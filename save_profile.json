@@ -10,12 +10,15 @@
       "hp": 3771,
       "mp": 316,
       "equippedVisionId": 13062,
+      "maxAP": 484,
       "name": "Rain",
       "thai": "เรน",
       "role": "Vanguard / Tank",
+      "portrait": "assets/images/portraits/1001.png",
+      "face": "assets/images/faces/1001.png",
       "equippedVisionName": "Wilhelm",
       "equippedVisionThai": "วิลเฮล์ม",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13062.png"
     },
     {
       "unitId": 1002,
@@ -24,12 +27,15 @@
       "hp": 3011,
       "mp": 484,
       "equippedVisionId": 13110,
+      "maxAP": 484,
       "name": "Lasswell",
       "thai": "ลาสเวลล์",
-      "role": "Commando / Katana Specialist",
+      "role": "Commando / Katana",
+      "portrait": "assets/images/portraits/1002.png",
+      "face": "assets/images/faces/1002.png",
       "equippedVisionName": "Cloud",
       "equippedVisionThai": "คลาวด์",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13110.png"
     },
     {
       "unitId": 1003,
@@ -38,12 +44,15 @@
       "hp": 3255,
       "mp": 547,
       "equippedVisionId": 13045,
+      "maxAP": 484,
       "name": "Fina",
       "thai": "ฟีน่า",
       "role": "Medic / White Mage",
+      "portrait": "assets/images/portraits/1003.png",
+      "face": "assets/images/faces/1003.png",
       "equippedVisionName": "Leah",
       "equippedVisionThai": "ลีอาห์",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13045.png"
     },
     {
       "unitId": 1004,
@@ -52,12 +61,15 @@
       "hp": 3070,
       "mp": 543,
       "equippedVisionId": 13130,
+      "maxAP": 484,
       "name": "Lid",
       "thai": "ลิด",
       "role": "Saboteur / Breaker",
+      "portrait": "assets/images/portraits/1004.png",
+      "face": "assets/images/faces/1004.png",
       "equippedVisionName": "Clive",
       "equippedVisionThai": "ไคลฟ์",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13130.png"
     },
     {
       "unitId": 1005,
@@ -66,12 +78,15 @@
       "hp": 2766,
       "mp": 569,
       "equippedVisionId": 13017,
+      "maxAP": 484,
       "name": "Nichol",
       "thai": "นิโคล",
       "role": "Strategist / Buffer",
+      "portrait": "assets/images/portraits/1005.png",
+      "face": "assets/images/faces/1005.png",
       "equippedVisionName": "Amelia",
       "equippedVisionThai": "อมีเลีย",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13017.png"
     },
     {
       "unitId": 1006,
@@ -80,12 +95,15 @@
       "hp": 2696,
       "mp": 744,
       "equippedVisionId": 13123,
+      "maxAP": 484,
       "name": "Archwitch Fina",
       "thai": "แม่มดฟีน่า",
       "role": "Ravager / Black Mage",
+      "portrait": "assets/images/portraits/1006.png",
+      "face": "assets/images/faces/1006.png",
       "equippedVisionName": "Shantotto",
       "equippedVisionThai": "ชันโตโตะ",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13123.png"
     },
     {
       "unitId": 1007,
@@ -94,12 +112,15 @@
       "hp": 3203,
       "mp": 610,
       "equippedVisionId": 13102,
+      "maxAP": 484,
       "name": "Jake",
       "thai": "เจค",
-      "role": "Gunner / Multi-Hit Striker",
+      "role": "Gunner / Striker",
+      "portrait": "assets/images/portraits/1007.png",
+      "face": "assets/images/faces/1007.png",
       "equippedVisionName": "Onion Knight",
       "equippedVisionThai": "ออเนียนไนท์",
-      "estimatedMaxAP": 82
+      "equippedVisionSprite": "assets/images/visions/13102.png"
     },
     {
       "unitId": 1008,
@@ -108,280 +129,284 @@
       "hp": 2469,
       "mp": 571,
       "equippedVisionId": 13113,
+      "maxAP": 484,
       "name": "Sakura",
       "thai": "ซากุระ",
       "role": "Sorceress / Elementalist",
+      "portrait": "assets/images/portraits/1008.png",
+      "face": "assets/images/faces/1008.png",
       "equippedVisionName": "Sephiroth",
       "equippedVisionThai": "เซฟิรอธ",
-      "estimatedMaxAP": 81
+      "equippedVisionSprite": "assets/images/visions/13113.png"
     }
   ],
   "visions": [
     {
       "id": 13024,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2348,
-      "maxMRP": 4695,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "tronn",
       "name": "Tronn",
-      "thai": "ทรอนน์"
+      "thai": "ทรอนน์",
+      "sprite": "assets/images/visions/13024.png"
     },
     {
       "id": 13045,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "leah",
       "name": "Leah",
-      "thai": "ลีอาห์"
+      "thai": "ลีอาห์",
+      "sprite": "assets/images/visions/13045.png"
     },
     {
       "id": 13100,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "wol",
       "name": "Warrior of Light",
-      "thai": "นักรบแห่งแสง"
+      "thai": "นักรบแห่งแสง",
+      "sprite": "assets/images/visions/13100.png"
     },
     {
       "id": 13110,
       "awakening": 3,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "cloud",
       "name": "Cloud",
-      "thai": "คลาวด์"
+      "thai": "คลาวด์",
+      "sprite": "assets/images/visions/13110.png"
     },
     {
       "id": 13108,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2548,
-      "maxMRP": 5095,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "terra",
       "name": "Terra",
-      "thai": "เทอร์ร่า / ทีน่า"
+      "thai": "เทอร์ร่า",
+      "sprite": "assets/images/visions/13108.png"
     },
     {
       "id": 13118,
       "awakening": 1,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "zidane",
       "name": "Zidane",
-      "thai": "ซีดาน"
+      "thai": "ซีดาน",
+      "sprite": "assets/images/visions/13118.png"
     },
     {
       "id": 13128,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2392,
-      "maxMRP": 4785,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "noctis",
       "name": "Noctis",
-      "thai": "น็อคติส"
+      "thai": "น็อคติส",
+      "sprite": "assets/images/visions/13128.png"
     },
     {
       "id": 13102,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2472,
-      "maxMRP": 4945,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "onion_knight",
       "name": "Onion Knight",
-      "thai": "ออเนียนไนท์"
+      "thai": "ออเนียนไนท์",
+      "sprite": "assets/images/visions/13102.png"
     },
     {
       "id": 13101,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2488,
-      "maxMRP": 4975,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "firion",
       "name": "Firion",
-      "thai": "ฟิริออน"
+      "thai": "ฟิริออน",
+      "sprite": "assets/images/visions/13101.png"
     },
     {
       "id": 13116,
       "awakening": 2,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2472,
-      "maxMRP": 4945,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "squall",
       "name": "Squall",
-      "thai": "สคอลล์"
+      "thai": "สคอลล์",
+      "sprite": "assets/images/visions/13116.png"
     },
     {
       "id": 13120,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2598,
-      "maxMRP": 5195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "tidus",
       "name": "Tidus",
-      "thai": "ทีดัส"
+      "thai": "ทีดัส",
+      "sprite": "assets/images/visions/13120.png"
     },
     {
       "id": 13103,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2598,
-      "maxMRP": 5195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "cecil",
       "name": "Cecil",
-      "thai": "เซซิล"
+      "thai": "เซซิล",
+      "sprite": "assets/images/visions/13103.png"
     },
     {
       "id": 13127,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "yshtola",
       "name": "Y'shtola",
-      "thai": "อิชโทลา"
+      "thai": "อิชโทลา",
+      "sprite": "assets/images/visions/13127.png"
     },
     {
       "id": 13033,
       "awakening": 1,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "camille",
       "name": "Camille",
-      "thai": "คามิลล์"
+      "thai": "คามิลล์",
+      "sprite": "assets/images/visions/13033.png"
     },
     {
       "id": 13123,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2538,
-      "maxMRP": 5075,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "shantotto",
       "name": "Shantotto",
-      "thai": "ชันโตโตะ"
+      "thai": "ชันโตโตะ",
+      "sprite": "assets/images/visions/13123.png"
     },
     {
       "id": 13062,
       "awakening": 3,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "wilhelm",
       "name": "Wilhelm",
-      "thai": "วิลเฮล์ม"
+      "thai": "วิลเฮล์ม",
+      "sprite": "assets/images/visions/13062.png"
     },
     {
       "id": 13130,
       "awakening": 2,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2598,
-      "maxMRP": 5195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "clive",
       "name": "Clive",
-      "thai": "ไคลฟ์"
+      "thai": "ไคลฟ์",
+      "sprite": "assets/images/visions/13130.png"
     },
     {
       "id": 13080,
       "awakening": 1,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "aileen",
       "name": "Aileen",
-      "thai": "ไอลีน"
+      "thai": "ไอลีน",
+      "sprite": "assets/images/visions/13080.png"
     },
     {
       "id": 13125,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2598,
-      "maxMRP": 5195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "lightning",
       "name": "Lightning",
-      "thai": "ไลท์นิ่ง"
+      "thai": "ไลท์นิ่ง",
+      "sprite": "assets/images/visions/13125.png"
     },
     {
       "id": 13017,
       "awakening": 2,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "amelia",
       "name": "Amelia",
-      "thai": "อมีเลีย"
+      "thai": "อมีเลีย",
+      "sprite": "assets/images/visions/13017.png"
     },
     {
       "id": 13124,
       "awakening": 1,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2098,
-      "maxMRP": 4195,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "vaan",
       "name": "Vaan",
-      "thai": "วาน"
+      "thai": "วาน",
+      "sprite": "assets/images/visions/13124.png"
     },
     {
       "id": 13105,
       "awakening": 3,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2622,
-      "maxMRP": 5245,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "bartz",
       "name": "Bartz",
-      "thai": "บาร์ทซ์"
+      "thai": "บาร์ทซ์",
+      "sprite": "assets/images/visions/13105.png"
     },
     {
       "id": 13027,
       "awakening": 1,
-      "currentMR": 8,
+      "currentMR": 9,
       "currentMRP": 2472,
-      "maxMRP": 4945,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "victoria",
       "name": "Victoria",
-      "thai": "วิกตอเรีย"
+      "thai": "วิกตอเรีย",
+      "sprite": "assets/images/visions/13027.png"
     },
     {
       "id": 13113,
       "awakening": 3,
-      "currentMR": 7,
+      "currentMR": 9,
       "currentMRP": 2392,
-      "maxMRP": 4785,
-      "isMax": false,
+      "isMax": true,
       "visionKey": "sephiroth",
       "name": "Sephiroth",
-      "thai": "เซฟิรอธ"
+      "thai": "เซฟิรอธ",
+      "sprite": "assets/images/visions/13113.png"
     }
   ],
-  "maxMrCount": 0,
-  "totalVisionsOwned": 24
+  "maxMrCount": 24,
+  "totalVisionsOwned": 24,
+  "baseMaxAP": 484
 }
