@@ -1,0 +1,2212 @@
+[
+  {
+    "key": "tronn",
+    "id": 13024,
+    "name": "Tronn",
+    "archive": 631941,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Restore MP on Stagger Restores 5% of max MP upon staggering an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Speed +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Fill LB on Stagger Fills the LB gauge by 10% upon staggering an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Focus Magic Increase stagger power of next magic attack.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Stagger Power +20% Increases stagger power by 20%.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Half MP Cost Halves MP cost.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Tronn Activates all of Tronn's Mastery Rank abilities.",
+        "cost": "110",
+        "costVal": 110,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "leah",
+    "id": 13045,
+    "name": "Leah",
+    "archive": 631940,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "First Aid Restore a small amount of HP for an ally.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Healing Magic +10% Increases potency of healing magic by 10%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Pass the Torch Pass turn to an ally.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Pharmacology Enhances the effect of items by 50% during battle.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Spirit +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Auto-Cure Ailments Automatically uses Esuna or a remedy when inflicted with a status ailment.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Leah Activates all of Leah's Mastery Rank abilities.",
+        "cost": "105",
+        "costVal": 105,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "wol",
+    "id": 13100,
+    "name": "Warrior of Light",
+    "archive": 631942,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Restore HP on Stagger Restores 10% of max HP upon staggering an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Multi-Cover Take attacks in place of all allies.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Physical Counter Counters physical attacks with a standard attack.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Strength +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Heroic Nature Increases physical attack damage when hit with an attack. Amount increased scales with the number of attacks received that round.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "HP +90.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Grit Grants the ability to survive with 1 HP upon receiving damage exceeding HP once per battle.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of WoL Activates all of Warrior of Light's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "terra",
+    "id": 13108,
+    "name": "Terra",
+    "archive": 631949,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Tenebrous Rites Increases damage dealt by 30% when using magic attacks on enemies inflicted with debuffs or status ailments.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Magic +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Magic Boost Increase MP cost of selected magic attack by 50%, but double its damage.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "LB Double Charge Doubles the LB gauge fill rate.",
+        "cost": "35",
+        "costVal": 35,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Sharp Mind Increases damage dealt by 100% when using a multi-target attack skill against a single enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Break the Limit Raises damage cap to 99999.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Terra Activates all of Terra's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "cloud",
+    "id": 13110,
+    "name": "Cloud",
+    "archive": 631943,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Restore MP on Critical Hit Restores 3% of max MP upon dealing a critical hit.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Speed +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Deathblow (Battle Skill) Guarantee a critical if attack lands, but with a low hit chance.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Fill Gauge Fill LB gauge by 25%.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Stamina +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Critical Stagger Increases stagger power by 40% upon dealing a physical critical hit.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Critical Boost Increases damage dealt by 40% upon dealing a physical critical hit.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Cloud Activates all of Cloud's Mastery Rank abilities.",
+        "cost": "105",
+        "costVal": 105,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "onion_knight",
+    "id": 13102,
+    "name": "Onion Knight",
+    "archive": 632782,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Throw Throw an item at a target.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Magic +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Spry Steps Adds a 25% chance of evading magic attacks.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Observe and Recover HP Restores 10% of max HP when performing an action without dealing damage.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Vigorous Attacks When at full HP or higher, increases damage dealt by 30%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "LB Triple Charge Triples the LB gauge fill rate.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Onion Knight Activates all of Onion Knight's Mastery Rank abilities.",
+        "cost": "100",
+        "costVal": 100,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "zidane",
+    "id": 13118,
+    "name": "Zidane",
+    "archive": 632778,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Steal Steal an item from an enemy.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Insult to Injury Increases stagger power by 30% when attacking enemies inflicted with debuffs or status ailments.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Mug (Battle Skill) Deal damage with a chance to steal an item from an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Aggravation Increases damage dealt by up to 60%. Damage scales with the number of debuffs and status ailments afflicting the target.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Speed +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Misfortune Inflict one of the following status ailments: Poison, Sleep, Blind, Silence, or Confuse.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Zidane Activates all of Zidane's Mastery Rank abilities.",
+        "cost": "90",
+        "costVal": 90,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "noctis",
+    "id": 13128,
+    "name": "Noctis",
+    "archive": 632772,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Fill LB on Defeating Foes Fills the LB gauge by 40% upon defeating an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Strength +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Reflex Adds a 25% chance of evading physical attacks.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Scan and Strike Increases damage dealt by 25% when using attacks of the target's elemental weakness if that target has already been analyzed with Libra.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Spirit +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Bonus Damage Increases damage dealt by 40% during the bonus phase.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "HP +90.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Barrage (Battle Skill) Deal damage to random enemies 4 times. Guaranteed to hit.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Noctis Activates all of Noctis's Mastery Rank abilities.",
+        "cost": "100",
+        "costVal": 100,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "firion",
+    "id": 13101,
+    "name": "Firion",
+    "archive": 632783,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Fill LB when Taking Damage Fills the LB gauge by 10% upon receiving damage.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Bladeblitz (Battle Skill) Deal damage to all enemies at once.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Decimating Attacks When attacking all enemies, increases damage dealt by 10% per enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Recuperate LB Fills the LB gauge by 30% after using a limit burst.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Stamina +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Arms Akimbo Grant use of 2 actions in a single turn.",
+        "cost": "60",
+        "costVal": 60,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Firion Activates all of Firion's Mastery Rank abilities.",
+        "cost": "120",
+        "costVal": 120,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "squall",
+    "id": 13116,
+    "name": "Squall",
+    "archive": 632779,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Improvement Increases stagger power and damage dealt by up to 50%. Amount increased scales with the number of standard attacks and battle skills performed during battle.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Gut Rip Make all attacks either miss or deal critical hits for 5 turns.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Trigger Increases stagger power and damage dealt by standard attacks and battle skills by 30%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Restore MP on Attack Restores 2% of max MP upon dealing damage with a standard attack.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Double Action Grant use of 2 consecutive attack skills in a single turn. Cannot be used with black or white magic.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Squall Activates all of Squall's Mastery Rank abilities.",
+        "cost": "105",
+        "costVal": 105,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "tidus",
+    "id": 13120,
+    "name": "Tidus",
+    "archive": 632777,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Focus Decrease own speed to increase the damage of next attack.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Speed +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "First Strike Allows self to act first at the start of battle.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Reckless Abandonment Increase MP cost of selected physical attack by 50%, but double its stagger power.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Strength +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Tip-Top Shape Increases damage dealt by physical attacks. Damage scales with own buff count.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Speed +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Water Eater Absorbs damage taken from Water attacks and restores HP.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Tidus Activates all of Tidus's Mastery Rank abilities.",
+        "cost": "90",
+        "costVal": 90,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "cecil",
+    "id": 13103,
+    "name": "Cecil",
+    "archive": 632781,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Darkness [Battle Skill] Consume HP to deal physical damage to all enemies.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Cover Take attacks in place of an ally.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Magic Counter Counters magic attacks with a standard attack.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Staggeringly Risky Increase MP cost of physical attacks by 50%, but also increases stagger power by 50%.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Spirit +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Dark Immunity Nullifies damage taken from Dark attacks.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Cecil Activates all of Cecil's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "shantotto",
+    "id": 13123,
+    "name": "Shantotto",
+    "archive": 632776,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Restore MP on Defeating Foes Restores 3% of max MP upon defeating an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Magic +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Dark Rite Increases damage dealt by magic attacks. Damage inversely scales with own HP.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "MP Stroll Restores MP after walking a certain distance.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Area Effect Adept When multicasting, doubles MP cost, but keeps full effect. (Only during battle.)",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Dualcast Grant use of 2 consecutive black or white magic spells in a single turn.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Shantotto Activates all of Shantotto's Mastery Rank abilities.",
+        "cost": "120",
+        "costVal": 120,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "yshtola",
+    "id": 13127,
+    "name": "Y'shtola",
+    "archive": 632773,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Skill Flow Increases stagger power and damage dealt by up to 50%. Amount increased scales with the number of skill types used in the last 5 rounds.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Magic +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Staggering Spells Increases MP cost of magic attacks by 50%, but also increases stagger power by 30%.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Magic Attack +10% Increases damage dealt by magic attacks by 10%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Heal on Sweeping Stagger Restores 10% of max HP for all allies when triggering a sweeping stagger.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "MP +30.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Magic Barrage Cast black or white magic on random targets 4 times. The effect of each cast is halved.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Y’shtola Activates all of Y’shtola's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "bartz",
+    "id": 13105,
+    "name": "Bartz",
+    "archive": 632780,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Wait Take action after the next ally's turn. Fails if not followed by an ally's turn.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Speed +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "HP Stroll Restores HP after walking a certain distance.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Speed +5% Increases speed by 5%.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "MP +20.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Dual Spellblade Activates Spellblade skills twice. Consumes twice the MP.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Mimic Mimic the last action performed by an ally.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Bartz Activates all of Bartz's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "vaan",
+    "id": 13124,
+    "name": "Vaan",
+    "archive": 632775,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Gil Farmer Steal gil.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Gil Farmer on Stagger Triggers Gil Farmer upon staggering an enemy.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Gil Toss Throw gil to deal physical damage to all enemies.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Stamina +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Observe and Attack Unleashes a standard attack when performing an action without dealing damage.",
+        "cost": "35",
+        "costVal": 35,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "HP +90.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Double Gil Doubles the amount of gil received from battles.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Vaan Activates all of Vaan's Mastery Rank abilities.",
+        "cost": "90",
+        "costVal": 90,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "lightning",
+    "id": 13125,
+    "name": "Lightning",
+    "archive": 632774,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Mineuchi (Battle Skill) Deal damage with a chance to inflict Paralysis.",
+        "cost": "10",
+        "costVal": 10,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Overwhelm Increases stagger power and damage an enemy takes when attacking them using standard attacks or battle skills. Effect stacks but resets after enemy takes damage from other types of attacks.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Bonus Phase Stagger Boost Increases stagger power by 40% during the bonus phase.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Momentum Shift Upon defeating an enemy, increases stagger power by 40% until the end of the next round.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Lightning Eater Absorbs damage taken from Lightning attacks and restores HP.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Lightning Activates all of Lightning's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "clive",
+    "id": 13130,
+    "name": "Clive",
+    "archive": 632771,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Vigorous Staggerer When at full HP, increases stagger power by 30%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "HP +30.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Restore HP on Defeating Foes Restores 10% of max HP upon defeating an enemy.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Power Stagger Increases physical damage dealt to staggered enemies by 35%.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Mirage Create 2 mirages of self that take physical damage instead.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Fire Eater Absorbs damage taken from Fire attacks and restores HP.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Clive Activates all of Clive's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "sephiroth",
+    "id": 13113,
+    "name": "Sephiroth",
+    "archive": 632770,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Perfect Serenity Increases damage of standard attacks and battle skills by 50%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "HP +30.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Critical Hit Rate +20% Increases critical hit rate by 20%.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Ultimate Aggression Guarantees critical hits on Limit Bursts and Resonances.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Moiety's Mirror Select one physical attack and one magic attack. Reduce damage taken that turn and counterattack with both when hit.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Dark Eater Absorbs damage taken from Dark attacks and restores HP.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Sephiroth Activates all of Sephiroth's Mastery Rank abilities.",
+        "cost": "130",
+        "costVal": 130,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "amelia",
+    "id": 13017,
+    "name": "Amelia",
+    "archive": 632769,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Skilled Disruptor Increases the duration of debuffs and status ailments inflicted by self by 1 turn.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "MP +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Aim Guarantee all attacks hit for 5 turns.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Stealth Specialist Increases damage dealt by 35% when not targeted by an enemy that round.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Speed +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "LB Shield Consumes 50% of the LB gauge to halve damage taken when HP falls to 50% or below.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Versatility Increases damage dealt, scaling with the number of skill-granting abilities equipped.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Amelia Activates all of Amelia's Mastery Rank abilities.",
+        "cost": "100",
+        "costVal": 100,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "camille",
+    "id": 13033,
+    "name": "Camille",
+    "archive": 632768,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Restore MP when Taking Damage Restores 3% of max MP upon receiving damage.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Speed +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Preemptive Strike Increases damage dealt by 30% when attacking an enemy that has not yet acted that round.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Blade Dance (Battle Skill) Deal damage to an enemy 4 times.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Magic +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Essence of Mundanity Halves stagger power, but increases physical damage dealt by non-elemental attacks by 40%.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "MP +30.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Hit and Run Adds a 35% chance to nullify damage taken from physical attacks if an attack has been performed by self that round.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Camille Activates all of Camille's Mastery Rank abilities.",
+        "cost": "110",
+        "costVal": 110,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "wilhelm",
+    "id": 13062,
+    "name": "Wilhelm",
+    "archive": 632767,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Strategic Acumen Increases the duration of buffs applied to self by 1 turn.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Chakra Restore own HP by a small amount and cure status ailments.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Guard Decrease damage taken by 75% until next action. LB gauge will not fill while active.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Critical Counter Performs a counterattack which will either miss or result in a critical hit when hit with a physical attack.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Stamina +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Riposte Adds a 50% chance to inflict a debuff upon receiving physical damage.",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Wilhelm Activates all of Wilhelm's Mastery Rank abilities.",
+        "cost": "90",
+        "costVal": 90,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "aileen",
+    "id": 13080,
+    "name": "Aileen",
+    "archive": 632766,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Rearguard Places self behind all allies in the turn order, but increases damage dealt by physical attacks by 40%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Stamina +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Jump (Battle Skill) Leap into the air and land next turn, dealing physical damage.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "LB Charge Opener Fills the LB gauge by 50% at the start of battle.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Observe and Charge LB Fills the LB gauge by 15% when performing an action without dealing damage.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Strength +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Pilebunker When the LB gauge is full, increases the stagger power of single-target physical attacks (excluding limit bursts).",
+        "cost": "40",
+        "costVal": 40,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Aileen Activates all of Aileen's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "victoria",
+    "id": 13027,
+    "name": "Victoria",
+    "archive": 632764,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Arcane Reclamation Restores MP by 2% of damage taken.",
+        "cost": "25",
+        "costVal": 25,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "MP +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Mana Overload Increases damage dealt by magic attacks by 35% when MP is at 75% or higher.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Spell Drinker Nullify a single black or white magic spell and absorb MP from it. Cannot absorb Meltdown or Meteor.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Spirit +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "MRP Gain +50% Increases MRP gained by 50%.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Magic +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Drop Rate Up Increases the item drop rate by 25%.",
+        "cost": "35",
+        "costVal": 35,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Victoria Activates all of Victoria's Mastery Rank abilities.",
+        "cost": "100",
+        "costVal": 100,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "charlotte",
+    "id": 13060,
+    "name": "Charlotte",
+    "archive": 632765,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Magic Barrier When hit with an attack, consumes 3% of max MP to reduce damage taken by 15%.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Hale and Hearty Doubles the rate at which the duration of debuffs and status ailments inflicted on self fades.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Lance (Battle Skill) Deal non-elemental magic damage and drain HP and MP.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "HP +60.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "Indomitable Spirit When hit with an enemy attack, increases stagger power by 40% for that round.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "Stamina +15.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Ice Eater Absorbs damage taken from Ice attacks and restores HP.",
+        "cost": "50",
+        "costVal": 50,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Charlotte Activates all of Charlotte's Mastery Rank abilities.",
+        "cost": "105",
+        "costVal": 105,
+        "isPermanent": false
+      }
+    ]
+  },
+  {
+    "key": "ayaka",
+    "id": 13051,
+    "name": "Ayaka",
+    "archive": 632763,
+    "masteryBonuses": [
+      {
+        "rank": "MR 1",
+        "bonus": "Angelic Advocate Increases the duration of buffs applied by self by 1 turn.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 2",
+        "bonus": "Spirit +5.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 3",
+        "bonus": "Recover Cure all status ailments other than KO for an ally.",
+        "cost": "15",
+        "costVal": 15,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 4",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 5",
+        "bonus": "Prepare Healing During this round, automatically cast healing magic on an ally when they are at half or less of max HP.",
+        "cost": "30",
+        "costVal": 30,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 6",
+        "bonus": "Spirit +10.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 7",
+        "bonus": "The Hand That Heals Increases stagger power and damage dealt when healing an ally during battle. Effect stacks up to 50%.",
+        "cost": "35",
+        "costVal": 35,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 8",
+        "bonus": "MP +30.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "LB Charge on Heal Fills the LB gauge by 25% upon restoring an ally's HP.",
+        "cost": "20",
+        "costVal": 20,
+        "isPermanent": false
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "AP +8.",
+        "cost": "Permanent",
+        "costVal": null,
+        "isPermanent": true
+      },
+      {
+        "rank": "MR 9",
+        "bonus": "Spirit of Ayaka Activates all of Ayaka's Mastery Rank abilities.",
+        "cost": "95",
+        "costVal": 95,
+        "isPermanent": false
+      }
+    ]
+  }
+]
