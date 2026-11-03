@@ -800,33 +800,42 @@
       }
 ];
 
-    const PASSIVES_DATABASE = [
+        const PASSIVES_DATABASE = [
       { id: "spirit_cecil", name: "Spirit of Cecil", thai: "จิตวิญญาณเซซิล (Darkness + Cover + Magic Counter)", ap: 95, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13103.png", desc: "รวมทุกความสามารถของ Cecil ใน 1 ช่อง: Cover รับดาเมจแทนเพื่อน + Magic Counter สวนกลับเวท + Dark Immunity" },
       { id: "spirit_firion", name: "Spirit of Firion", thai: "จิตวิญญาณฟิริออน (Arms Akimbo + Blood Weapon + Arsenal)", ap: 120, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13101.png", desc: "รวมทุกความสามารถของ Firion ใน 1 ช่อง: Arms Akimbo (2 แอคชั่น/เทิร์น) + ดูดเลือด 10% ทุกฮิต + เจาะเกราะ 15%" },
-      { id: "spirit_shantotto", name: "Spirit of Shantotto", thai: "จิตวิญญาณชันโตโตะ (Dualcast + Full AoE Power + Dark Rite)", ap: 120, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13123.png", desc: "รวมทุกความสามารถของ Shantotto ใน 1 ช่อง: Dualcast (ร่ายเวท 2 ครั้ง/คำสั่ง) + เวทหมู่พลังเต็ม 100% ทุกตัว + ฟื้น MP เมื่อฆ่าศัตรู" },
+      { id: "spirit_shantotto", name: "Spirit of Shantotto", thai: "จิตวิญญาณชันโตโตะ (Dualcast + Full AoE Power + Dark Rite)", ap: 120, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13123.png", desc: "รวมทุกความสามารถของ Shantotto ใน 1 ช่อง: Dualcast (ร่ายเวทขาว/ดำ 2 ครั้งซ้อน) + เวทหมู่พลังเต็ม 100% ทุกตัว + ฟื้น MP" },
       { id: "spirit_squall", name: "Spirit of Squall", thai: "จิตวิญญาณสคอลล์ (Double Action + Trigger + Stagger 50%)", ap: 105, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13116.png", desc: "รวมทุกความสามารถของ Squall ใน 1 ช่อง: Double Action (ฟันซ้ำ 2 ครั้ง/คำสั่ง) + บูสต์ดาเมจและ Stagger 50% + ฟื้น MP เมื่อโจมตี" },
       { id: "spirit_cloud", name: "Spirit of Cloud", thai: "จิตวิญญาณคลาวด์ (Crit Rate + Crit Boost 35% + Crit MP Refund)", ap: 105, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13110.png", desc: "รวมทุกความสามารถของ Cloud ใน 1 ช่อง: Cloud Soul ฟื้น MP 3% ทุกครั้งที่คริติคอล + คูณดาเมจคริ 35% + โอกาสคริ 10% (หัวใจของ Infinite MP Loop)" },
       { id: "spirit_bartz", name: "Spirit of Bartz", thai: "จิตวิญญาณบาร์ทซ์ (Dual Spellblade + Elemental Amp 30%)", ap: 110, isSpirit: true, role: "hybrid", visSprite: "assets/images/visions/13105.png", desc: "รวมทุกความสามารถของ Bartz ใน 1 ช่อง: Dual Spellblade (ฟันดาบเวท 2 ครั้ง/คำสั่ง) + เพิ่มดาเมจทุกธาตุ 30% + เร่งเกจ Stagger รุนแรง" },
-      { id: "spirit_onion", name: "Spirit of Onion Knight", thai: "จิตวิญญาณออเนียนไนท์ (LB Triple Charge + Speed)", ap: 100, isSpirit: true, role: "support", visSprite: "assets/images/visions/13102.png", desc: "รวมทุกความสามารถของ Onion Knight ใน 1 ช่อง: เร่งชาร์จเกจ Limit Break ขึ้น 300% (Triple Charge) + Speed 10% + เพิ่มจำนวนฮิต" },
-      { id: "spirit_wol", name: "Spirit of WoL", thai: "จิตวิญญาณนักรบแห่งแสง (Counter + Redux 20% + Stagger 30%)", ap: 95, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13100.png", desc: "รวมทุกความสามารถของ WoL ใน 1 ช่อง: สวนกลับกายภาพ 30% + ลดดาเมจกายภาพ 20% + เพิ่มพลังสะสมเกจ Stagger 30%" },
+      { id: "spirit_onion", name: "Spirit of Onion Knight", thai: "จิตวิญญาณออเนียนไนท์ (LB Triple Charge + Speed)", ap: 100, isSpirit: true, role: "support", visSprite: "assets/images/visions/13102.png", desc: "รวมทุกความสามารถของ Onion Knight ใน 1 ช่อง: เร่งชาร์จเกจ Limit Break ขึ้น 300% (Triple Charge) + Speed 10% + หลบเวท 25%" },
+      { id: "spirit_wol", name: "Spirit of WoL", thai: "จิตวิญญาณนักรบแห่งแสง (Counter + Redux 20% + Stagger 30%)", ap: 95, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13100.png", desc: "รวมทุกความสามารถของ WoL ใน 1 ช่อง: สวนกลับกายภาพ 30% + Multi-Cover รับดาเมจแทนทุกคน + Grit รอดด้วย 1 HP" },
       { id: "spirit_yshtola", name: "Spirit of Y'shtola", thai: "จิตวิญญาณอิชโทลา (Aetherflow MP Regen + Stagger 20%)", ap: 95, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13127.png", desc: "รวมทุกความสามารถของ Y'shtola ใน 1 ช่อง: รีเจน MP 5% ทุกเทิร์น + ป้องกันเวท 20% + พลัง Stagger 20%" },
-      { id: "spirit_wilhelm", name: "Spirit of Wilhelm", thai: "จิตวิญญาณวิลเฮล์ม (Bastion ลดดาเมจทีม 20% + Def 30%)", ap: 105, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13062.png", desc: "รวมทุกความสามารถของ Wilhelm ใน 1 ช่อง: Bastion ลดดาเมจให้เพื่อนทั้งปาร์ตี้ 20% ตอน Guard + สวนกลับคริติคอล + ป้องกัน 30%" },
-      { id: "spirit_sephiroth", name: "Spirit of Sephiroth", thai: "จิตวิญญาณเซฟิรอธ (Auto-Bravery + Crit 20% + Atk 30%)", ap: 130, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13113.png", desc: "รวมทุกความสามารถของ Sephiroth ใน 1 ช่อง: เปิดด้วย Bravery (+25% Atk) + โอกาสคริ 20% + พลังโจมตีกายภาพ 30%" },
-      { id: "spirit_ayaka", name: "Spirit of Ayaka", thai: "จิตวิญญาณอายากะ (The Hand That Heals + LB on Heal)", ap: 100, isSpirit: true, role: "healer", visSprite: "assets/images/visions/13051.png", desc: "รวมทุกความสามารถของ Ayaka ใน 1 ช่อง: ฮีลเพื่อนแล้วเก่งขึ้น 50% + ฮีลแล้วชาร์จเกจ LB ตนเอง 25%" },
-      { id: "spirit_clive", name: "Spirit of Clive", thai: "จิตวิญญาณไคลฟ์ (LB Damage +40% + Boundless Flames)", ap: 115, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13130.png", desc: "รวมทุกความสามารถของ Clive ใน 1 ช่อง: ทวีคูณความแรง Limit Break 40% + ดาเมจไฟและเกจ Stagger 30%" },
-      { id: "spirit_victoria", name: "Spirit of Victoria", thai: "จิตวิญญาณวิกตอเรีย (MRP Gain +50% + Dark Amp)", ap: 100, isSpirit: true, role: "mrp_farm", visSprite: "assets/images/visions/13027.png", desc: "รวมทุกความสามารถของ Victoria ใน 1 ช่อง: เพิ่มแต้มฟาร์มวิชั่น MRP +50% + Dark Amp + พลังเวท 20%" },
+      { id: "spirit_wilhelm", name: "Spirit of Wilhelm", thai: "จิตวิญญาณวิลเฮล์ม (Bastion ลดดาเมจทีม 20% + Def 30%)", ap: 90, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13062.png", desc: "รวมทุกความสามารถของ Wilhelm ใน 1 ช่อง: Bastion ลดดาเมจให้เพื่อนทั้งปาร์ตี้ 20% ตอน Guard + สวนกลับคริติคอล + ป้องกัน 75%" },
+      { id: "spirit_sephiroth", name: "Spirit of Sephiroth", thai: "จิตวิญญาณเซฟิรอธ (Auto-Bravery + Crit 20% + Atk 30%)", ap: 130, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13113.png", desc: "รวมทุกความสามารถของ Sephiroth ใน 1 ช่อง: เปิดด้วย Bravery (+25% Atk) + โอกาสคริ 20% + พลังโจมตีกายภาพ 30% + Dark Eater" },
+      { id: "spirit_ayaka", name: "Spirit of Ayaka", thai: "จิตวิญญาณอายากะ (The Hand That Heals + LB on Heal)", ap: 95, isSpirit: true, role: "healer", visSprite: "assets/images/visions/13051.png", desc: "รวมทุกความสามารถของ Ayaka ใน 1 ช่อง: ฮีลเพื่อนแล้วเก่งขึ้น 50% + ฮีลแล้วชาร์จเกจ LB ตนเอง 25% + บัฟอยู่นานขึ้น 1 เทิร์น" },
+      { id: "spirit_leah", name: "Spirit of Leah", thai: "จิตวิญญาณลีอาห์ (Auto-Cure Ailments + Healing +10%)", ap: 105, isSpirit: true, role: "healer", visSprite: "assets/images/visions/13045.png", desc: "รวมทุกความสามารถของ Leah ใน 1 ช่อง: Auto-Cure แก้สถานะผิดปกติอัตโนมัติ + ฮีลแรงขึ้น 10% + Pass the Torch ส่งเทิร์นให้เพื่อน" },
+      { id: "spirit_clive", name: "Spirit of Clive", thai: "จิตวิญญาณไคลฟ์ (LB Damage +40% + Vigorous Staggerer)", ap: 115, isSpirit: true, role: "breaker", visSprite: "assets/images/visions/13130.png", desc: "รวมทุกความสามารถของ Clive ใน 1 ช่อง: Vigorous Staggerer 30% + Power Stagger + ทวีคูณความแรง Limit Break 40%" },
+      { id: "spirit_amelia", name: "Spirit of Amelia", thai: "จิตวิญญาณอมีเลีย (LB Shield + Gunner Breaker)", ap: 100, isSpirit: true, role: "breaker", visSprite: "assets/images/visions/13017.png", desc: "รวมทุกความสามารถของ Amelia ใน 1 ช่อง: LB Shield บาเรียลดดาเมจเมื่อเลือดต่ำกว่า 50% + สลายเกราะป้องกันศัตรู" },
+      { id: "spirit_zidane", name: "Spirit of Zidane", thai: "จิตวิญญาณซีดาน (Insult to Injury + Aggravation 60%)", ap: 95, isSpirit: true, role: "breaker", visSprite: "assets/images/visions/13118.png", desc: "รวมทุกความสามารถของ Zidane ใน 1 ช่อง: Insult to Injury (+30% Stagger) + Aggravation (+60% Dmg เมื่อศัตรูติดดีบัฟ) + ขโมย" },
+      { id: "spirit_noctis", name: "Spirit of Noctis", thai: "จิตวิญญาณน็อคติส (Reflex Evasion 25% + Warp-Strike)", ap: 100, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13128.png", desc: "รวมทุกความสามารถของ Noctis ใน 1 ช่อง: Reflex หลบหลีกกายภาพ 25% + Warp-Strike + Critical Stagger" },
+      { id: "spirit_terra", name: "Spirit of Terra", thai: "จิตวิญญาณเทอร์ร่า (Break the Limit 99999 + LB Double Charge)", ap: 95, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13108.png", desc: "รวมทุกความสามารถของ Terra ใน 1 ช่อง: Break the Limit ดาเมจทะลุ 99999 + เร่งเกจ LB 2 เท่า + Sharp Mind" },
+      { id: "spirit_victoria", name: "Spirit of Victoria", thai: "จิตวิญญาณวิกตอเรีย (MRP Gain +50% + Dark Amp)", ap: 100, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13027.png", desc: "รวมทุกความสามารถของ Victoria ใน 1 ช่อง: เพิ่มแต้มฟาร์มวิชั่น MRP +50% + Mana Overload + ฟื้น MP เมื่อโดนตี" },
+      { id: "spirit_tronn", name: "Spirit of Tronn", thai: "จิตวิญญาณทรอนน์ (Half MP Cost + Stagger Power 20%)", ap: 110, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13024.png", desc: "รวมทุกความสามารถของ Tronn ใน 1 ช่อง: ลดค่าร่าย MP ทั้งหมดลง 50% + Stagger Power +20% + ฟื้น MP ตอนสตักเกอร์" },
+      { id: "spirit_tidus", name: "Spirit of Tidus", thai: "จิตวิญญาณทีดัส (First Strike + Tip-Top Shape)", ap: 100, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13120.png", desc: "รวมทุกความสามารถของ Tidus ใน 1 ช่อง: First Strike ออกตัวคนแรก + Tip-Top Shape บูสต์ดาเมจกายภาพ" },
+      { id: "spirit_charlotte", name: "Spirit of Charlotte", thai: "จิตวิญญาณชาร์ลอตต์ (Magic Barrier + Ice Eater)", ap: 105, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13060.png", desc: "รวมทุกความสามารถของ Charlotte ใน 1 ช่อง: Magic Barrier ลดดาเมจเวท 15% + ดูดซับน้ำแข็งฟื้น HP" },
       { id: "arms_akimbo_standalone", name: "Arms Akimbo", thai: "สองมือสองใจ (ทำ 2 คำสั่ง/เทิร์น)", ap: 60, isSpirit: false, role: "action_economy", desc: "ออกคำสั่งได้ 2 แอคชั่นใน 1 เทิร์น (แบบแยกเดี่ยว 60 AP)" },
+      { id: "dualcast_standalone", name: "Dualcast", thai: "ร่ายเวทมนตร์ 2 ครั้งซ้อน", ap: 50, isSpirit: false, role: "magic", desc: "ร่ายเวทขาวหรือเวทดำได้ 2 ครั้งติดต่อกันต่อ 1 คำสั่ง" },
       { id: "half_mp_cost", name: "Half MP Cost", thai: "ลดค่าร่าย MP ลงครึ่งหนึ่ง", ap: 50, isSpirit: false, role: "sustain", desc: "ลดการใช้ MP ของสกิลและเวทมนตร์ทั้งหมดลง 50%" },
       { id: "break_the_limit", name: "Break the Limit", thai: "ทะลุขีดจำกัดความเสียหาย 9,999", ap: 30, isSpirit: false, role: "burst", desc: "ปลดล็อคให้ความเสียหายทุกฮิตสามารถทะลุเพดาน 9,999 ได้" },
       { id: "first_strike", name: "First Strike", thai: "ออกตัวก่อน (การันตีเริ่มคนแรก)", ap: 20, isSpirit: false, role: "breaker", desc: "การันตีได้ออกตัวเป็นคนแรกสุดของการต่อสู้ทันที" },
       { id: "tip_top_shape", name: "Tip-Top Shape", thai: "+25% Dmg เมื่อ HP > 80%", ap: 20, isSpirit: false, role: "phys_dps", desc: "เพิ่มความเสียหาย 25% หาก HP สูงกว่า 80%" },
       { id: "decimating_attacks", name: "Decimating Attacks", thai: "โจมตีถล่มทลาย (Multi-Hit Amp)", ap: 20, isSpirit: false, role: "phys_dps", desc: "เพิ่มพลังทำลายล้างของการโจมตีต่อเนื่อง" },
       { id: "preemptive_strike", name: "Preemptive Strike", thai: "จู่โจมฉับพลัน (Turn 1 Burst)", ap: 20, isSpirit: false, role: "breaker", desc: "สร้างความเสียหายรุนแรงขึ้นมากในเทิร์นแรกของการต่อสู้" },
-      { id: "insult_to_injury", name: "Insult to Injury", thai: "ซ้ำเติมบาดแผล", ap: 20, isSpirit: false, role: "breaker", desc: "เพิ่มดาเมจซ้ำใส่ศัตรูที่กำลังเสียการทรงตัว" },
-      { id: "aggravation", name: "Aggravation", thai: "+60% Dmg เมื่อศัตรูมีดีบัฟ", ap: 25, isSpirit: false, role: "phys_dps", desc: "โบนัสดาเมจสูงสุด 60% เมื่อเป้าหมายติดสถานะผิดปกติ" },
+      { id: "insult_to_injury", name: "Insult to Injury", thai: "ซ้ำเติมบาดแผล", ap: 20, isSpirit: false, role: "breaker", desc: "เพิ่มดาเมจซ้ำใส่ศัตรูที่กำลังเสียการทรงตัว (+30% Stagger Power)" },
+      { id: "aggravation", name: "Aggravation", thai: "+60% Dmg เมื่อศัตรูมีดีบัฟ", ap: 25, isSpirit: false, role: "breaker", desc: "โบนัสดาเมจสูงสุด 60% เมื่อเป้าหมายติดสถานะผิดปกติ" },
       { id: "power_stagger", name: "Power Stagger", thai: "กระหน่ำ Stagger หนักหน่วง", ap: 15, isSpirit: false, role: "breaker", desc: "เพิ่มพลังการตัดเกจเบรคของศัตรูอย่างรวดเร็ว" },
-      { id: "vigorous_staggerer", name: "Vigorous Staggerer", thai: "เร่งเกจ Stagger รวดเร็ว", ap: 20, isSpirit: false, role: "breaker", desc: "เร่งความเร็วในการสะสมเกจ Stagger ของเป้าหมาย" },
-      { id: "reflex", name: "Reflex", thai: "หลบหลีกฉับไว (Reflex Evasion)", ap: 20, isSpirit: false, role: "tank", desc: "เพิ่มอัตราการหลบหลีกการโจมตีอันตราย" },
+      { id: "vigorous_staggerer", name: "Vigorous Staggerer", thai: "เร่งเกจ Stagger รวดเร็ว", ap: 20, isSpirit: false, role: "breaker", desc: "เร่งความเร็วในการสะสมเกจ Stagger ของเป้าหมาย 30%" },
+      { id: "reflex", name: "Reflex", thai: "หลบหลีกฉับไว (Reflex Evasion)", ap: 20, isSpirit: false, role: "tank", desc: "เพิ่มอัตราการหลบหลีกการโจมตีกายภาพ 25%" },
       { id: "restore_mp_dmg", name: "Restore MP when Taking Damage", thai: "ฟื้น MP เมื่อได้รับความเสียหาย", ap: 20, isSpirit: false, role: "tank", desc: "ฟื้นฟู MP ทุกครั้งที่ถูกศัตรูโจมตี" },
       { id: "magic_counter", name: "Magic Counter", thai: "สวนกลับเวทมนตร์", ap: 20, isSpirit: false, role: "tank", desc: "มีโอกาสสวนกลับเมื่อถูกโจมตีด้วยเวทมนตร์" },
       { id: "auto_shell", name: "Auto-Shell", thai: "เปิดเทิร์นด้วยเกราะ Shell", ap: 20, isSpirit: false, role: "tank", desc: "ลดความเสียหายเวทมนตร์ลง 30% ทันทีที่เริ่มการต่อสู้" },
@@ -835,7 +844,7 @@
     ];
 
     // Presets
-    const META_PRESETS = [
+        const META_PRESETS = [
       {
         id: "tank_wilhelm",
         name: "📸 บิลด์แทงก์ Wilhelm (Image 1)",
@@ -867,14 +876,34 @@
         synergyText: "Sephiroth มอบ Bravery ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Shantotto + Spirit of Y'shtola + Arms Akimbo รวม 410 / 484 AP"
       },
       {
+        id: "healer_ayaka",
+        name: "💖 บิลด์ฮีลเลอร์ Fina (Healer 475 AP)",
+        subtitle: "วิชั่นหลัก: Ayaka • Dualcast x4 White Magic",
+        requiredBaseVis: 13051,
+        actionBadge: "Dualcast White Magic (2-4 Spells)",
+        desc: "บิลด์หมอยาชุบชีวิตไร้พ่าย: ร่ายเวทขาวได้สูงสุด 4 ครั้งใน 1 เทิร์น (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟ) ใช้ 475 / 484 AP",
+        skills: ["spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"],
+        synergyText: "Ayaka มอบ The Hand That Heals ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Leah + Firion + Shantotto (Dualcast) รวม 475 / 484 AP"
+      },
+      {
+        id: "breaker_amelia",
+        name: "⚡ บิลด์เบรกเกอร์ Nichol/Lid (Breaker 455 AP)",
+        subtitle: "วิชั่นหลัก: Amelia • Turn 1 Stagger Shredder",
+        requiredBaseVis: 13017,
+        actionBadge: "Turn 1 Instant Break & Stagger",
+        desc: "บิลด์สลายเกราะบอส: ออกตัวคนแรกด้วย First Strike รัวสกิล Breaker 2 ครั้งซ้อนเร่งเกจ Stagger +30% และดาเมจดีบัฟ +60% ใช้ 455 / 484 AP",
+        skills: ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"],
+        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Firion + Clive + Zidane (Aggravation 60%) รวม 455 / 484 AP"
+      },
+      {
         id: "quad_attack",
-        name: "⚡ สิงห์ปืนคู่ 4-16 ฮิต (Quad-Attack Loop)",
-        subtitle: "Arms Akimbo x Double Action + Crit MP Refund",
-        requiredBaseVis: null,
+        name: "⚡ สิงห์ปืนคู่ 4-16 ฮิต (Quad-Attack 470 AP)",
+        subtitle: "วิชั่นหลัก: Sephiroth • Arms Akimbo x Double Action",
+        requiredBaseVis: 13113,
         actionBadge: "4 Actions (16 Hits)",
-        desc: "2 คำสั่ง x ฟันซ้ำ 2 รอบ = 4 ท่าใหญ่! พร้อมรีฟันด์ MP คืนเข้าหลอดทุกคริ",
+        desc: "2 คำสั่ง x ฟันซ้ำ 2 รอบ = 4 ท่าใหญ่ (16 ฮิต)! พร้อมรีฟันด์ MP คืนเข้าหลอดทุกคริ ใช้ 470 / 484 AP",
         skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"],
-        synergyText: "Arms Akimbo x Double Action = 4 ท่าใหญ่ รีฟันด์ MP เต็มหลอดวนลูปไม่จำกัด"
+        synergyText: "Arms Akimbo x Double Action = 4 ท่าใหญ่ รีฟันด์ MP เต็มหลอดวนลูปไม่จำกัด รวม 470 / 484 AP"
       }
     ];
 
@@ -3725,7 +3754,7 @@
     // -------------------------------------------------------------
     // SMART VISION SUGGESTER (TAILORED TO BASE VISION & MAX AP PACKING)
     // -------------------------------------------------------------
-    function suggestOptimalBuildForVision(visId, targetAP = currentAPCapacity) {
+        function suggestOptimalBuildForVision(visId, targetAP = currentAPCapacity) {
       const vis = VISIONS.find(v => v.id === visId) || VISIONS[0];
       const excluded = vis.providedSkillIds || [];
 
@@ -3733,51 +3762,82 @@
       let synergySummary = "";
       let actionBadge = "4 Actions / Turn";
 
-      // 1. Sephiroth (Physical Burst & Crit)
-      if (vis.id === 13113) {
-        recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
-        synergySummary = `⚔️ <strong>คอมโบสูงสุดสำหรับ Sephiroth:</strong> ตัวละครได้รับ <em>Auto-Bravery (+25% Atk)</em> และ <em>Crit Rate +20%</em> ฟรี! สวมใส่ Spirit of Firion (2 แอคชั่น) x Spirit of Squall (ฟันซ้ำ 2 รอบ) ฟัน 4 ท่าใหญ่ (16 ฮิต) ติดคริติคอลแทบทุกฮิต คืน MP เต็มหลอดจาก Cloud Soul และดูดเลือดเต็ม 100%!`;
-        actionBadge = "4 Actions (16 Hits)";
+      // 1. HEALER / MEDIC (Fina or Ayaka / Leah base vision)
+      const isHealer = (vis.role === "healer") || [13051, 13045].includes(vis.id) || (currentChar.id === 1003);
+
+      // 2. BREAKER / SABOTEUR / STRATEGIST (Lid, Nichol, or Amelia / Clive / Zidane / Vaan / Camille)
+      const isBreaker = !isHealer && ((vis.role === "breaker") || (vis.role === "support") || [13017, 13130, 13118, 13124, 13033].includes(vis.id) || [1004, 1005].includes(currentChar.id));
+
+      // 3. TANK (Rain or Wilhelm / Cecil / WoL / Charlotte)
+      const isTank = !isHealer && !isBreaker && ((vis.role === "tank") || [13062, 13103, 13100, 13060].includes(vis.id) || (currentChar.id === 1001));
+
+      // 4. MAGIC DPS (Archwitch Fina, Sakura, or Shantotto / Terra / Y'shtola / Tronn / Victoria)
+      const isMage = !isHealer && !isBreaker && !isTank && ((vis.role === "magic_dps") || [13123, 13127, 13108, 13024, 13027].includes(vis.id) || [1006, 1008].includes(currentChar.id));
+
+      // -------------------------------------------------------------
+      // BUILD LOGIC BY ROLE
+      // -------------------------------------------------------------
+      // A. HEALER
+      if (isHealer) {
+        if (vis.id === 13051) {
+          // Ayaka base: provide Leah (Auto-Cure), Firion (Arms Akimbo), Shantotto (Dualcast)
+          recommendedSkills = ["spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"];
+        } else if (vis.id === 13045) {
+          // Leah base: provide Ayaka (The Hand That Heals), Firion, Shantotto
+          recommendedSkills = ["spirit_ayaka", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"];
+        } else {
+          recommendedSkills = ["spirit_ayaka", "spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex"];
+        }
+        synergySummary = `💖 <strong>สุดยอดคอมโบฮีลเลอร์ & ชุบชีวิตไร้พ่าย (${vis.name} / ${currentChar.name}):</strong> ผสาน <em>Arms Akimbo</em> (2 แอคชั่น) x <em>Dualcast</em> (ร่ายเวท 2 ครั้งซ้อน) = ร่ายเวทขาวได้สูงสุด <strong>4 ครั้งใน 1 เทิร์น</strong> (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟในเทิร์นเดียว!) ไม่เปลือง MP ด้วย <em>Half MP Cost</em> พร้อม <em>First Strike</em> ออกตัวคนแรกเพื่อชุบเพื่อนฉุกเฉินก่อนโดนศัตรูซ้ำ และมีบาเรีย <em>LB Shield</em> + <em>Reflex</em> เอาตัวรอด!`;
+        actionBadge = "Dualcast White Magic (2-4 Spells)";
       }
-      // 2. Wilhelm or Cecil (Retaliation Tank)
-      else if (vis.id === 13062 || vis.id === 13103) {
+      // B. BREAKER / SABOTEUR / STRATEGIST
+      else if (isBreaker) {
+        if (vis.id === 13130) {
+          // Clive base: has Vigorous Staggerer innate
+          recommendedSkills = ["spirit_firion", "spirit_onion", "spirit_zidane", "half_mp_cost", "first_strike", "preemptive_strike", "power_stagger", "aggravation"];
+        } else if (vis.id === 13118) {
+          // Zidane base: has Insult to Injury & Aggravation innate
+          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_onion", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"];
+        } else if (vis.id === 13017) {
+          // Amelia base: has LB Shield innate
+          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"];
+        } else {
+          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "aggravation"];
+        }
+        synergySummary = `⚡ <strong>สุดยอดคอมโบเบรกเกอร์ & สลายเกราะบอส (${vis.name} / ${currentChar.name}):</strong> ออกตัวคนแรกด้วย <em>First Strike</em> รัวสกิล Breaker 2 ครั้งซ้อนด้วย <em>Arms Akimbo</em> เร่งเกจ Stagger พุ่งกระฉูด +30% (<em>Vigorous Staggerer</em>) และทวีคูณดาเมจซ้ำเติมศัตรูที่ติดดีบัฟขึ้นถึง +60% (<em>Aggravation</em>) พร้อม <em>Half MP Cost</em> สแปมสกิลเบรกเกอร์ได้ต่อเนื่องไม่จำกัด!`;
+        actionBadge = "Turn 1 Instant Break & Stagger";
+      }
+      // C. TANK
+      else if (isTank) {
         recommendedSkills = ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"];
         synergySummary = `🛡️ <strong>คอมโบสูงสุดสำหรับแทงก์ (${vis.name}):</strong> ได้รับ <em>Bastion</em> หรือ <em>Cover</em> ฟรี! สวมใส่ Spirit of WoL (สวนกลับกายภาพ 30%) + Spirit of Firion (เบิ้ลแอคชั่นและดูดเลือด) + Onion Knight (เร่ง LB 300%) ยืนชนบอสได้ทุกตัว`;
         actionBadge = "Guard & Counter x2";
       }
-      // 3. Cloud (Physical Crit & Multi-Hit)
-      else if (vis.id === 13110) {
-        recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_bartz", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
-        synergySummary = `⚔️ <strong>คอมโบสูงสุดสำหรับ Cloud:</strong> ได้รับ <em>Cloud Soul</em> คืน MP ทุกคริ ฟรี! ไม่ต้องใส่ Spirit of Cloud ซ้ำ นำ 8 ช่องไปสวมใส่ Spirit of Firion + Squall + Bartz ฟันดาบเวท 4 ครั้งซ้อนโดย MP ไม่มีวันหมด!`;
-        actionBadge = "4 Actions (16 Hits)";
-      }
-      // 4. Shantotto, Y'shtola, or Tronn (Magic Nuke)
-      else if (vis.id === 13123 || vis.id === 13127 || vis.id === 13024) {
-        recommendedSkills = ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"];
+      // D. MAGIC DPS
+      else if (isMage) {
         if (vis.id === 13123) {
-          // Shantotto base: replace spirit_shantotto with spirit_victoria
+          // Shantotto base: already has Dualcast
           recommendedSkills = ["spirit_firion", "spirit_victoria", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"];
+        } else {
+          recommendedSkills = ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"];
         }
         synergySummary = `🔮 <strong>คอมโบมหาเวทสูงสุด (${vis.name}):</strong> ร่ายมหาเวทหมู่เต็ม 100% ซ้ำ 4 ครั้งซ้อนใน 1 เทิร์น (Arms Akimbo x Dualcast) พร้อมรีเจน MP 5% ต่อเทิร์น ล้างศัตรูทั้งสนาม!`;
         actionBadge = "4 Spells / Turn";
       }
-      // 5. Bartz (Dual Spellblade)
-      else if (vis.id === 13105) {
-        recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "power_stagger", "vigorous_staggerer", "tip_top_shape"];
-        synergySummary = `⚔️ <strong>คอมโบดาบเวทสูงสุดสำหรับ Bartz:</strong> ได้รับ <em>Dual Spellblade</em> และโบนัสธาตุ 30% ฟรี! สวมใส่ Spirit of Firion เพื่อขยายเป็น 4 ดาบเวท ตัดเกจ Stagger บอสใน 1 เทิร์น!`;
-        actionBadge = "4 Spellblades / Turn";
-      }
-      // 6. Onion Knight or Clive (LB Engine)
-      else if (vis.id === 13102 || vis.id === 13130) {
-        recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_ayaka", "spirit_cloud", "break_the_limit", "first_strike", "tip_top_shape"];
-        if (vis.id === 13130) recommendedSkills = ["spirit_onion", "spirit_firion", "spirit_ayaka", "spirit_cloud", "break_the_limit", "first_strike", "tip_top_shape"];
-        synergySummary = `💖 <strong>คอมโบ Limit Break สูงสุด:</strong> เร่งเกจ LB เร็วขึ้น 300% ผสานกับความแรง LB +40% และฟื้น MP ทุกคริ สแปมท่าไม้ตายใหญ่ได้ทุก 1-2 เทิร์น!`;
-        actionBadge = "LB Every 1-2 Turns";
-      }
-      // 7. General / Default High-AP Packing (Quad-Attack Loop)
+      // E. PHYSICAL DPS / HYBRID
       else {
-        recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
-        synergySummary = `⚡ <strong>คอมโบทั่วไปสุดคุ้มค่า:</strong> Arms Akimbo (2 คำสั่ง) x Double Action (ฟันซ้ำ 2 รอบ) = 4 ท่าใหญ่ รีฟันด์ MP เต็มหลอด ใช้ AP คุ้มค่าสูงสุด!`;
+        if (vis.id === 13110) {
+          // Cloud base: already has Cloud Soul
+          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_bartz", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
+        } else if (vis.id === 13105) {
+          // Bartz base: already has Dual Spellblade
+          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "power_stagger", "vigorous_staggerer", "tip_top_shape"];
+        } else {
+          // Sephiroth / General Physical
+          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
+        }
+        synergySummary = `⚔️ <strong>คอมโบกายภาพสูงสุด (${vis.name}):</strong> Arms Akimbo (2 แอคชั่น) x Double Action (ฟันซ้ำ 2 รอบ) = <strong>4 ท่าใหญ่ (16 ฮิต)</strong> คืน MP เต็มหลอดจาก Cloud Soul ฟันทะลุ 99,999 ได้ไม่จำกัด!`;
         actionBadge = "4 Actions (16 Hits)";
       }
 
@@ -3787,7 +3847,19 @@
 
       // Maximize AP packing up to 8 slots: backfill if there's remaining slots
       if (filtered.length < 8) {
-        const fillers = ["spirit_bartz", "spirit_cloud", "spirit_squall", "spirit_onion", "decimating_attacks", "power_stagger", "tip_top_shape"];
+        let fillers = [];
+        if (isHealer) {
+          fillers = ["spirit_onion", "reflex", "restore_mp_dmg", "lb_shield", "first_strike"];
+        } else if (isBreaker) {
+          fillers = ["spirit_onion", "aggravation", "power_stagger", "lb_shield", "tip_top_shape"];
+        } else if (isTank) {
+          fillers = ["spirit_cecil", "spirit_charlotte", "auto_shell", "power_stagger"];
+        } else if (isMage) {
+          fillers = ["spirit_terra", "spirit_tronn", "aggravation", "tip_top_shape"];
+        } else {
+          fillers = ["spirit_bartz", "spirit_cloud", "spirit_squall", "spirit_onion", "decimating_attacks", "power_stagger", "tip_top_shape"];
+        }
+
         for (const fId of fillers) {
           if (filtered.length >= 8) break;
           if (!excluded.includes(fId) && !filtered.some(s => s.id === fId)) {
@@ -4032,16 +4104,17 @@
       });
     }
 
-    function renderAllArchetypesComparison() {
+        function renderAllArchetypesComparison() {
       const container = document.getElementById('all-archetypes-comparison');
       container.innerHTML = '';
 
-      // Test builds for 4 popular archetypes with current character
+      // Test builds for 5 popular archetypes with current character
       const testVisions = [
         { visId: 13113, label: "⚔️ กายภาพคริติคอล (Sephiroth)" },
+        { visId: 13051, label: "💖 ฮีลเลอร์ชุบชีวิต (Ayaka)" },
+        { visId: 13017, label: "⚡ เบรกเกอร์สลายเกราะ (Amelia)" },
         { visId: 13123, label: "🔮 มหาเวทล้างโลก (Shantotto)" },
-        { visId: 13062, label: "🛡️ แทงก์สวนกลับ (Wilhelm)" },
-        { visId: 13105, label: "⚡ ดาบเวท 4 ธาตุ (Bartz)" }
+        { visId: 13062, label: "🛡️ แทงก์สวนกลับ (Wilhelm)" }
       ];
 
       testVisions.forEach(t => {
