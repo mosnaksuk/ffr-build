@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF Resonance - Build Optimizer (484 AP & High-Res Sprites)</title>
+  <title>FF Resonance - Meta Build & Action Stacking Optimizer (484 AP)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -30,6 +30,7 @@
     ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
     .crystal-glow { box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25); }
     .gold-glow { box-shadow: 0 0 20px -5px rgba(245, 158, 11, 0.25); }
+    .purple-glow { box-shadow: 0 0 20px -5px rgba(168, 85, 247, 0.25); }
     .portrait-mask {
       mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
       -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
@@ -56,14 +57,17 @@
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800 font-mono">
               Save Synced: 484 AP (MR 9 All)
             </span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800 font-mono">
+              Meta Action Stacking Engine
+            </span>
           </div>
-          <p class="text-[11px] text-slate-400">ระบบคำนวณบิลด์ Spirit Masteries & Passives (จำกัด 8 ช่อง)</p>
+          <p class="text-[11px] text-slate-400">ระบบคำนวณบิลด์เมต้าคอมโบ Arms Akimbo x Double Action/Dualcast (ล็อก 8 ช่อง)</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
         <span class="text-xs px-3 py-1.5 rounded-xl bg-cyan-950/80 text-cyan-300 border border-cyan-800 font-mono" id="header-ap-badge">
-          AP 484 / 484
+          AP 470 / 484
         </span>
         <button id="btn-copy-build" class="text-xs px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-medium flex items-center gap-1.5 shadow transition">
           <i data-lucide="copy" class="w-3.5 h-3.5"></i> คัดลอกบิลด์
@@ -74,6 +78,39 @@
 
   <!-- Main Container -->
   <main class="max-w-7xl mx-auto px-4 py-5 w-full flex-1 space-y-5">
+
+    <!-- CONCEPT BANNER: META ACTION STACKING & SPIRIT BUNDLES -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 shadow-xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-indigo-900/80 text-indigo-300 text-[10px] font-bold border border-indigo-700">META CORE PRINCIPLE</span>
+            <h3 class="text-xs md:text-sm font-bold text-slate-100">กฎความคุ้มค่า: Spirit Mastery (ประหยัด Slot) vs. สกิลเดี่ยว (ประหยัด AP)</h3>
+          </div>
+          <p class="text-[11px] text-slate-300 leading-relaxed">
+            • <strong>Spirit of [Vision] (1 ช่อง):</strong> มัดรวมทุกสกิลของวิชั่นใน 1 ช่อง ช่วยประหยัด <strong>Slot ความจุ (ไม่เกิน 8 ช่อง)</strong> เหมาะกับ Endgame ที่มี <strong>484 AP</strong><br>
+            • <strong>Multi-Action Stacking:</strong> เมื่อผสาน <code>Arms Akimbo</code> (2 แอคชั่น) x <code>Double Action</code> (กายภาพ 2 ฮิต) หรือ <code>Dualcast</code> (เวท 2 ครั้ง) = <strong>ออกท่าได้ 4 ครั้ง/เทิร์น!</strong><br>
+            • <strong>Infinite Loop:</strong> ผสาน <code>Half MP Cost</code> + <code>Spirit of Cloud</code> (คืน MP ทุกคริ) + <code>Blood Weapon</code> (ดูดเลือด) ทำให้ตี 4-16 ฮิตโดย MP และ HP ไม่มีวันหมด!
+          </p>
+        </div>
+        <div class="shrink-0 flex items-center gap-2 bg-slate-950/70 p-2.5 rounded-xl border border-indigo-500/30">
+          <div class="text-center px-2">
+            <div class="text-xs text-indigo-400 font-bold">2 Actions</div>
+            <div class="text-[9px] text-slate-400">Arms Akimbo</div>
+          </div>
+          <span class="text-indigo-400 font-bold">✖</span>
+          <div class="text-center px-2">
+            <div class="text-xs text-amber-400 font-bold">2x Repeats</div>
+            <div class="text-[9px] text-slate-400">Double / Dualcast</div>
+          </div>
+          <span class="text-indigo-400 font-bold">=</span>
+          <div class="text-center px-2 bg-emerald-950/80 rounded-lg border border-emerald-700">
+            <div class="text-sm text-emerald-400 font-black">4x BURST</div>
+            <div class="text-[9px] text-emerald-300">ต่อเทิร์น (8-16 Hits)</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- CHARACTER SELECTION (Faces & Avatars) -->
     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl">
@@ -165,10 +202,10 @@
             <div>
               <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">AP BUDGET USAGE</span>
               <div class="flex items-baseline gap-2">
-                <span id="ap-used-num" class="text-2xl font-black font-mono text-cyan-400">410</span>
+                <span id="ap-used-num" class="text-2xl font-black font-mono text-cyan-400">470</span>
                 <span class="text-slate-500 text-sm font-mono">/ <span id="ap-max-num">484</span> AP</span>
                 <span id="ap-remaining-tag" class="text-xs px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono">
-                  เหลือ 74 AP
+                  เหลือ 14 AP
                 </span>
               </div>
             </div>
@@ -185,7 +222,7 @@
 
           <!-- Progress Bar -->
           <div class="w-full h-3 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
-            <div id="ap-progress-bar" class="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" style="width: 85%;"></div>
+            <div id="ap-progress-bar" class="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" style="width: 97%;"></div>
           </div>
           <div class="flex justify-between items-center mt-2 text-[11px] text-slate-400">
             <span>ช่องสกิลในเกมล็อกไว้ไม่เกิน <strong>8 ช่อง</strong></span>
@@ -193,34 +230,30 @@
           </div>
         </div>
 
-        <!-- Role Tabs -->
-        <div class="flex flex-wrap gap-1.5" id="role-tabs-container">
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white" data-role="tank">
-            🛡️ สายตั้งรับ (Tank)
-          </button>
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white" data-role="phys_dps">
-            ⚔️ สายดาเมจ (Physical DPS)
-          </button>
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-cyan-600 border-cyan-500 text-white shadow-md" data-role="magic_dps">
-            🔮 สายเวท (Magic Nuke)
-          </button>
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white" data-role="support">
-            💖 สาย Support & LB
-          </button>
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white" data-role="healer">
-            💚 สายฮีลเลอร์ (Healer)
-          </button>
-          <button class="role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white" data-role="mrp_farm">
-            🌾 สายฟาร์มเร่งเวล (MRP Farm)
-          </button>
+        <!-- META PRESET SELECTOR (Endgame Meta Archetypes) -->
+        <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
+              <i data-lucide="flame" class="w-4 h-4 text-amber-400"></i>
+              <span>เลือกพรีเซ็ตเมต้าระดับสูง (Endgame Meta Presets & Combos):</span>
+            </h3>
+            <span class="text-[10px] text-slate-400">คลิกเพื่อสลับบิลด์ทันที</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="meta-presets-container">
+            <!-- Injected via JS -->
+          </div>
         </div>
 
         <!-- Recommended 8 Slots Loadout -->
         <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">
-              เซ็ตพาสซีฟและ Spirit Masteries ที่ติดตั้ง (ไม่เกิน 8 ช่อง):
-            </h3>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200" id="current-preset-title">
+                เซ็ตพาสซีฟและ Spirit Masteries ที่ติดตั้ง (ไม่เกิน 8 ช่อง):
+              </h3>
+              <p class="text-[11px] text-cyan-400 mt-0.5" id="current-preset-desc"></p>
+            </div>
             <span class="text-xs text-slate-400 font-mono" id="equipped-indicator">8 สกิล</span>
           </div>
 
@@ -228,11 +261,16 @@
             <!-- Injected via JS -->
           </div>
 
-          <!-- Tactical Synergy Guide -->
-          <div class="mt-3 p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1">
-            <div class="flex items-center gap-1.5 text-cyan-400 font-bold text-xs uppercase tracking-wider">
-              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-              <span>คำแนะนำ Synergy สายนี้:</span>
+          <!-- Tactical Synergy & Action Economy Guide -->
+          <div class="mt-3 p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-1.5 text-cyan-400 font-bold text-xs uppercase tracking-wider">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                <span>Action Economy & Combat Mechanics:</span>
+              </span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono border border-emerald-800" id="action-economy-badge">
+                4 Actions / Turn
+              </span>
             </div>
             <p id="synergy-guide-text" class="leading-relaxed"></p>
           </div>
@@ -242,14 +280,14 @@
 
     </div>
 
-    <!-- COMPARISON: ALL 6 ARCHETYPES AT A GLANCE (in 484 AP) -->
+    <!-- COMPARISON: ALL 6 META BUILDS AT A GLANCE (in 484 AP) -->
     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3">
       <div class="flex items-center justify-between pb-2 border-b border-slate-800">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
           <i data-lucide="layout-grid" class="w-4 h-4 text-amber-400"></i>
-          <span>เปรียบเทียบการจัดบิลด์ทั้ง 6 สายของตัวละครนี้ในงบ 484 AP (ไม่เกิน 8 ช่อง)</span>
+          <span>ตารางเปรียบเทียบ 6 บิลด์ระดับเมต้า (Endgame Meta Builds in 484 AP)</span>
         </h2>
-        <span class="text-xs text-slate-400 font-mono">Endgame Meta</span>
+        <span class="text-xs text-slate-400 font-mono">Meta Tier S</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="all-archetypes-comparison">
@@ -261,7 +299,7 @@
 
   <!-- Footer -->
   <footer class="border-t border-slate-800/80 bg-slate-950 py-3 text-center text-xs text-slate-500">
-    Final Fantasy Resonance Build Optimizer • ภาพสไปรต์ตัวละครและวิชั่นความละเอียดสูงตรงตามเกม
+    Final Fantasy Resonance Build Optimizer • Meta Multi-Action Stacking & Spirit Mastery Engine
   </footer>
 
   <!-- SCRIPT -->
@@ -270,14 +308,14 @@
     // CHARACTERS WITH REAL PORTRAITS & FACES
     // -------------------------------------------------------------
     const CHARACTERS = [
-      { id: 1001, name: "Rain", thai: "เรน", role: "Vanguard / Tank", lv: 42, hp: 3771, mp: 316, baseVis: 13062, visName: "Wilhelm", face: "assets/images/faces/1001.png", portrait: "assets/images/portraits/1001.png" },
-      { id: 1002, name: "Lasswell", thai: "ลาสเวลล์", role: "Commando / Katana", lv: 42, hp: 3011, mp: 484, baseVis: 13110, visName: "Cloud", face: "assets/images/faces/1002.png", portrait: "assets/images/portraits/1002.png" },
-      { id: 1003, name: "Fina", thai: "ฟีน่า", role: "Medic / White Mage", lv: 42, hp: 3255, mp: 547, baseVis: 13045, visName: "Leah", face: "assets/images/faces/1003.png", portrait: "assets/images/portraits/1003.png" },
-      { id: 1004, name: "Lid", thai: "ลิด", role: "Saboteur / Breaker", lv: 42, hp: 3070, mp: 543, baseVis: 13130, visName: "Clive", face: "assets/images/faces/1004.png", portrait: "assets/images/portraits/1004.png" },
-      { id: 1005, name: "Nichol", thai: "นิโคล", role: "Strategist / Buffer", lv: 42, hp: 2766, mp: 569, baseVis: 13017, visName: "Amelia", face: "assets/images/faces/1005.png", portrait: "assets/images/portraits/1005.png" },
-      { id: 1006, name: "Archwitch Fina", thai: "แม่มดฟีน่า", role: "Ravager / Black Mage", lv: 42, hp: 2696, mp: 744, baseVis: 13123, visName: "Shantotto", face: "assets/images/faces/1006.png", portrait: "assets/images/portraits/1006.png" },
-      { id: 1007, name: "Jake", thai: "เจค", role: "Gunner / Striker", lv: 42, hp: 3203, mp: 610, baseVis: 13102, visName: "Onion Knight", face: "assets/images/faces/1007.png", portrait: "assets/images/portraits/1007.png" },
-      { id: 1008, name: "Sakura", thai: "ซากุระ", role: "Sorceress / Elementalist", lv: 41, hp: 2469, mp: 571, baseVis: 13113, visName: "Sephiroth", face: "assets/images/faces/1008.png", portrait: "assets/images/portraits/1008.png" }
+      { id: 1001, name: "Rain", thai: "เรน", role: "Vanguard / Tank", lv: 42, hp: 3771, mp: 316, baseVis: 13062, visName: "Wilhelm", face: "assets/images/faces/1001.png", portrait: "assets/images/portraits/1001.png", defaultPreset: "tank" },
+      { id: 1002, name: "Lasswell", thai: "ลาสเวลล์", role: "Commando / Katana", lv: 42, hp: 3011, mp: 484, baseVis: 13110, visName: "Cloud", face: "assets/images/faces/1002.png", portrait: "assets/images/portraits/1002.png", defaultPreset: "quad_attack" },
+      { id: 1003, name: "Fina", thai: "ฟีน่า", role: "Medic / White Mage", lv: 42, hp: 3255, mp: 547, baseVis: 13045, visName: "Leah", face: "assets/images/faces/1003.png", portrait: "assets/images/portraits/1003.png", defaultPreset: "healer_meta" },
+      { id: 1004, name: "Lid", thai: "ลิด", role: "Saboteur / Breaker", lv: 42, hp: 3070, mp: 543, baseVis: 13130, visName: "Clive", face: "assets/images/faces/1004.png", portrait: "assets/images/portraits/1004.png", defaultPreset: "spellblade_meta" },
+      { id: 1005, name: "Nichol", thai: "นิโคล", role: "Strategist / Buffer", lv: 42, hp: 2766, mp: 569, baseVis: 13017, visName: "Amelia", face: "assets/images/faces/1005.png", portrait: "assets/images/portraits/1005.png", defaultPreset: "lb_machine" },
+      { id: 1006, name: "Archwitch Fina", thai: "แม่มดฟีน่า", role: "Ravager / Black Mage", lv: 42, hp: 2696, mp: 744, baseVis: 13123, visName: "Shantotto", face: "assets/images/faces/1006.png", portrait: "assets/images/portraits/1006.png", defaultPreset: "quad_dualcast" },
+      { id: 1007, name: "Jake", thai: "เจค", role: "Gunner / Striker", lv: 42, hp: 3203, mp: 610, baseVis: 13102, visName: "Onion Knight", face: "assets/images/faces/1007.png", portrait: "assets/images/portraits/1007.png", defaultPreset: "quad_attack" },
+      { id: 1008, name: "Sakura", thai: "ซากุระ", role: "Sorceress / Elementalist", lv: 41, hp: 2469, mp: 571, baseVis: 13113, visName: "Sephiroth", face: "assets/images/faces/1008.png", portrait: "assets/images/portraits/1008.png", defaultPreset: "quad_dualcast" }
     ];
 
     // Visions mapping
@@ -307,54 +345,119 @@
       { id: 13128, name: "Noctis", thai: "น็อคติส", role: "phys_dps", sprite: "assets/images/visions/13128.png" }
     ];
 
-    // MASTER PASSIVES & SPIRIT BUNDLES (Matching In-game Screenshots)
+    // MASTER PASSIVES & SPIRIT BUNDLES (Matching In-game Screenshots & Deep Meta)
     const PASSIVES_DATABASE = [
-      // Spirit Bundles (MR 9 Masteries)
-      { id: "spirit_firion", name: "Spirit of Firion", thai: "จิตวิญญาณฟิริออน (Arms Akimbo + Blood Weapon + Arsenal)", ap: 120, score: 28.0, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13101.png", desc: "รวมทุกความสามารถของ Firion: 2 แอคชั่น/เทิร์น + ดูดเลือด 10% + เจาะเกราะ 15%" },
-      { id: "spirit_shantotto", name: "Spirit of Shantotto", thai: "จิตวิญญาณชันโตโตะ (Full AoE Power + Dark Rite)", ap: 120, score: 28.0, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13123.png", desc: "รวมทุกความสามารถของ Shantotto: เวทหมู่พลังเต็ม 100% ทุกตัว + เวทแรงขึ้นตาม HP ต่ำ + ฟื้น MP เมื่อกำจัดศัตรู" },
-      { id: "spirit_squall", name: "Spirit of Squall", thai: "จิตวิญญาณสคอลล์ (Improvement + Trigger + MP Attack)", ap: 105, score: 26.0, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13116.png", desc: "รวมทุกความสามารถของ Squall: บูสต์ดาเมจและ Stagger 50% ตามจำนวนแอคชั่น + การันตีคริ + ฟื้น MP เมื่อโจมตี" },
-      { id: "spirit_onion", name: "Spirit of Onion Knight", thai: "จิตวิญญาณออเนียนไนท์ (LB Triple Charge + Speed)", ap: 100, score: 26.0, isSpirit: true, role: "support", visSprite: "assets/images/visions/13102.png", desc: "รวมทุกความสามารถของ Onion Knight: เร่งเกจ Limit Break ขึ้น 300% (Triple Charge) + Speed 10% + Multi-Hit" },
-      { id: "spirit_wol", name: "Spirit of WoL", thai: "จิตวิญญาณนักรบแห่งแสง (Counter + Redux 20% + Stagger 30%)", ap: 95, score: 25.0, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13100.png", desc: "รวมทุกความสามารถของ WoL: สวนกลับกายภาพ 30% + ลดดาเมจกายภาพ 20% + เพิ่มพลังสะสมเกจ Stagger 30%" },
-      { id: "spirit_yshtola", name: "Spirit of Y'shtola", thai: "จิตวิญญาณอิชโทลา (Aetherflow MP Regen + Stagger 20%)", ap: 95, score: 25.0, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13127.png", desc: "รวมทุกความสามารถของ Y'shtola: รีเจน MP 5% ทุกเทิร์น + ป้องกันเวท 20% + พลัง Stagger 20%" },
-      { id: "spirit_cloud", name: "Spirit of Cloud", thai: "จิตวิญญาณคลาวด์ (Crit Boost 35% + Crit Rate + Crit MP)", ap: 105, score: 26.0, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13110.png", desc: "รวมทุกความสามารถของ Cloud: คูณความแรงคริ 35% + โอกาสคริ 10% + ฟื้น MP 3% เมื่อโจมตีติดคริ" },
-      { id: "spirit_sephiroth", name: "Spirit of Sephiroth", thai: "จิตวิญญาณเซฟิรอธ (Auto-Bravery + Crit 20% + Atk 30%)", ap: 130, score: 28.0, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13113.png", desc: "รวมทุกความสามารถของ Sephiroth: เปิดด้วย Bravery (+25% Atk) + โอกาสคริ 20% + พลังโจมตีกายภาพ 30%" },
-      { id: "spirit_wilhelm", name: "Spirit of Wilhelm", thai: "จิตวิญญาณวิลเฮล์ม (Bastion ลดดาเมจทีม 20% + Def 30%)", ap: 105, score: 26.0, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13062.png", desc: "รวมทุกความสามารถของ Wilhelm: ลดดาเมจให้เพื่อนทั้งปาร์ตี้ 20% ตอน Guard + สวนกลับคริติคอล + ป้องกัน 30%" },
-      { id: "spirit_ayaka", name: "Spirit of Ayaka", thai: "จิตวิญญาณอายากะ (The Hand That Heals + LB on Heal)", ap: 100, score: 26.0, isSpirit: true, role: "healer", visSprite: "assets/images/visions/13051.png", desc: "รวมทุกความสามารถของ Ayaka: ฮีลเพื่อนแล้วเก่งขึ้น 50% + ฮีลแล้วชาร์จเกจ LB ตนเอง 25% + ยืดระยะเวลาบัฟ" },
-      { id: "spirit_victoria", name: "Spirit of Victoria", thai: "จิตวิญญาณวิกตอเรีย (MRP Gain +50% + Magic Atk)", ap: 100, score: 28.0, isSpirit: true, role: "mrp_farm", visSprite: "assets/images/visions/13027.png", desc: "รวมทุกความสามารถของ Victoria: เพิ่มแต้มฟาร์มวิชั่น MRP +50% + Dark Amp + พลังเวท 20%" },
-      { id: "spirit_clive", name: "Spirit of Clive", thai: "จิตวิญญาณไคลฟ์ (LB Damage +40% + Boundless Flames)", ap: 115, score: 26.0, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13130.png", desc: "รวมทุกความสามารถของ Clive: ทวีคูณความแรง Limit Break 40% + ดาเมจไฟและเกจ Stagger 30%" },
+      // 1. Spirit Bundles (MR 9 Masteries - Packs ALL passives of a Vision into 1 single slot!)
+      { id: "spirit_firion", name: "Spirit of Firion", thai: "จิตวิญญาณฟิริออน (Arms Akimbo + Blood Weapon + Arsenal)", ap: 120, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13101.png", desc: "รวมทุกความสามารถของ Firion ใน 1 ช่อง: Arms Akimbo (2 แอคชั่น/เทิร์น) + ดูดเลือด 10% ทุกฮิต + เจาะเกราะ 15%" },
+      { id: "spirit_shantotto", name: "Spirit of Shantotto", thai: "จิตวิญญาณชันโตโตะ (Dualcast + Full AoE Power + Dark Rite)", ap: 120, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13123.png", desc: "รวมทุกความสามารถของ Shantotto ใน 1 ช่อง: Dualcast (ร่ายเวท 2 ครั้ง/คำสั่ง) + เวทหมู่พลังเต็ม 100% ทุกตัว + ฟื้น MP เมื่อฆ่าศัตรู" },
+      { id: "spirit_squall", name: "Spirit of Squall", thai: "จิตวิญญาณสคอลล์ (Double Action + Trigger + Stagger 50%)", ap: 105, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13116.png", desc: "รวมทุกความสามารถของ Squall ใน 1 ช่อง: Double Action (ฟันซ้ำ 2 ครั้ง/คำสั่ง) + บูสต์ดาเมจและ Stagger 50% + ฟื้น MP เมื่อโจมตี" },
+      { id: "spirit_cloud", name: "Spirit of Cloud", thai: "จิตวิญญาณคลาวด์ (Crit Rate + Crit Boost 35% + Crit MP Refund)", ap: 105, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13110.png", desc: "รวมทุกความสามารถของ Cloud ใน 1 ช่อง: Cloud Soul ฟื้น MP 3% ทุกครั้งที่คริติคอล + คูณดาเมจคริ 35% + โอกาสคริ 10% (หัวใจของ Infinite MP Loop)" },
+      { id: "spirit_bartz", name: "Spirit of Bartz", thai: "จิตวิญญาณบาร์ทซ์ (Dual Spellblade + Elemental Amp 30%)", ap: 110, isSpirit: true, role: "hybrid", visSprite: "assets/images/visions/13105.png", desc: "รวมทุกความสามารถของ Bartz ใน 1 ช่อง: Dual Spellblade (ฟันดาบเวท 2 ครั้ง/คำสั่ง) + เพิ่มดาเมจทุกธาตุ 30% + เร่งเกจ Stagger รุนแรง" },
+      { id: "spirit_onion", name: "Spirit of Onion Knight", thai: "จิตวิญญาณออเนียนไนท์ (LB Triple Charge + Speed)", ap: 100, isSpirit: true, role: "support", visSprite: "assets/images/visions/13102.png", desc: "รวมทุกความสามารถของ Onion Knight ใน 1 ช่อง: เร่งชาร์จเกจ Limit Break ขึ้น 300% (Triple Charge) + Speed 10% + เพิ่มจำนวนฮิต" },
+      { id: "spirit_wol", name: "Spirit of WoL", thai: "จิตวิญญาณนักรบแห่งแสง (Counter + Redux 20% + Stagger 30%)", ap: 95, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13100.png", desc: "รวมทุกความสามารถของ WoL ใน 1 ช่อง: สวนกลับกายภาพ 30% + ลดดาเมจกายภาพ 20% + เพิ่มพลังสะสมเกจ Stagger 30%" },
+      { id: "spirit_yshtola", name: "Spirit of Y'shtola", thai: "จิตวิญญาณอิชโทลา (Aetherflow MP Regen + Stagger 20%)", ap: 95, isSpirit: true, role: "magic_dps", visSprite: "assets/images/visions/13127.png", desc: "รวมทุกความสามารถของ Y'shtola ใน 1 ช่อง: รีเจน MP 5% ทุกเทิร์น + ป้องกันเวท 20% + พลัง Stagger 20%" },
+      { id: "spirit_wilhelm", name: "Spirit of Wilhelm", thai: "จิตวิญญาณวิลเฮล์ม (Bastion ลดดาเมจทีม 20% + Def 30%)", ap: 105, isSpirit: true, role: "tank", visSprite: "assets/images/visions/13062.png", desc: "รวมทุกความสามารถของ Wilhelm ใน 1 ช่อง: Bastion ลดดาเมจให้เพื่อนทั้งปาร์ตี้ 20% ตอน Guard + สวนกลับคริติคอล + ป้องกัน 30%" },
+      { id: "spirit_sephiroth", name: "Spirit of Sephiroth", thai: "จิตวิญญาณเซฟิรอธ (Auto-Bravery + Crit 20% + Atk 30%)", ap: 130, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13113.png", desc: "รวมทุกความสามารถของ Sephiroth ใน 1 ช่อง: เปิดด้วย Bravery (+25% Atk) + โอกาสคริ 20% + พลังโจมตีกายภาพ 30%" },
+      { id: "spirit_ayaka", name: "Spirit of Ayaka", thai: "จิตวิญญาณอายากะ (The Hand That Heals + LB on Heal)", ap: 100, isSpirit: true, role: "healer", visSprite: "assets/images/visions/13051.png", desc: "รวมทุกความสามารถของ Ayaka ใน 1 ช่อง: ฮีลเพื่อนแล้วเก่งขึ้น 50% + ฮีลแล้วชาร์จเกจ LB ตนเอง 25% + ยืดระยะเวลาบัฟ" },
+      { id: "spirit_clive", name: "Spirit of Clive", thai: "จิตวิญญาณไคลฟ์ (LB Damage +40% + Boundless Flames)", ap: 115, isSpirit: true, role: "phys_dps", visSprite: "assets/images/visions/13130.png", desc: "รวมทุกความสามารถของ Clive ใน 1 ช่อง: ทวีคูณความแรง Limit Break 40% + ดาเมจไฟและเกจ Stagger 30%" },
+      { id: "spirit_victoria", name: "Spirit of Victoria", thai: "จิตวิญญาณวิกตอเรีย (MRP Gain +50% + Dark Amp)", ap: 100, isSpirit: true, role: "mrp_farm", visSprite: "assets/images/visions/13027.png", desc: "รวมทุกความสามารถของ Victoria ใน 1 ช่อง: เพิ่มแต้มฟาร์มวิชั่น MRP +50% + Dark Amp + พลังเวท 20%" },
 
-      // Standalone High-Tier Passives
-      { id: "arms_akimbo_standalone", name: "Arms Akimbo", thai: "สองมือสองใจ (ทำ 2 แอคชั่น/เทิร์น)", ap: 60, score: 20.0, isSpirit: false, role: "phys_dps", desc: "ออกคำสั่งได้ 2 ครั้งใน 1 เทิร์น (แบบแยกเดี่ยว) สำหรับบิลด์ที่ต้องการประหยัด AP หรือจัดผสม" },
-      { id: "half_mp_cost", name: "Half MP Cost", thai: "ลดค่าร่าย MP ลงครึ่งหนึ่ง", ap: 50, score: 18.0, isSpirit: false, role: "magic_dps", desc: "ลดการใช้ MP ของสกิลและเวทมนตร์ทั้งหมดลง 50% คอมโบไม่สะดุด" },
-      { id: "break_the_limit", name: "Break the Limit", thai: "ทะลุขีดจำกัดความเสียหาย 9,999", ap: 30, score: 14.0, isSpirit: false, role: "magic_dps", desc: "ปลดล็อคให้ความเสียหายสามารถทำลายทะลุเพดาน 9,999 ได้" },
-      { id: "first_strike", name: "First Strike", thai: "ออกตัวก่อน (การันตีเริ่มคนแรก)", ap: 20, score: 15.0, isSpirit: false, role: "breaker", desc: "การันตีได้ออกตัวเป็นคนแรกสุดของการต่อสู้ทันที" },
-      { id: "tip_top_shape", name: "Tip-Top Shape", thai: "+25% Dmg เมื่อ HP > 80%", ap: 20, score: 11.0, isSpirit: false, role: "phys_dps", desc: "เพิ่มความเสียหาย 25% หาก HP ตนเองสูงกว่า 80%" },
-      { id: "power_stagger", name: "Power Stagger", thai: "กระหน่ำ Stagger หนักหน่วง", ap: 15, score: 9.0, isSpirit: false, role: "breaker", desc: "เพิ่มพลังการตัดเกจเบรคของศัตรูอย่างรวดเร็ว" },
-      { id: "vigorous_staggerer", name: "Vigorous Staggerer", thai: "เร่งเกจ Stagger รวดเร็ว", ap: 20, score: 10.0, isSpirit: false, role: "breaker", desc: "เร่งความเร็วในการสะสมเกจ Stagger ของเป้าหมาย" },
-      { id: "aggravation", name: "Aggravation", thai: "+60% Dmg เมื่อศัตรูมีดีบัฟ", ap: 25, score: 13.0, isSpirit: false, role: "phys_dps", desc: "โบนัสดาเมจสูงสุด 60% เมื่อเป้าหมายติดสถานะผิดปกติหรือดีบัฟ" },
-      { id: "reflex", name: "Reflex", thai: "หลบหลีกฉับไว (Reflex Evasion)", ap: 20, score: 9.0, isSpirit: false, role: "tank", desc: "เพิ่มอัตราการหลบหลีกการโจมตีอันตราย" },
-      { id: "restore_mp_dmg", name: "Restore MP when Taking Damage", thai: "ฟื้น MP เมื่อได้รับความเสียหาย", ap: 20, score: 9.5, role: "tank", desc: "ฟื้นฟู MP ทุกครั้งที่ถูกศัตรูโจมตี" },
-      { id: "lb_shield", name: "LB Shield", thai: "โล่บาเรีย Limit Break", ap: 20, score: 9.0, isSpirit: false, role: "support", desc: "สร้างบาเรียป้องกันความเสียหายเมื่อกดใช้ท่า Limit Break" },
-      { id: "magic_counter", name: "Magic Counter", thai: "สวนกลับเวทมนตร์", ap: 20, score: 9.5, role: "tank", desc: "มีโอกาสสวนกลับเมื่อถูกโจมตีด้วยเวทมนตร์" },
-      { id: "decimating_attacks", name: "Decimating Attacks", thai: "โจมตีถล่มทลาย", ap: 20, score: 10.5, role: "phys_dps", desc: "เพิ่มพลังทำลายล้างของการโจมตีต่อเนื่อง" },
-      { id: "preemptive_strike", name: "Preemptive Strike", thai: "จู่โจมฉับพลัน", ap: 20, score: 10.0, role: "breaker", desc: "สร้างความเสียหายรุนแรงในเทิร์นแรกของการต่อสู้" },
-      { id: "insult_to_injury", name: "Insult to Injury", thai: "ซ้ำเติมบาดแผล", ap: 20, score: 11.0, role: "breaker", desc: "เพิ่มดาเมจซ้ำใส่ศัตรูที่กำลังเสียการทรงตัว" },
-      { id: "auto_shell", name: "Auto-Shell", thai: "เปิดเทิร์นด้วยเกราะ Shell", ap: 20, score: 9.0, isSpirit: false, role: "tank", desc: "ลดความเสียหายเวทมนตร์ลง 30% ทันทีที่เริ่มการต่อสู้" },
-      { id: "deprotect_opener", name: "Deprotect Opener", thai: "เปิดฉากลดเกราะทั้งสนาม", ap: 25, score: 12.0, isSpirit: false, role: "breaker", desc: "ร่าย Deprotect ใส่ศัตรูทุกตัวทันทีที่เริ่มการต่อสู้" },
-      { id: "lb_charge_heal", name: "LB Charge on Heal", thai: "ฮีลเพื่อนชาร์จ LB +25%", ap: 20, score: 12.0, isSpirit: false, role: "support", desc: "ฟื้นฟูเกจ Limit Break 25% ทุกครั้งที่ใช้ท่าฟื้นฟู HP" },
-      { id: "mrp_gain_50", name: "MRP Gain +50%", thai: "เร่งฟาร์มแต้มวิชั่น MRP +50%", ap: 30, score: 25.0, isSpirit: false, role: "mrp_farm", desc: "เพิ่มแต้ม MRP หลังจบการต่อสู้ขึ้น 50%" }
+      // 2. Standalone Multi-Action & Core Meta Passives (แบบแยกเดี่ยว สำหรับประหยัด AP หรือจัดผสม)
+      { id: "arms_akimbo_standalone", name: "Arms Akimbo", thai: "สองมือสองใจ (ทำ 2 คำสั่ง/เทิร์น)", ap: 60, isSpirit: false, role: "action_economy", desc: "ออกคำสั่งได้ 2 แอคชั่นใน 1 เทิร์น (แบบแยกเดี่ยว 60 AP แทนที่จะใส่ Spirit 120 AP เพื่อประหยัด AP สำหรับบิลด์ผสม)" },
+      { id: "double_action_standalone", name: "Double Action", thai: "ฟันซ้ำสองรอบ (2 Physical Hits/คำสั่ง)", ap: 60, isSpirit: false, role: "action_economy", desc: "ออกสกิลโจมตีกายภาพ 2 ครั้งซ้อนต่อ 1 คำสั่ง (คอมโบกับ Arms Akimbo กลายเป็น 4 การโจมตี/เทิร์น!)" },
+      { id: "dualcast_standalone", name: "Dualcast", thai: "ร่ายเวทคู่ (2 Spells/คำสั่ง)", ap: 60, isSpirit: false, role: "action_economy", desc: "ร่ายเวทมนตร์ 2 ครั้งซ้อนต่อ 1 คำสั่ง (คอมโบกับ Arms Akimbo กลายเป็น 4 คาถาหมู่/เทิร์น!)" },
+      { id: "dual_spellblade_standalone", name: "Dual Spellblade", thai: "ดาบเวทมนตร์คู่ (2 Spellblades/คำสั่ง)", ap: 50, isSpirit: false, role: "action_economy", desc: "ฟันดาบเคลือบเวทมนตร์ 2 ครั้งซ้อนต่อ 1 คำสั่ง (ของ Bartz)" },
+      { id: "half_mp_cost", name: "Half MP Cost", thai: "ลดค่าร่าย MP ลงครึ่งหนึ่ง", ap: 50, isSpirit: false, role: "sustain", desc: "ลดการใช้ MP ของสกิลและเวทมนตร์ทั้งหมดลง 50% (สำคัญที่สุดในระบบ Multi-Action เพื่อไม่ให้ MP หมดกลางคัน)" },
+      { id: "break_the_limit", name: "Break the Limit", thai: "ทะลุขีดจำกัดความเสียหาย 9,999", ap: 30, isSpirit: false, role: "burst", desc: "ปลดล็อคให้ความเสียหายทุกฮิตสามารถทะลุเพดาน 9,999 ได้ สู่หลักหมื่นถึงแสน!" },
+      { id: "blood_weapon_standalone", name: "Blood Weapon", thai: "ดาบดูดเลือด (ดูดเลือด 10% ทุกฮิต)", ap: 30, isSpirit: false, role: "sustain", desc: "ฟื้นฟู HP 10% ของความเสียหายที่สร้าง ยืนชนและคอมโบได้โดยเลือดไม่ลด" },
+      { id: "cloud_soul_standalone", name: "Cloud Soul (Crit MP Refund)", thai: "ฟื้น MP 3% ทุกครั้งที่คริติคอล", ap: 40, isSpirit: false, role: "sustain", desc: "รีฟันด์ MP คืนเข้าหลอดทุกครั้งที่โจมตีติดคริติคอล (เครื่องยนต์ของ Infinite Loop)" },
+      { id: "first_strike", name: "First Strike", thai: "ออกตัวก่อน (การันตีเริ่มคนแรก)", ap: 20, isSpirit: false, role: "breaker", desc: "การันตีได้ออกตัวเป็นคนแรกสุดของการต่อสู้ทันทีก่อนศัตรูทุกตัว" },
+      { id: "tip_top_shape", name: "Tip-Top Shape", thai: "+25% Dmg เมื่อ HP > 80%", ap: 20, isSpirit: false, role: "phys_dps", desc: "เพิ่มความเสียหาย 25% หาก HP สูงกว่า 80% (ทำงานคู่กับ Blood Weapon เลือดเต็มตลอด)" },
+      { id: "decimating_attacks", name: "Decimating Attacks", thai: "โจมตีถล่มทลาย (Multi-Hit Amp)", ap: 20, isSpirit: false, role: "phys_dps", desc: "เพิ่มพลังทำลายล้างของการโจมตีต่อเนื่องและคอมโบหลายฮิต" },
+      { id: "preemptive_strike", name: "Preemptive Strike", thai: "จู่โจมฉับพลัน (Turn 1 Burst)", ap: 20, isSpirit: false, role: "breaker", desc: "สร้างความเสียหายรุนแรงขึ้นมากในเทิร์นแรกของการต่อสู้" },
+      { id: "insult_to_injury", name: "Insult to Injury", thai: "ซ้ำเติมบาดแผล", ap: 20, isSpirit: false, role: "breaker", desc: "เพิ่มดาเมจซ้ำใส่ศัตรูที่กำลังเสียการทรงตัวหรือติดสถานะ" },
+      { id: "aggravation", name: "Aggravation", thai: "+60% Dmg เมื่อศัตรูมีดีบัฟ", ap: 25, isSpirit: false, role: "phys_dps", desc: "โบนัสดาเมจสูงสุด 60% เมื่อเป้าหมายติดสถานะผิดปกติหรือดีบัฟ" },
+      { id: "power_stagger", name: "Power Stagger", thai: "กระหน่ำ Stagger หนักหน่วง", ap: 15, isSpirit: false, role: "breaker", desc: "เพิ่มพลังการตัดเกจเบรคของศัตรูอย่างรวดเร็ว" },
+      { id: "vigorous_staggerer", name: "Vigorous Staggerer", thai: "เร่งเกจ Stagger รวดเร็ว", ap: 20, isSpirit: false, role: "breaker", desc: "เร่งความเร็วในการสะสมเกจ Stagger ของเป้าหมาย" },
+      { id: "reflex", name: "Reflex", thai: "หลบหลีกฉับไว (Reflex Evasion)", ap: 20, isSpirit: false, role: "tank", desc: "เพิ่มอัตราการหลบหลีกการโจมตีอันตราย" },
+      { id: "restore_mp_dmg", name: "Restore MP when Taking Damage", thai: "ฟื้น MP เมื่อได้รับความเสียหาย", ap: 20, isSpirit: false, role: "tank", desc: "ฟื้นฟู MP ทุกครั้งที่ถูกศัตรูโจมตี" },
+      { id: "magic_counter", name: "Magic Counter", thai: "สวนกลับเวทมนตร์", ap: 20, isSpirit: false, role: "tank", desc: "มีโอกาสสวนกลับเมื่อถูกโจมตีด้วยเวทมนตร์" },
+      { id: "auto_shell", name: "Auto-Shell", thai: "เปิดเทิร์นด้วยเกราะ Shell", ap: 20, isSpirit: false, role: "tank", desc: "ลดความเสียหายเวทมนตร์ลง 30% ทันทีที่เริ่มการต่อสู้" },
+      { id: "lb_shield", name: "LB Shield", thai: "โล่บาเรีย Limit Break", ap: 20, isSpirit: false, role: "support", desc: "สร้างบาเรียป้องกันความเสียหายเมื่อกดใช้ท่า Limit Break" },
+      { id: "mrp_gain_50", name: "MRP Gain +50%", thai: "เร่งฟาร์มแต้มวิชั่น MRP +50%", ap: 30, isSpirit: false, role: "mrp_farm", desc: "เพิ่มแต้ม MRP หลังจบการต่อสู้ขึ้น 50%" }
+    ];
+
+    // -------------------------------------------------------------
+    // META PRESET ARCHETYPES DEFINITION (Deep Meta Combos)
+    // -------------------------------------------------------------
+    const META_PRESETS = [
+      {
+        id: "quad_attack",
+        name: "⚡ สิงห์ปืนคู่ 4-16 ฮิต (Infinite Quad-Attack)",
+        subtitle: "Arms Akimbo x Double Action + Infinite Crit MP Refund",
+        actionBadge: "4 Actions (16 Hits)",
+        desc: "คอมโบที่โกงที่สุดในสายกายภาพ: Arms Akimbo เบิ้ล 2 คำสั่ง x Double Action ฟันซ้ำ 2 รอบ = 4 ท่าใหญ่! พร้อม Spirit of Cloud คืน MP รัวๆ ทุกคริ และดูดเลือดเต็ม 100% ตลอดเวลา",
+        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"],
+        synergyText: "🔥 <strong>กลไกลูปอนันต์ (Infinite Action Loop):</strong><br>1. <strong>First Strike:</strong> การันตีออกตัวก่อนศัตรูทุกตัวในรอบแรก<br>2. <strong>2 Commands x 2 Hits:</strong> Arms Akimbo (Spirit of Firion) สั่งได้ 2 ครั้ง ผสานกับ Double Action (Spirit of Squall) ทำให้แต่ละครั้งฟันซ้ำ 2 รอบ รวมเป็น 4 ท่าใหญ่ (หรือ 8-16 ฮิต)<br>3. <strong>Zero MP Drain:</strong> ปกติจะกิน MP มหาศาล แต่ Half MP Cost ลดค่าร่าย 50% และ Spirit of Cloud (Cloud Soul) รีฟันด์ MP คืนทุกครั้งที่ติดคริติคอล ทำให้ MP เต็มหลอดวนลูปได้ไม่จำกัด!<br>4. <strong>Uncapped Damage:</strong> Break the Limit ปลดล็อกเพดาน 9,999 ฟันทะลุหลักหมื่นทุกฮิต พร้อม Blood Weapon เลือดเต็มตลอดเวลา ดึงโบนัส Tip-Top Shape (+25%) เต็มสูบ!"
+      },
+      {
+        id: "quad_dualcast",
+        name: "🔮 มหาเวท 4x Quad-Dualcast ล้างโลก",
+        subtitle: "Arms Akimbo x Dualcast + 100% Full AoE Nuke",
+        actionBadge: "4 Spells / Turn",
+        desc: "เมต้าสายเวททำลายล้างสูงสุด: Arms Akimbo มอบ 2 คำสั่งให้จอมเวท x Dualcast ร่ายเวทหมู่พลังเต็ม 100% ซ้ำ 2 รอบ รวมยิงมหาเวท 4 ครั้งซ้อนใน 1 เทิร์น บอสและลูกน้องสลายทันที",
+        skills: ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"],
+        synergyText: "⚡ <strong>กลไก Quad-Dualcast ล้างกระดาน:</strong><br>1. <strong>Arms Akimbo + Dualcast:</strong> ปลดล็อกให้ร่ายคาถาเวทมนตร์ระดับสูง (เช่น คาถา Tier-3 หรือ Dark Rite) ได้ถึง <strong>4 ครั้งในเทิร์นเดียว</strong> (2 Actions x 2 Spells)<br>2. <strong>Full 100% AoE Damage:</strong> ปกติเวทหมู่ของเกมจะลดทอนพลังลงตามจำนวนศัตรู แต่ Spirit of Shantotto ล็อกให้พลังเต็ม 100% กระจายใส่ทุกเป้าหมายเท่ากันหมด!<br>3. <strong>Sustain Engine:</strong> Half MP Cost ร่วมกับ Aetherflow (Spirit of Y'shtola รีเจน 5% ต่อเทิร์น) และฟื้น MP เมื่อกำจัดศัตรู ทำให้ร่ายเวทใหญ่ต่อเนื่องได้สบาย<br>4. <strong>Aggravation + Preemptive:</strong> เมื่อศัตรูติดสถานะธาตุ รับโบนัสดาเมจทันที +60%!"
+      },
+      {
+        id: "spellblade_meta",
+        name: "⚔️ ดาบเวท 4 ธาตุฉีกบอส (Dual Spellblade Shredder)",
+        subtitle: "Arms Akimbo x Dual Spellblade + Elemental Amp",
+        actionBadge: "4 Spellblades / Turn",
+        desc: "สายผสม Hybrid ที่รุนแรงที่สุด: Arms Akimbo x Dual Spellblade (Bartz) ฟันดาบเวทมนตร์ธาตุ 4 ครั้งซ้อน พร้อมโบนัสความเสียหายทุกธาตุ 30% และตัดเกจ Stagger บอสใน 1 เทิร์น",
+        skills: ["spirit_firion", "spirit_bartz", "spirit_cloud", "half_mp_cost", "break_the_limit", "power_stagger", "vigorous_staggerer", "tip_top_shape"],
+        synergyText: "💥 <strong>กลไกสับเกจ Stagger แตกละเอียด:</strong><br>1. <strong>4 Elemental Spellblades:</strong> ฟันดาบเคลือบเวทมนตร์ 4 ครั้งรวดในเทิร์นเดียว เจาะจุดอ่อนธาตุของบอสทุกตัว<br>2. <strong>Bartz Amp +30%:</strong> ทวีคูณความเสียหายธาตุทุกชนิด 30% พร้อมสะสมเกจ Stagger ได้เร็วขึ้นแบบก้าวกระโดด<br>3. <strong>Stagger Breaker:</strong> Power Stagger + Vigorous Staggerer ทำให้บอสที่ติด Stagger เสียพลังป้องกันลงทันที และโดนฮิตที่เหลือถล่มจนล้มในเทิร์นแรก<br>4. <strong>Cloud Crit Refund:</strong> ดาบเวทติดคริติคอลคืน MP รัวๆ ทำให้ใช้สกิลราคาสูงได้ต่อเนื่องตลอดการต่อสู้"
+      },
+      {
+        id: "tank",
+        name: "🛡️ ป้อมปราการสวนกลับอมตะ (Immortal Retaliation)",
+        subtitle: "Spirit of Wilhelm + WoL + Blood Counter",
+        actionBadge: "Guard & Counter x2",
+        desc: "บิลด์รถถังอมตะตรงตามรูปเซฟในเกม: Bastion ลดดาเมจให้ปาร์ตี้ 20% + WoL สวนกลับกายภาพ 30% + Firion ดูดเลือดกลับทุกครั้งที่สวน ยืนชนบอสได้ทุกตัวโดยไม่ต้องมีฮีลเลอร์",
+        skills: ["spirit_wilhelm", "spirit_wol", "spirit_firion", "reflex", "magic_counter", "restore_mp_dmg", "auto_shell", "lb_shield"],
+        synergyText: "🛡️ <strong>กลไกป้อมปราการสวนกลับอมตะ (Image 1 Style):</strong><br>1. <strong>Team Damage Reduction:</strong> Wilhelm Bastion ลดความเสียหายให้เพื่อนร่วมทีมทั้งปาร์ตี้ 20% ทันทีที่เข้าสู่ท่า Guard<br>2. <strong>Full Retaliation (Physical & Magic):</strong> WoL Counter สวนกลับกายภาพ 30% และ Magic Counter สวนกลับเวทมนตร์ ทำให้ไม่ว่าศัตรูจะตีด้วยอะไร ก็โดนฟันกลับทันที<br>3. <strong>Vampiric Drain:</strong> Spirit of Firion ดูดเลือด 10% ทุกครั้งที่สวนกลับ ทำให้เลือดของแทงก์เด้งเต็ม 100% ตลอดเวลา<br>4. <strong>Infinite MP from Damage:</strong> ทุกครั้งที่โดนโจมตี จะได้รับ MP คืนมา ไม่ต้องกลัว MP แห้งในการร่ายท่าป้องกัน"
+      },
+      {
+        id: "lb_machine",
+        name: "💖 ปืนกล Limit Break 300% (LB Spam Engine)",
+        subtitle: "Triple Charge x Onion + Clive Amp + Ayaka",
+        actionBadge: "LB Every 1-2 Turns",
+        desc: "เครื่องจักรปั๊ม Limit Break: เร่งชาร์จเกจเร็วขึ้น 300% (Onion Knight) + Clive ทวีคูณความแรง LB +40% + Ayaka ฮีลแล้วชาร์จ LB 25% สแปมท่าไม้ตายใหญ่แทบทุกเทิร์น",
+        skills: ["spirit_onion", "spirit_clive", "spirit_ayaka", "spirit_firion", "break_the_limit"],
+        synergyText: "🌟 <strong>กลไกสแปมท่าไม้ตายใหญ่ (ประหยัดเพียง 5 ช่อง!):</strong><br>1. <strong>Triple Charge:</strong> Onion Knight เพิ่มอัตราการสะสมเกจ LB ขึ้น 3 เท่า (300%) ส่งผลให้การโจมตีหรือโดนตีเพียงไม่กี่ครั้ง เกจก็เต็มหลอดทันที<br>2. <strong>Clive Boundless Flames:</strong> เพิ่มความแรงของท่า Limit Break ขึ้น 40% และปลดเพดานความเสียหายด้วย Break the Limit<br>3. <strong>Ayaka LB Recharge:</strong> ทุกครั้งที่ใช้ท่าฟื้นฟูเลือด จะเติมเกจ LB ให้ตนเองอีก 25% ทันที<br>4. <strong>Slot Efficiency:</strong> บิลด์นี้ใช้เพียง 5 ช่อง แต่รวบรวมพลังระดับสูงครบถ้วน เหลือ 3 ช่องว่างสำหรับใส่พาสซีฟตามใจชอบ!"
+      },
+      {
+        id: "mrp_farm",
+        name: "🌾 สปีดรันฟาร์ม 1 เทิร์นจบ (Speedrun MRP Wipe)",
+        subtitle: "Victoria MRP +50% + Shantotto AoE Wipe",
+        actionBadge: "1-Turn Clear (MRP +100%)",
+        desc: "บิลด์ฟาร์มเร่งเวลวิชั่นที่เร็วที่สุด: ซ้อนทับแต้ม MRP +100% (Victoria + Passive) พร้อม First Strike ออกตัวคนแรก และ Shantotto กวาดล้างมอนสเตอร์ทั้งสนามใน 1 เทิร์น",
+        skills: ["spirit_victoria", "spirit_firion", "spirit_shantotto", "mrp_gain_50", "half_mp_cost", "first_strike", "preemptive_strike", "decimating_attacks"],
+        synergyText: "🌾 <strong>กลไกสปีดรันเก็บเลเวลวิชั่น MR 9:</strong><br>1. <strong>Double MRP Multiplier:</strong> ผสาน Spirit of Victoria (+50% MRP) กับ MRP Gain +50% แบบแยกเดี่ยว รวมเป็นโบนัสแต้มวิชั่น <strong>+100% ทุกไฟต์</strong><br>2. <strong>Turn 1 Immediate Wipe:</strong> First Strike ออกตัวก่อนศัตรู ร่ายมหาเวท AoE 100% ของ Shantotto กวาดมอนสเตอร์ทั้งกลุ่มตายใน 2 วินาที<br>3. <strong>Zero Downtime:</strong> คืน MP เต็มหลังจบการต่อสู้ สามารถวิ่งฟาร์มต่อเนื่องได้นับร้อยรอบโดยไม่ต้องแวะพักเติมเต็นท์"
+      }
     ];
 
     // State
     let currentChar = CHARACTERS[7]; // Sakura default (Lv.41, Sephiroth)
     let currentAPCapacity = 484; // 484 AP from in-game save
-    let activeRole = "magic_dps"; // default for Sakura
+    let activePresetId = "quad_dualcast"; // default for Sakura
 
     function init() {
       renderCharacters();
       populateBaseVisions();
+      renderMetaPresets();
       updateCharacterDisplay();
-      renderBuild();
+      renderActiveBuild();
       renderAllArchetypesComparison();
 
       // Listeners
@@ -366,19 +469,8 @@
           document.getElementById('vis-name-mini').textContent = found.name;
           document.getElementById('vis-sprite-mini').src = found.sprite;
         }
-        renderBuild();
+        renderActiveBuild();
         renderAllArchetypesComparison();
-      });
-
-      document.querySelectorAll('.role-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.role-tab').forEach(b => {
-            b.className = "role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white";
-          });
-          btn.className = "role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-cyan-600 border-cyan-500 text-white shadow-md";
-          activeRole = btn.dataset.role;
-          renderBuild();
-        });
       });
 
       document.getElementById('btn-copy-build').addEventListener('click', copyCurrentBuildSummary);
@@ -402,9 +494,11 @@
         `;
         d.addEventListener('click', () => {
           currentChar = c;
+          activePresetId = c.defaultPreset || "quad_attack";
           updateCharacterDisplay();
           renderCharacters();
-          renderBuild();
+          renderMetaPresets();
+          renderActiveBuild();
           renderAllArchetypesComparison();
         });
         container.appendChild(d);
@@ -442,93 +536,78 @@
       }
     }
 
-    // 2D 0/1 Knapsack: Max 8 Slots AND Max AP <= 484
-    function calculateEndgameBuild(targetRole, maxAP = 484, maxSlots = 8) {
-      const roleBonus = {
-        tank: { tank: 10.0, breaker: 3.0, support: 2.0 },
-        phys_dps: { phys_dps: 10.0, breaker: 4.0 },
-        magic_dps: { magic_dps: 10.0, support: 3.0 },
-        support: { support: 10.0, healer: 4.0, breaker: 3.0 },
-        healer: { healer: 10.0, support: 4.0, phys_dps: 2.0 },
-        mrp_farm: { mrp_farm: 15.0, breaker: 4.0, phys_dps: 3.0 }
-      };
+    function renderMetaPresets() {
+      const container = document.getElementById('meta-presets-container');
+      container.innerHTML = '';
 
-      const pool = PASSIVES_DATABASE.map((p, idx) => {
-        let sc = p.score;
-        const weights = roleBonus[targetRole] || {};
-        if (weights[p.role] !== undefined) sc += weights[p.role];
-        else sc -= 5.0;
+      META_PRESETS.forEach(p => {
+        const isActive = p.id === activePresetId;
+        const btn = document.createElement('button');
+        btn.className = `p-2.5 rounded-xl border text-left transition select-none flex flex-col justify-between ${
+          isActive 
+            ? 'bg-gradient-to-tr from-cyan-950 via-slate-900 to-indigo-950 border-cyan-400 text-white shadow-lg ring-1 ring-cyan-400' 
+            : 'bg-slate-950/70 border-slate-800 hover:border-slate-700 text-slate-300'
+        }`;
 
-        // Specific high-priority matches
-        if (targetRole === "tank" && p.id.includes("wol") || p.id.includes("wilhelm")) sc += 6.0;
-        if (targetRole === "magic_dps" && (p.id.includes("shantotto") || p.id.includes("yshtola") || p.id === "half_mp_cost")) sc += 6.0;
-        if (targetRole === "phys_dps" && (p.id.includes("firion") || p.id.includes("squall") || p.id.includes("cloud") || p.id.includes("sephiroth"))) sc += 6.0;
-        if (targetRole === "support" && (p.id.includes("onion") || p.id.includes("ayaka") || p.id.includes("clive"))) sc += 6.0;
-        if (targetRole === "healer" && p.id.includes("ayaka")) sc += 8.0;
-        if (targetRole === "mrp_farm" && (p.id.includes("victoria") || p.id === "mrp_gain_50")) sc += 15.0;
+        btn.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold truncate ${isActive ? 'text-cyan-300' : 'text-slate-200'}">${p.name}</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">${p.subtitle}</p>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-[10px] font-mono">
+            <span class="px-1.5 py-0.2 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">${p.actionBadge}</span>
+            <span class="${isActive ? 'text-amber-400 font-bold' : 'text-slate-500'}">เลือก</span>
+          </div>
+        `;
 
-        return { ...p, poolIdx: idx, effScore: sc };
-      }).filter(p => p.effScore > 0);
+        btn.addEventListener('click', () => {
+          activePresetId = p.id;
+          renderMetaPresets();
+          renderActiveBuild();
+        });
 
-      // DP[k][w] = [val, [indices]]
-      const dp = Array.from({ length: maxSlots + 1 }, () => 
-        Array.from({ length: maxAP + 1 }, () => [0.0, []])
-      );
-
-      pool.forEach(item => {
-        const w = item.ap;
-        const v = item.effScore;
-        for (let k = maxSlots; k >= 1; k--) {
-          for (let cap = maxAP; cap >= w; cap--) {
-            const prevVal = dp[k - 1][cap - w][0];
-            const currVal = dp[k][cap][0];
-            if (prevVal + v > currVal) {
-              dp[k][cap] = [prevVal + v, [...dp[k - 1][cap - w][1], item]];
-            }
-          }
-        }
+        container.appendChild(btn);
       });
-
-      let bestVal = -1;
-      let bestList = [];
-      for (let k = 1; k <= maxSlots; k++) {
-        for (let cap = 0; cap <= maxAP; cap++) {
-          if (dp[k][cap][0] > bestVal) {
-            bestVal = dp[k][cap][0];
-            bestList = dp[k][cap][1];
-          }
-        }
-      }
-
-      const totalAP = bestList.reduce((sum, x) => sum + x.ap, 0);
-      return {
-        selected: bestList,
-        totalAP,
-        remainingAP: maxAP - totalAP
-      };
     }
 
-    function renderBuild() {
-      const res = calculateEndgameBuild(activeRole, currentAPCapacity, 8);
+    function getPresetSkills(presetId) {
+      const p = META_PRESETS.find(x => x.id === presetId);
+      if (!p) return [];
+      return p.skills.map(skillId => PASSIVES_DATABASE.find(item => item.id === skillId)).filter(Boolean);
+    }
+
+    function renderActiveBuild() {
+      const preset = META_PRESETS.find(p => p.id === activePresetId) || META_PRESETS[0];
+      const skills = getPresetSkills(activePresetId);
+      const totalAP = skills.reduce((sum, s) => sum + s.ap, 0);
+      const remainingAP = currentAPCapacity - totalAP;
+
+      document.getElementById('current-preset-title').textContent = preset.name;
+      document.getElementById('current-preset-desc').textContent = preset.desc;
+      document.getElementById('action-economy-badge').textContent = preset.actionBadge;
+      document.getElementById('synergy-guide-text').innerHTML = preset.synergyText;
+
+      document.getElementById('ap-used-num').textContent = totalAP;
+      document.getElementById('ap-max-num').textContent = currentAPCapacity;
+      document.getElementById('header-ap-badge').textContent = `AP ${totalAP} / ${currentAPCapacity}`;
+      document.getElementById('slots-count-num').textContent = `${skills.length} / 8`;
+      document.getElementById('equipped-indicator').textContent = `${skills.length} สกิล (จำกัด 8 ช่อง)`;
+
+      const remainingTag = document.getElementById('ap-remaining-tag');
+      remainingTag.textContent = `เหลือ ${remainingAP} AP`;
+
+      const pct = Math.min(100, Math.round((totalAP / currentAPCapacity) * 100));
+      document.getElementById('ap-progress-bar').style.width = `${pct}%`;
+
       const listEl = document.getElementById('equipped-passives-list');
       listEl.innerHTML = '';
 
-      document.getElementById('ap-used-num').textContent = res.totalAP;
-      document.getElementById('ap-max-num').textContent = currentAPCapacity;
-      document.getElementById('header-ap-badge').textContent = `AP ${res.totalAP} / ${currentAPCapacity}`;
-      document.getElementById('slots-count-num').textContent = `${res.selected.length} / 8`;
-      document.getElementById('equipped-indicator').textContent = `${res.selected.length} สกิล`;
-
-      const remainingTag = document.getElementById('ap-remaining-tag');
-      remainingTag.textContent = `เหลือ ${res.remainingAP} AP`;
-
-      const pct = Math.min(100, Math.round((res.totalAP / currentAPCapacity) * 100));
-      document.getElementById('ap-progress-bar').style.width = `${pct}%`;
-
-      res.selected.forEach((s, idx) => {
+      skills.forEach((s, idx) => {
         const card = document.createElement('div');
         card.className = `p-2.5 rounded-xl border flex items-center justify-between gap-3 transition ${
-          s.isSpirit ? 'bg-gradient-to-r from-amber-950/40 to-slate-900 border-amber-500/50 gold-glow' : 'bg-slate-950/70 border-slate-800 hover:border-cyan-500/40'
+          s.isSpirit ? 'bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 border-amber-500/50 gold-glow' : 'bg-slate-950/70 border-slate-800 hover:border-cyan-500/40'
         }`;
 
         card.innerHTML = `
@@ -536,12 +615,12 @@
             <span class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 font-mono font-bold text-xs flex items-center justify-center shrink-0">
               ${idx + 1}
             </span>
-            ${s.visSprite ? `<img src="${s.visSprite}" class="w-8 h-8 pixelated object-contain shrink-0" alt="Sprite">` : ''}
+            ${s.visSprite ? `<img src="${s.visSprite}" class="w-8 h-8 pixelated object-contain shrink-0" alt="Sprite">` : '<div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center text-xs shrink-0">⚡</div>'}
             <div>
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="font-bold text-xs ${s.isSpirit ? 'text-amber-300' : 'text-slate-100'}">${s.name}</span>
                 <span class="text-[10px] text-slate-400">(${s.thai})</span>
-                ${s.isSpirit ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-950 text-amber-400 border border-amber-800 font-mono font-bold">SPIRIT BUNDLE</span>' : ''}
+                ${s.isSpirit ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-950 text-amber-400 border border-amber-800 font-mono font-bold">SPIRIT BUNDLE (1 ช่อง)</span>' : '<span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">STANDALONE</span>'}
               </div>
               <p class="text-[11px] text-slate-400 mt-0.5 line-clamp-1">${s.desc}</p>
             </div>
@@ -554,39 +633,21 @@
         `;
         listEl.appendChild(card);
       });
-
-      // Synergy text
-      const notes = {
-        tank: "🛡️ <strong>สายตั้งรับอมตะ (Image 1 Style):</strong> รวมพลัง <em>Spirit of WoL (95 AP)</em> + <em>Spirit of Firion (120 AP)</em> เพื่อเบิ้ลแอคชั่นและดูดเลือด พร้อมเกราะ <em>Reflex</em> และ <em>Magic Counter</em> ยืนชนได้ทุกบอส",
-        phys_dps: "⚔️ <strong>สายดาเมจกายภาพมหาประลัย (Image 2 Style):</strong> <em>Spirit of Squall (105 AP)</em> ผสานกับ <em>Arms Akimbo (60 AP)</em> และ <em>Half MP Cost</em> ดาเมจพุ่ง 50% พร้อมฟาดฟัน 2 แอคชั่น/เทิร์นต่อเนื่อง",
-        magic_dps: "🔮 <strong>มหาเวทล้างสนามพลังเต็ม (Image 3 Style):</strong> <em>Spirit of Shantotto (120 AP)</em> ยิงเวทหมู่พลังเต็ม 100% ทุกตัว คู่กับ <em>Spirit of Y'shtola (95 AP)</em> รีเจน MP 5% และ <em>Arms Akimbo</em> ร่ายคาถาเบิ้ล 2 ครั้ง!",
-        support: "💖 <strong>เครื่องจักรปั๊ม Limit Break:</strong> <em>Spirit of Onion Knight (100 AP)</em> เร่งชาร์จเกจ 3 เท่า คู่กับ <em>Spirit of Ayaka</em> และ <em>Spirit of Clive</em> กดใช้ท่าไม้ตายใหญ่ได้แทบทุกเทิร์น",
-        healer: "💚 <strong>สายฮีลเลอร์หนุนทัพ:</strong> <em>Spirit of Ayaka (100 AP)</em> เพิ่มดาเมจและเกจ Stagger 50% ทุกครั้งที่ฮีลเพื่อน คู่กับ <em>Spirit of Firion</em> ทำให้มี 2 แอคชั่น ทั้งฮีลทั้งโจมตีในรอบเดียว",
-        mrp_farm: "🌾 <strong>สปีดรันเก็บเลเวลวิชั่น:</strong> <em>Spirit of Victoria (100 AP)</em> มอบแต้ม MRP +50% คู่กับ <em>Arms Akimbo</em> และ <em>First Strike</em> กวาดล้างมอนสเตอร์ใน 1 เทิร์นจบ"
-      };
-      document.getElementById('synergy-guide-text').innerHTML = notes[activeRole] || "";
     }
 
     function renderAllArchetypesComparison() {
       const container = document.getElementById('all-archetypes-comparison');
       container.innerHTML = '';
 
-      const roles = [
-        { id: "tank", name: "🛡️ สายตั้งรับ (Tank)" },
-        { id: "phys_dps", name: "⚔️ สายดาเมจกายภาพ" },
-        { id: "magic_dps", name: "🔮 สายเวทมนตร์" },
-        { id: "support", name: "💖 สาย Support & LB" },
-        { id: "healer", name: "💚 สายฮีลเลอร์" },
-        { id: "mrp_farm", name: "🌾 สายฟาร์มเร่งเวล" }
-      ];
+      META_PRESETS.forEach(p => {
+        const skills = getPresetSkills(p.id);
+        const totalAP = skills.reduce((sum, s) => sum + s.ap, 0);
 
-      roles.forEach(r => {
-        const res = calculateEndgameBuild(r.id, currentAPCapacity, 8);
         const card = document.createElement('div');
         card.className = "p-3 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-slate-700 transition flex flex-col justify-between";
 
         let listHtml = "";
-        res.selected.forEach(s => {
+        skills.forEach(s => {
           listHtml += `<li class="flex justify-between items-center text-[11px] text-slate-300">
             <span class="truncate max-w-[200px] ${s.isSpirit ? 'text-amber-300 font-bold' : ''}">• ${s.name}</span>
             <span class="font-mono text-cyan-400 font-bold">${s.ap} AP</span>
@@ -596,31 +657,25 @@
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-slate-800">
-              <span class="font-bold text-xs text-slate-100">${r.name}</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800">
-                ${res.totalAP} / ${currentAPCapacity} AP (${res.selected.length}/8 ช่อง)
+              <span class="font-bold text-xs text-slate-100 truncate">${p.name}</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800 shrink-0">
+                ${totalAP} / ${currentAPCapacity} AP (${skills.length}/8 ช่อง)
               </span>
             </div>
             <ul class="space-y-1 mb-3">
               ${listHtml}
             </ul>
           </div>
-          <button class="btn-quick-apply w-full py-1.5 rounded-lg bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white text-xs font-medium transition" data-role="${r.id}">
+          <button class="btn-quick-apply w-full py-1.5 rounded-lg bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white text-xs font-medium transition" data-preset="${p.id}">
             จัดบิลด์สายนี้
           </button>
         `;
 
         card.querySelector('.btn-quick-apply').addEventListener('click', () => {
-          activeRole = r.id;
-          document.querySelectorAll('.role-tab').forEach(b => {
-            if (b.dataset.role === activeRole) {
-              b.className = "role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-cyan-600 border-cyan-500 text-white shadow-md";
-            } else {
-              b.className = "role-tab px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-slate-800 border-slate-700 text-slate-300 hover:text-white";
-            }
-          });
-          renderBuild();
-          window.scrollTo({ top: document.getElementById('role-tabs-container').offsetTop - 80, behavior: 'smooth' });
+          activePresetId = p.id;
+          renderMetaPresets();
+          renderActiveBuild();
+          window.scrollTo({ top: document.getElementById('meta-presets-container').offsetTop - 80, behavior: 'smooth' });
         });
 
         container.appendChild(card);
@@ -628,19 +683,25 @@
     }
 
     function copyCurrentBuildSummary() {
-      const res = calculateEndgameBuild(activeRole, currentAPCapacity, 8);
-      let t = `🎮 FINAL FANTASY RESONANCE - ENDGAME BUILD (484 AP) 🎮\n`;
+      const preset = META_PRESETS.find(p => p.id === activePresetId) || META_PRESETS[0];
+      const skills = getPresetSkills(activePresetId);
+      const totalAP = skills.reduce((sum, s) => sum + s.ap, 0);
+      const remainingAP = currentAPCapacity - totalAP;
+
+      let t = `🎮 FINAL FANTASY RESONANCE - META BUILD (484 AP) 🎮\n`;
       t += `ตัวละคร: ${currentChar.name} (${currentChar.thai}) - Lv.${currentChar.lv}\n`;
       t += `วิชั่นหลัก: ${currentChar.visName}\n`;
-      t += `สายการเล่น: ${activeRole.toUpperCase()}\n`;
-      t += `AP ที่ใช้: ${res.totalAP} / ${currentAPCapacity} AP (ติดตั้ง ${res.selected.length} / 8 ช่อง, เหลือ ${res.remainingAP} AP)\n`;
+      t += `สายการเล่น: ${preset.name} (${preset.actionBadge})\n`;
+      t += `AP ที่ใช้: ${totalAP} / ${currentAPCapacity} AP (ติดตั้ง ${skills.length} / 8 ช่อง, เหลือ ${remainingAP} AP)\n`;
       t += `------------------------------------------------\n`;
       t += `พาสซีฟและ Spirit Masteries ที่ติดตั้ง:\n`;
-      res.selected.forEach((s, idx) => {
-        t += `${idx + 1}. [${s.ap} AP] ${s.name} (${s.thai})${s.isSpirit ? ' ⭐ SPIRIT BUNDLE' : ''}\n   └ ${s.desc}\n`;
+      skills.forEach((s, idx) => {
+        t += `${idx + 1}. [${s.ap} AP] ${s.name} (${s.thai})${s.isSpirit ? ' ⭐ SPIRIT BUNDLE (ประหยัด Slot)' : ''}\n   └ ${s.desc}\n`;
       });
       t += `------------------------------------------------\n`;
-      navigator.clipboard.writeText(t).then(() => alert("คัดลอกสรุปบิลด์ลง Clipboard เรียบร้อยแล้ว!"));
+      t += `กลไกคอมโบ:\n${preset.synergyText.replace(/<[^>]+>/g, '')}\n`;
+      t += `------------------------------------------------\n`;
+      navigator.clipboard.writeText(t).then(() => alert("คัดลอกสรุปบิลด์เมต้าลง Clipboard เรียบร้อยแล้ว!"));
     }
 
     init();
