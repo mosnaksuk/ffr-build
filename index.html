@@ -3808,10 +3808,43 @@
         synergySummary = `⚡ <strong>สุดยอดคอมโบเบรกเกอร์ & สลายเกราะบอส (${vis.name} / ${currentChar.name}):</strong> ออกตัวคนแรกด้วย <em>First Strike</em> รัวสกิล Breaker 2 ครั้งซ้อนด้วย <em>Arms Akimbo</em> เร่งเกจ Stagger พุ่งกระฉูด +30% (<em>Vigorous Staggerer</em>) และทวีคูณดาเมจซ้ำเติมศัตรูที่ติดดีบัฟขึ้นถึง +60% (<em>Aggravation</em>) พร้อม <em>Half MP Cost</em> สแปมสกิลเบรกเกอร์ได้ต่อเนื่องไม่จำกัด!`;
         actionBadge = "Turn 1 Instant Break & Stagger";
       }
-      // C. TANK
+            // C. TANK
       else if (isTank) {
-        recommendedSkills = ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"];
-        synergySummary = `🛡️ <strong>คอมโบสูงสุดสำหรับแทงก์ (${vis.name}):</strong> ได้รับ <em>Bastion</em> หรือ <em>Cover</em> ฟรี! สวมใส่ Spirit of WoL (สวนกลับกายภาพ 30%) + Spirit of Firion (เบิ้ลแอคชั่นและดูดเลือด) + Onion Knight (เร่ง LB 300%) ยืนชนบอสได้ทุกตัว`;
+        recommendedSkills = [];
+        
+        // 1. Primary Tank Spirit (Wilhelm is top tier tank)
+        if (vis.id !== 13062) {
+          // If NOT Wilhelm base -> Wilhelm is #1 priority!
+          recommendedSkills.push("spirit_wilhelm");
+        } else {
+          // Wilhelm base -> WoL is #1 priority!
+          recommendedSkills.push("spirit_wol");
+        }
+
+        // 2. Secondary Tank Spirit
+        if (vis.id !== 13100 && !recommendedSkills.includes("spirit_wol")) {
+          recommendedSkills.push("spirit_wol");
+        } else if (vis.id !== 13103 && !recommendedSkills.includes("spirit_cecil")) {
+          recommendedSkills.push("spirit_cecil");
+        }
+
+        // 3. Firion (Arms Akimbo 2 actions + Blood Weapon leech)
+        recommendedSkills.push("spirit_firion");
+
+        // 4. Onion Knight (LB Triple Charge 300% + Spry Steps)
+        recommendedSkills.push("spirit_onion");
+
+        // 5. Core Tank Passives
+        recommendedSkills.push("lb_shield");
+        recommendedSkills.push("reflex");
+        recommendedSkills.push("restore_mp_dmg");
+        recommendedSkills.push("power_stagger");
+
+        synergySummary = `🛡️ <strong>คอมโบสูงสุดสำหรับแทงก์ (${vis.name} / ${currentChar.name}):</strong> ${
+          vis.id !== 13062 
+            ? 'ดึงสุดยอดความสามารถของ <em>Spirit of Wilhelm</em> (ลดดาเมจ 75% + Critical Counter สวนกลับติดคริ) ผสานกับ Spirit of Cecil/WoL' 
+            : 'ได้รับ <em>Bastion</em> ฟรี! สวมใส่ Spirit of WoL (สวนกลับกายภาพ 30%) + Spirit of Firion (2 แอคชั่นและดูดเลือด) + Onion Knight (เร่ง LB 300%)'
+        } ยืนชนบอสได้ทุกตัวโดย MP ฟื้นเต็มตลอดเวลาและมีบาเรีย LB Shield + Reflex ป้องกันตัว!`;
         actionBadge = "Guard & Counter x2";
       }
       // D. MAGIC DPS
@@ -3841,9 +3874,14 @@
         actionBadge = "4 Actions (16 Hits)";
       }
 
-      // Filter out any skills provided by this base vision
+            // Filter out any skills provided by this base vision
       let filtered = recommendedSkills.map(id => PASSIVES_DATABASE.find(s => s.id === id)).filter(Boolean)
         .filter(s => !excluded.includes(s.id));
+
+      // Ensure initial filtered list does not exceed targetAP
+      while (filtered.reduce((sum, s) => sum + s.ap, 0) > targetAP && filtered.length > 0) {
+        filtered.pop();
+      }
 
       // Maximize AP packing up to 8 slots: backfill if there's remaining slots
       if (filtered.length < 8) {
