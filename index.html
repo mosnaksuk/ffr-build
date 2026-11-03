@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FF Resonance - Vision & AP Build Optimizer</title>
+  <!-- Tailwind CSS via official CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ffblue: '#0284c7',
+            ffcyan: '#06b6d4',
+            ffgold: '#f59e0b',
+            ffdark: '#0f172a',
+            ffcard: '#1e293b',
+            ffborder: '#334155'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+    .crystal-glow {
+      box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-[#0b1120] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-black text-xl">
+          ⚡
+        </div>
+        <div>
+          <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 via-sky-200 to-amber-300 bg-clip-text text-transparent">
+            Final Fantasy Resonance
+          </h1>
+          <p class="text-xs text-slate-400">Vision & AP Build Optimizer • คำนวณบิลด์จัดสกิลให้คุ้มค่า AP ที่สุด</p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center space-x-2">
+        <button id="btn-save-build" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-cyan-400"></i> บันทึกบิลด์
+        </button>
+        <button id="btn-copy-build" class="text-xs px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium flex items-center gap-1.5 shadow-sm transition">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i> คัดลอกสรุปบิลด์
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-7xl mx-auto px-4 py-6 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT COLUMN: Owned Visions Selector & AP Budget (4 Cols) -->
+    <div class="lg:col-span-4 space-y-6">
+
+      <!-- Step 1: AP Budget & Target Role -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl crystal-glow">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold flex items-center justify-center border border-cyan-500/40">1</span>
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-200">ตั้งค่า AP & เป้าหมาย</h2>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800" id="ap-display-badge">100 AP</span>
+        </div>
+
+        <!-- AP Capacity Slider -->
+        <div class="space-y-2 mb-4">
+          <div class="flex justify-between items-center text-xs">
+            <label for="ap-slider" class="text-slate-300 font-medium">ความจุ AP ของตัวละคร (AP Limit):</label>
+            <div class="flex items-center gap-1">
+              <input type="number" id="ap-input" min="20" max="300" value="100" class="w-16 bg-slate-950 border border-slate-700 rounded px-2 py-1 text-right text-cyan-400 font-mono font-bold text-sm focus:outline-none focus:border-cyan-500">
+              <span class="text-slate-400">AP</span>
+            </div>
+          </div>
+          <input type="range" id="ap-slider" min="20" max="300" step="5" value="100" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          <div class="flex justify-between text-[11px] text-slate-400">
+            <span>ต้นเกม (40-60)</span>
+            <span>กลางเกม (80-120)</span>
+            <span>ท้ายเกม (150-250+)</span>
+          </div>
+        </div>
+
+        <!-- Target Role Selection -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-medium text-slate-300">สายการเล่นที่ต้องการ (Build Archetype):</label>
+          <select id="role-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500">
+            <option value="all">🌟 สายสมดุลรอบด้าน (All-Rounder Meta)</option>
+            <option value="phys_dps" selected>⚔️ กายภาพ & เบิ้ลเทิร์น (Physical DPS / Multi-Action)</option>
+            <option value="magic_dps">🔮 เวทมนตร์ & เผาผลาญ MP ไม่จำกัด (Mage Nuke)</option>
+            <option value="breaker">⚡ เบรคเกอร์ & เร่งสปีด (Stagger Breaker / Turn Rush)</option>
+            <option value="tank">🛡️ แทงก์อมตะ & ซับพอร์ตทีม (Sentinel Defense)</option>
+            <option value="support">💖 ซัพพอร์ต & ปั๊ม Limit Break (LB Battery)</option>
+            <option value="mrp_farm">🌾 ฟาร์มเลเวลวิชั่น (MRP Speed Farm)</option>
+          </select>
+        </div>
+
+        <!-- Optimize Button -->
+        <button id="btn-auto-optimize" class="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-600/30 flex items-center justify-center gap-2 transition transform active:scale-95">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i> คำนวณบิลด์ที่คุ้มค่า AP ที่สุด
+        </button>
+      </div>
+
+      <!-- Step 2: Owned Visions Checklist -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold flex items-center justify-center border border-cyan-500/40">2</span>
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-200">เลือกวิชั่นที่มีอยู่ (Owned Visions)</h2>
+          </div>
+          <span class="text-xs text-slate-400 font-mono" id="owned-count">0 / 26</span>
+        </div>
+
+        <!-- Quick filter presets -->
+        <div class="flex flex-wrap gap-1.5 mb-3 text-xs">
+          <button id="btn-select-all" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition">มีครบทุกตัว</button>
+          <button id="btn-select-early" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">ช่วง Ch 1-2</button>
+          <button id="btn-select-mid" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">ช่วง Ch 3-4</button>
+          <button id="btn-clear-all" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-950/60 text-rose-300 border border-slate-700 transition">ล้างทั้งหมด</button>
+        </div>
+
+        <!-- Search visions -->
+        <div class="relative mb-3">
+          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500"></i>
+          <input type="text" id="vision-search" placeholder="ค้นหาชื่อวิชั่น เช่น Firion, Cloud..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500">
+        </div>
+
+        <!-- Visions list container -->
+        <div id="visions-list" class="max-h-[380px] overflow-y-auto pr-1 space-y-1.5 text-xs">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Recommended Build & AP Utilization (8 Cols) -->
+    <div class="lg:col-span-8 space-y-6">
+
+      <!-- AP Utilization Monitor -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">AP Budget Usage</span>
+            <div class="flex items-baseline gap-2">
+              <span id="current-ap-used" class="text-2xl font-black font-mono text-cyan-400">0</span>
+              <span class="text-slate-500 text-sm font-mono">/ <span id="current-ap-max">100</span> AP</span>
+              <span id="ap-remaining-tag" class="text-xs px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono">เหลือ 100 AP</span>
+            </div>
+          </div>
+          
+          <div class="text-right">
+            <span class="text-xs text-slate-400">ประสิทธิภาพความคุ้มค่า (AP Efficiency)</span>
+            <div id="efficiency-rating" class="text-sm font-bold text-amber-400 flex items-center justify-end gap-1">
+              <span>⭐⭐⭐⭐⭐</span> <span class="text-xs text-slate-300">(S-Tier Synergy)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AP Progress Bar -->
+        <div class="w-full h-3.5 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
+          <div id="ap-progress-bar" class="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-500" style="width: 0%;"></div>
+        </div>
+        <div class="flex justify-between items-center mt-2 text-[11px] text-slate-400">
+          <span>สล็อตพาสซีฟที่ติดตั้ง: <strong id="equipped-count" class="text-slate-200">0</strong> สกิล</span>
+          <span id="ap-status-hint" class="text-cyan-400">ระบบจะช่วยเลือกสกิลที่คุ้มค่า AP ที่สุด</span>
+        </div>
+      </div>
+
+      <!-- Current Recommended Loadout -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-5 h-5 text-cyan-400"></i>
+            <h2 class="text-base font-bold text-slate-100">พาสซีฟและสกิลที่แนะนำให้ติดตั้ง (Equipped Loadout)</h2>
+          </div>
+          <button id="btn-clear-loadout" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1 transition">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> ถอดออกทั้งหมด
+          </button>
+        </div>
+
+        <!-- Synergy summary banner -->
+        <div id="synergy-banner" class="mb-4 p-3 rounded-xl bg-cyan-950/40 border border-cyan-800/60 text-xs text-cyan-200 flex items-start gap-3">
+          <i data-lucide="info" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+          <div id="synergy-description">
+            กดปุ่ม <strong>"คำนวณบิลด์ที่คุ้มค่า AP ที่สุด"</strong> หรือเลือกวิชั่นที่คุณมีทางซ้าย เพื่อดูการจัดสกิลที่ทำงานร่วมกันได้อย่างเต็มประสิทธิภาพ
+          </div>
+        </div>
+
+        <!-- Equipped Skills Grid -->
+        <div id="equipped-skills-container" class="space-y-2.5">
+          <div class="text-center py-8 text-slate-500 text-xs">
+            ยังไม่ได้ติดตั้งสกิลใดๆ — เลือกวิชั่นทางซ้ายแล้วกดคำนวณบิลด์
+          </div>
+        </div>
+      </div>
+
+      <!-- Available Skills Pool from Owned Visions -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-2 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>
+            <h2 class="text-base font-bold text-slate-100">คลังพาสซีฟที่ปลดล็อคแล้ว (Available Passives Pool)</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="skill-filter-input" placeholder="ค้นหาสกิล..." class="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+            <select id="sort-skill-select" class="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1 text-xs text-slate-300 focus:outline-none">
+              <option value="tier">เรียงตาม Tier ความคุ้มค่า</option>
+              <option value="ap_asc">AP น้อยไปมาก</option>
+              <option value="ap_desc">AP มากไปน้อย</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Skills table / card list -->
+        <div id="available-skills-container" class="max-h-[380px] overflow-y-auto pr-1 space-y-2 text-xs">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Preset Top Meta Builds Section -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+            <h2 class="text-base font-bold text-slate-100">เทมเพลตบิลด์ยอดนิยมระดับ Meta (Preset Builds)</h2>
+          </div>
+          <span class="text-xs text-slate-400">คลิกเพื่อโหลดและตรวจสอบวิชั่นที่ต้องใช้</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="preset-builds-container">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-4 text-center text-xs text-slate-500">
+    Final Fantasy Resonance Build & AP Optimizer • สร้างขึ้นเพื่อแนะนำการใช้งาน AP และ Synergy ของ Vision อย่างคุ้มค่าที่สุด
+  </footer>
+
+  <!-- Application Logic & Data -->
+  <script>
+    // -------------------------------------------------------------
+    // DATABASE: All 26 Visions & Passives in Final Fantasy Resonance
+    // -------------------------------------------------------------
+    const VISIONS_DATA = [
+      {
+        id: "firion",
+        name: "Firion",
+        thaiName: "ฟิริออน",
+        chapter: "Chapter 3 (Olderion)",
+        category: "phys_dps",
+        role: "Commando / Multi-Action God",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "firion_arms_akimbo",
+            name: "Arms Akimbo",
+            thaiName: "สองมือสองใจ (โจมตี 2 แอคชั่น/เทิร์น)",
+            mr: "MR 9",
+            ap: 20,
+            tier: "SSS",
+            efficiency: 10.0,
+            role: "phys_dps",
+            desc: "ช่วยให้ตัวละครสามารถออกคำสั่งหรือทำแอคชั่นได้ 2 ครั้งในหนึ่งเทิร์น! ใช้เพียง 20 AP ซึ่งคุ้มค่าที่สุดในเกม",
+            synergy: ["squall_improvement", "tronn_half_mp", "cloud_crit_boost", "tidus_first_strike"]
+          },
+          {
+            id: "firion_blood_weapon",
+            name: "Blood Weapon",
+            thaiName: "ดาบดูดเลือด (Lifesteal 10%)",
+            mr: "MR 3",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.5,
+            role: "phys_dps",
+            desc: "ดูดพลังชีวิต 10% จากความเสียหายกายภาพที่สร้างได้ ช่วยให้อยู่รอดในสนามรบโดยไม่ต้องพึ่งฮีลเลอร์ตลอดเวลา",
+            synergy: ["firion_arms_akimbo"]
+          },
+          {
+            id: "firion_arsenal",
+            name: "Arsenal Adaptability",
+            thaiName: "ความชำนาญสรรพวุธ (เจาะเกราะ 15%)",
+            mr: "MR 5",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.0,
+            role: "phys_dps",
+            desc: "การโจมตีกายภาพเพิกเฉยต่อการป้องกันของศัตรู 15%",
+            synergy: ["firion_arms_akimbo", "squall_atk30"]
+          }
+        ]
+      },
+      {
+        id: "tidus",
+        name: "Tidus",
+        thaiName: "ทีดัส",
+        chapter: "Chapter 3",
+        category: "breaker",
+        role: "Speedster / Turn Manipulator",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "tidus_first_strike",
+            name: "First Strike",
+            thaiName: "ออกตัวก่อน (การันตีเทิร์นแรก)",
+            mr: "MR 3",
+            ap: 20,
+            tier: "SSS",
+            efficiency: 9.8,
+            role: "breaker",
+            desc: "รับประกันว่าตัวละครจะได้เริ่มแอคชั่นเป็นคนแรกสุดของการต่อสู้ทันที เหมาะสำหรับสายเปิดบัฟ/ดีบัฟและสายเบิ้ลโจมตี",
+            synergy: ["firion_arms_akimbo", "amelia_deprotect", "victoria_mrp"]
+          },
+          {
+            id: "tidus_tiptop",
+            name: "Tip-Top Shape",
+            thaiName: "กายพร้อมใจพร้อม (+25% Dmg เมื่อ HP > 80%)",
+            mr: "MR 7",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.8,
+            role: "phys_dps",
+            desc: "เพิ่มความเสียหายที่ทำได้ขึ้น 25% หาก HP ปัจจุบันของตนเองสูงกว่า 80%",
+            synergy: ["firion_blood_weapon", "tidus_first_strike"]
+          }
+        ]
+      },
+      {
+        id: "tronn",
+        name: "Tronn",
+        thaiName: "ทรอนน์",
+        chapter: "Chapter 1 (Story Unlock)",
+        category: "support",
+        role: "Resource Engine / MP Reducer",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "tronn_half_mp",
+            name: "Half MP Cost",
+            thaiName: "ลดค่าร่าย MP ลงครึ่งหนึ่ง (Half MP)",
+            mr: "MR 9",
+            ap: 50,
+            tier: "SSS",
+            efficiency: 9.5,
+            role: "magic_dps",
+            desc: "ลดการใช้ MP ของสกิลและเวทมนตร์ทั้งหมดลง 50% ทำให้สามารถร่ายท่าหนักๆ หรือเบิ้ลสกิลด้วย Arms Akimbo ได้ต่อเนื่องไม่ติดขัด",
+            synergy: ["firion_arms_akimbo", "shantotto_aoe", "bartz_dual_spellblade", "terra_lb_double"]
+          },
+          {
+            id: "tronn_stagger_mp",
+            name: "Restore MP on Stagger",
+            thaiName: "ฟื้นฟู MP เมื่อทำให้ศัตรูติด Stagger",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.5,
+            role: "breaker",
+            desc: "ฟื้นฟู 5% ของ Max MP ทันทีเมื่อสามารถทำให้ศัตรูเข้าสู่สถานะ Stagger",
+            synergy: ["tronn_stagger_power", "wol_stagger_power"]
+          },
+          {
+            id: "tronn_stagger_power",
+            name: "Stagger Power +20%",
+            thaiName: "พลังสะสมเกจ Stagger +20%",
+            mr: "MR 7",
+            ap: 40,
+            tier: "S",
+            efficiency: 8.0,
+            role: "breaker",
+            desc: "เพิ่มประสิทธิภาพในการลดเกจเบรคของศัตรูขึ้น 20%",
+            synergy: ["wol_stagger_power", "squall_improvement"]
+          }
+        ]
+      },
+      {
+        id: "squall",
+        name: "Squall",
+        thaiName: "สคอลล์",
+        chapter: "Chapter 3",
+        category: "phys_dps",
+        role: "Commando / Action Accumulator",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "squall_improvement",
+            name: "Improvement",
+            thaiName: "ยิ่งสู้อารมณ์ยิ่งพุ่ง (ดาเมจ & เกจ Stagger +50%)",
+            mr: "MR 1",
+            ap: 20,
+            tier: "SSS",
+            efficiency: 9.5,
+            role: "phys_dps",
+            desc: "เพิ่มพลังทำลายล้างและพลัง Stagger สูงสุดถึง +50% ตามจำนวนแอคชั่นที่ทำในการต่อสู้ เข้ากันได้ 100% กับ Arms Akimbo",
+            synergy: ["firion_arms_akimbo", "cloud_crit_boost"]
+          },
+          {
+            id: "squall_atk30",
+            name: "Physical Attack +30%",
+            thaiName: "พลังโจมตีกายภาพ +30%",
+            mr: "MR 8",
+            ap: 60,
+            tier: "S",
+            efficiency: 8.2,
+            role: "phys_dps",
+            desc: "เพิ่มค่าพลังโจมตีกายภาพขึ้น 30% เหมาะสำหรับช่วงเลทเกมที่มี AP สูง",
+            synergy: ["cloud_crit_boost", "firion_arms_akimbo"]
+          },
+          {
+            id: "squall_trigger",
+            name: "Trigger Timing",
+            thaiName: "ลั่นไกแม่นยำ (การันตีคริติคอล)",
+            mr: "MR 5",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.6,
+            role: "phys_dps",
+            desc: "การกดยิงจังหวะ Gunblade ติดคริติคอลแน่นอน 100%",
+            synergy: ["cloud_crit_boost", "cloud_crit_mp"]
+          }
+        ]
+      },
+      {
+        id: "cloud",
+        name: "Cloud Strife",
+        thaiName: "คลาวด์ สไตรฟ์",
+        chapter: "Chapter 1",
+        category: "phys_dps",
+        role: "Commando / Critical Specialist",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "cloud_crit_boost",
+            name: "Critical Boost",
+            thaiName: "เพิ่มความแรงคริติคอล +35%",
+            mr: "MR 7",
+            ap: 40,
+            tier: "S",
+            efficiency: 8.8,
+            role: "phys_dps",
+            desc: "คูณความเสียหายจากการติดคริติคอลเพิ่มขึ้น 35% เป็นตัวคูณดาเมจหลักของสายกายภาพ",
+            synergy: ["cloud_crit_rate", "squall_trigger", "sephiroth_crit_rate"]
+          },
+          {
+            id: "cloud_crit_rate",
+            name: "Critical Hit Rate +10%",
+            thaiName: "โอกาสติดคริติคอล +10%",
+            mr: "MR 2",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.2,
+            role: "phys_dps",
+            desc: "เพิ่มโอกาสติดคริติคอลพื้นฐาน 10%",
+            synergy: ["cloud_crit_boost"]
+          },
+          {
+            id: "cloud_crit_mp",
+            name: "Restore MP on Critical Hit",
+            thaiName: "ฟื้นฟู MP เมื่อโจมตีติดคริติคอล",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.5,
+            role: "phys_dps",
+            desc: "ฟื้นฟู 3% Max MP ทุกครั้งที่การโจมตีติดคริติคอล",
+            synergy: ["cloud_crit_rate", "cloud_crit_boost", "firion_arms_akimbo"]
+          },
+          {
+            id: "cloud_crit_stagger",
+            name: "Critical Stagger",
+            thaiName: "คริติคอลเร่งเกจ Stagger +25%",
+            mr: "MR 5",
+            ap: 40,
+            tier: "A",
+            efficiency: 7.4,
+            role: "breaker",
+            desc: "เมื่อโจมตีติดคริติคอล จะเร่งสะสมเกจ Stagger ของเป้าหมายเพิ่มขึ้น 25%",
+            synergy: ["cloud_crit_rate", "tronn_stagger_power"]
+          }
+        ]
+      },
+      {
+        id: "terra",
+        name: "Terra",
+        thaiName: "ทีน่า / เทอร์ร่า",
+        chapter: "Chapter 1 (Grandshelt)",
+        category: "magic_dps",
+        role: "Ravager / Limit Mage",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "terra_lb_double",
+            name: "LB Double Charge",
+            thaiName: "เกจ Limit Break เต็มไว 2 เท่า",
+            mr: "MR 5",
+            ap: 35,
+            tier: "S",
+            efficiency: 8.9,
+            role: "support",
+            desc: "เร่งอัตราการเก็บเกจ Limit Break ขึ้นเป็น 2 เท่า ใช้เพียง 35 AP เหมาะมากในระดับกลางเกมและช่วงท้ายเกม",
+            synergy: ["ayaka_lb_heal", "clive_lb_dmg"]
+          },
+          {
+            id: "terra_break_limit",
+            name: "Break the Limit",
+            thaiName: "ทะลุขีดจำกัดความเสียหาย (Damage Limit Break)",
+            mr: "MR 8",
+            ap: 45,
+            tier: "S",
+            efficiency: 8.5,
+            role: "magic_dps",
+            desc: "ปลดล็อคให้พลังเวทมนตร์สามารถทำความเสียหายทะลุขีดจำกัด 9,999 ต่อฮิตได้ จำเป็นสำหรับบอสเลทเกม",
+            synergy: ["shantotto_aoe", "tronn_half_mp"]
+          },
+          {
+            id: "terra_sharp_mind",
+            name: "Sharp Mind",
+            thaiName: "จิตสมาธิเฉียบคม (ลดเวลาหน่วงเวท)",
+            mr: "MR 7",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.6,
+            role: "magic_dps",
+            desc: "ลดเวลาหน่วง (Cast Delay) ในการร่ายเวทมนตร์ลง 25% และเพิ่มสเกลพลังเวท",
+            synergy: ["shantotto_aoe", "terra_break_limit"]
+          }
+        ]
+      },
+      {
+        id: "onion_knight",
+        name: "Onion Knight",
+        thaiName: "ออเนียนไนท์",
+        chapter: "Chapter 2 (Dirnado)",
+        category: "support",
+        role: "All-Rounder / Ultimate LB Engine",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "onion_lb_triple",
+            name: "LB Triple Charge",
+            thaiName: "เกจ Limit Break เต็มไว 3 เท่า (Triple Charge)",
+            mr: "MR 9",
+            ap: 50,
+            tier: "SSS",
+            efficiency: 9.3,
+            role: "support",
+            desc: "เพิ่มอัตราการชาร์จเกจ Limit Break สูงถึง 300% กดใช้ท่าไม้ตายได้แทบทุกรอบ เหมาะกับสายเบิร์ส Limit Break",
+            synergy: ["clive_lb_dmg", "ayaka_lb_heal"]
+          },
+          {
+            id: "onion_speed",
+            name: "Speed +10%",
+            thaiName: "ความเร็วรอบเทิร์น +10%",
+            mr: "MR 6",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.6,
+            role: "breaker",
+            desc: "เพิ่มความเร็วในการวนรอบการออกท่า 10%",
+            synergy: ["tidus_first_strike"]
+          }
+        ]
+      },
+      {
+        id: "zidane",
+        name: "Zidane",
+        thaiName: "ซีดาน",
+        chapter: "Chapter 2 (Dirnado)",
+        category: "breaker",
+        role: "Saboteur / Debuff Punisher",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "zidane_aggravation",
+            name: "Aggravation",
+            thaiName: "ซ้ำเติมบาดแผล (+60% Dmg เมื่อศัตรูมีดีบัฟ)",
+            mr: "MR 7",
+            ap: 25,
+            tier: "S",
+            efficiency: 9.0,
+            role: "phys_dps",
+            desc: "เพิ่มความเสียหายที่ทำต่อศัตรูสูงสุดถึง 60% ยิ่งศัตรูติดดีบัฟหรือสถานะผิดปกติมากเท่าไหร่ยิ่งแรง ใช้แค่ 25 AP",
+            synergy: ["amelia_deprotect", "camille_slow", "firion_arms_akimbo"]
+          }
+        ]
+      },
+      {
+        id: "shantotto",
+        name: "Shantotto",
+        thaiName: "ชันโตโตะ",
+        chapter: "Chapter 4",
+        category: "magic_dps",
+        role: "Black Mage / Multicast Archmage",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "shantotto_aoe",
+            name: "Area Effect Adept",
+            thaiName: "เชี่ยวชาญเวทหมู่วงกว้าง (Full AoE Power)",
+            mr: "MR 7",
+            ap: 40,
+            tier: "S",
+            efficiency: 8.7,
+            role: "magic_dps",
+            desc: "เมื่อร่ายเวทหมู่ พลังทำลายจะไม่ถูกหารเฉลี่ย (ได้พลังเต็ม 100% ทุกตัว) แลกกับค่า MP สองเท่า (แก้ด้วย Half MP Cost)",
+            synergy: ["tronn_half_mp", "terra_break_limit"]
+          },
+          {
+            id: "shantotto_dark_rite",
+            name: "Dark Rite",
+            thaiName: "พิธีมืด (เวทแรงขึ้นตาม HP ที่เสียไป)",
+            mr: "MR 3",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.5,
+            role: "magic_dps",
+            desc: "เพิ่มพลังเวทมนตร์ ยิ่งมี HP ต่ำ พลังเวทจะยิ่งรุนแรงขึ้น",
+            synergy: ["shantotto_aoe"]
+          },
+          {
+            id: "shantotto_mp_kill",
+            name: "Restore MP on Defeating Foes",
+            thaiName: "ฟื้นฟู MP เมื่อกำจัดศัตรูได้",
+            mr: "MR 1",
+            ap: 20,
+            tier: "B",
+            efficiency: 6.8,
+            role: "magic_dps",
+            desc: "ฟื้นฟู 3% Max MP เมื่อกำจัดศัตรูสำเร็จ ช่วยเคลียร์ม็อบหลายตัว",
+            synergy: ["shantotto_aoe"]
+          }
+        ]
+      },
+      {
+        id: "bartz",
+        name: "Bartz",
+        thaiName: "บาร์ทซ์",
+        chapter: "Chapter 5 (Airship)",
+        category: "phys_dps",
+        role: "Spellblade Hybrid / Mimic",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "bartz_dual_spellblade",
+            name: "Dual Spellblade",
+            thaiName: "เวทดาบคู่ประสาน (Spellblade ทำงาน 2 ครั้ง)",
+            mr: "MR 7",
+            ap: 40,
+            tier: "S",
+            efficiency: 8.9,
+            role: "phys_dps",
+            desc: "การโจมตีด้วยดาบเวทมนตร์ (Spellblade) จะแสดงผลและฟาดฟันซ้ำอีก 1 รอบทันที ทำดาเมจธาตุแบบทวีคูณ",
+            synergy: ["firion_arms_akimbo", "tronn_half_mp"]
+          },
+          {
+            id: "bartz_speed",
+            name: "Speed +5%",
+            thaiName: "ความเร็ว +5%",
+            mr: "MR 5",
+            ap: 20,
+            tier: "B",
+            efficiency: 6.5,
+            role: "breaker",
+            desc: "เพิ่มความเร็วพื้นฐาน 5%",
+            synergy: ["tidus_first_strike"]
+          }
+        ]
+      },
+      {
+        id: "sephiroth",
+        name: "Sephiroth",
+        thaiName: "เซฟิรอธ",
+        chapter: "Chapter 5 (Airship / Boss)",
+        category: "phys_dps",
+        role: "Commando / Pure Destruction",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "sephiroth_crit_rate",
+            name: "Critical Hit Rate +20%",
+            thaiName: "โอกาสคริติคอลมหาศาล +20%",
+            mr: "MR 4",
+            ap: 40,
+            tier: "S",
+            efficiency: 8.4,
+            role: "phys_dps",
+            desc: "เพิ่มโอกาสติดคริติคอลสูงถึง 20% ทำให้การโจมตีติดคริติคอลเกือบตลอดเวลา",
+            synergy: ["cloud_crit_boost", "squall_improvement"]
+          },
+          {
+            id: "sephiroth_atk30",
+            name: "Physical Attack +30%",
+            thaiName: "พลังโจมตีกายภาพ +30%",
+            mr: "MR 7",
+            ap: 60,
+            tier: "S",
+            efficiency: 8.0,
+            role: "phys_dps",
+            desc: "เพิ่มพลังโจมตีกายภาพพื้นฐาน 30% เหมาะกับบิลด์บอสสเตจท้ายเกม",
+            synergy: ["cloud_crit_boost"]
+          },
+          {
+            id: "sephiroth_bravery",
+            name: "Auto-Bravery",
+            thaiName: "เปิดเทิร์นด้วยบัฟ Bravery",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.8,
+            role: "phys_dps",
+            desc: "ได้รับสถานะ Bravery (+25% พลังโจมตี) อัตโนมัติเมื่อเริ่มการต่อสู้",
+            synergy: ["tidus_first_strike", "firion_arms_akimbo"]
+          }
+        ]
+      },
+      {
+        id: "victoria",
+        name: "Victoria",
+        thaiName: "วิกตอเรีย",
+        chapter: "Chapter 5 (Side Quest)",
+        category: "mrp_farm",
+        role: "Dark Mage / Fast Leveler",
+        rarity: "S-Tier (Utility)",
+        passives: [
+          {
+            id: "victoria_mrp",
+            name: "MRP Gain +50%",
+            thaiName: "เร่งฟาร์มแต้มวิชั่น MRP +50% (Speed Level)",
+            mr: "MR 7",
+            ap: 30,
+            tier: "SSS",
+            efficiency: 9.9,
+            role: "mrp_farm",
+            desc: "เพิ่มแต้ม Mastery Rank Points (MRP) ที่ได้หลังจบการต่อสู้ขึ้น 50% เร่งการปลดล็อค MR 9 ของวิชั่นทุกตัวให้เร็วขึ้นเท่าตัว!",
+            synergy: ["tidus_first_strike", "firion_arms_akimbo"]
+          },
+          {
+            id: "victoria_matk",
+            name: "Magic Attack +20%",
+            thaiName: "พลังโจมตีเวทมนตร์ +20%",
+            mr: "MR 3",
+            ap: 35,
+            tier: "A",
+            efficiency: 7.5,
+            role: "magic_dps",
+            desc: "เพิ่มพลังโจมตีเวทมนตร์ 20%",
+            synergy: ["shantotto_aoe", "terra_break_limit"]
+          }
+        ]
+      },
+      {
+        id: "ayaka",
+        name: "Ayaka",
+        thaiName: "อายากะ",
+        chapter: "Chapter 7 (Side Quest)",
+        category: "support",
+        role: "White Mage / Supreme Healer",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "ayaka_lb_heal",
+            name: "LB Charge on Heal",
+            thaiName: "ฮีลเพื่อนเร่งเกจ LB +25%",
+            mr: "MR 9",
+            ap: 20,
+            tier: "SSS",
+            efficiency: 9.4,
+            role: "support",
+            desc: "ฟื้นฟูเกจ Limit Break ของตนเองขึ้น 25% ทุกครั้งที่ใช้ท่าฟื้นฟู HP ให้เพื่อนในทีม ใช้เพียง 20 AP เท่านั้น!",
+            synergy: ["terra_lb_double", "onion_lb_triple", "clive_lb_dmg"]
+          },
+          {
+            id: "ayaka_hand_heals",
+            name: "The Hand That Heals",
+            thaiName: "หัตถ์เยียวยาหนุนทัพ (+50% Dmg & Stagger)",
+            mr: "MR 7",
+            ap: 35,
+            tier: "S",
+            efficiency: 8.5,
+            role: "support",
+            desc: "เมื่อฮีลเพื่อน จะเพิ่มพลังทำลายล้างและเกจ Stagger ของตนเองสะสมได้สูงสุดถึง 50%",
+            synergy: ["ayaka_lb_heal"]
+          },
+          {
+            id: "ayaka_buff_ext",
+            name: "Angelic Advocate",
+            thaiName: "ยืดเวลาระยะบัฟ +1 เทิร์น",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.9,
+            role: "support",
+            desc: "เพิ่มระยะเวลาการแสดงผลของบัฟที่ตนเองร่ายให้เพื่อนร่วมทีมขึ้นอีก 1 เทิร์น",
+            synergy: ["sephiroth_bravery", "camille_haste"]
+          }
+        ]
+      },
+      {
+        id: "wol",
+        name: "Warrior of Light",
+        thaiName: "นักรบแห่งแสง (Warrior of Light)",
+        chapter: "Chapter 1",
+        category: "tank",
+        role: "Sentinel / Counter Wall",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "wol_stagger_power",
+            name: "Stagger Power +30%",
+            thaiName: "พลังกระหน่ำเกจ Stagger +30%",
+            mr: "MR 7",
+            ap: 45,
+            tier: "S",
+            efficiency: 8.6,
+            role: "breaker",
+            desc: "เพิ่มประสิทธิภาพการสะสมเกจ Stagger ขึ้นถึง 30% สูงที่สุดในบรรดาสกิลประเภท Stagger",
+            synergy: ["tronn_stagger_power", "squall_improvement"]
+          },
+          {
+            id: "wol_phys_def",
+            name: "Physical Damage Reduction 20%",
+            thaiName: "ลดความเสียหายกายภาพลง 20%",
+            mr: "MR 3",
+            ap: 35,
+            tier: "A",
+            efficiency: 7.7,
+            role: "tank",
+            desc: "ลดความเสียหายทางกายภาพที่ได้รับลง 20%",
+            synergy: ["wilhelm_bastion", "cecil_pdef"]
+          },
+          {
+            id: "wol_counter",
+            name: "Physical Counter",
+            thaiName: "สวนกลับการโจมตีกายภาพ (30% Counter)",
+            mr: "MR 1",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.3,
+            role: "tank",
+            desc: "มีโอกาส 30% ที่จะสวนกลับทันทีเมื่อถูกโจมตีกายภาพ",
+            synergy: ["wilhelm_crit_counter"]
+          }
+        ]
+      },
+      {
+        id: "cecil",
+        name: "Cecil",
+        thaiName: "เซซิล",
+        chapter: "Chapter 4",
+        category: "tank",
+        role: "Sentinel / Paladin Defense",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "cecil_pdef",
+            name: "Physical Defense +20%",
+            thaiName: "พลังป้องกันกายภาพ +20%",
+            mr: "MR 5",
+            ap: 40,
+            tier: "A",
+            efficiency: 7.5,
+            role: "tank",
+            desc: "เพิ่มค่าพลังป้องกันทางกายภาพขึ้น 20%",
+            synergy: ["wol_phys_def", "wilhelm_bastion"]
+          },
+          {
+            id: "cecil_dark_imm",
+            name: "Dark Immunity",
+            thaiName: "ภูมิคุ้มกันธาตุมืด (ดูดซับธาตุมืด)",
+            mr: "MR 3",
+            ap: 30,
+            tier: "B",
+            efficiency: 6.8,
+            role: "tank",
+            desc: "ป้องกันและดูดซับการโจมตีธาตุมืดทั้งหมด มีประโยชน์มากกับบอสมืดช่วงหลัง",
+            synergy: []
+          }
+        ]
+      },
+      {
+        id: "wilhelm",
+        name: "Wilhelm",
+        thaiName: "วิลเฮล์ม",
+        chapter: "Chapter 5 (Side Quest)",
+        category: "tank",
+        role: "Sentinel / Ultimate Fortress",
+        rarity: "S-Tier (Tank)",
+        passives: [
+          {
+            id: "wilhelm_bastion",
+            name: "Bastion",
+            thaiName: "กำแพงปราการเหล็ก (ลดดาเมจทั้งทีม 20%)",
+            mr: "MR 3",
+            ap: 30,
+            tier: "S",
+            efficiency: 8.5,
+            role: "tank",
+            desc: "เพิ่มการลดทอนความเสียหายให้แก่เพื่อนร่วมทีมทุกคนขึ้น 20% ขณะเข้าท่า Guard",
+            synergy: ["wol_phys_def", "charlotte_shell"]
+          },
+          {
+            id: "wilhelm_crit_counter",
+            name: "Critical Counter",
+            thaiName: "สวนกลับเมื่อโดนคริติคอล",
+            mr: "MR 5",
+            ap: 35,
+            tier: "A",
+            efficiency: 7.4,
+            role: "tank",
+            desc: "ตอบโต้การโจมตีอัตโนมัติด้วยพลังทำลายรุนแรงเมื่อถูกโจมตีติดคริติคอล",
+            synergy: ["wol_counter"]
+          }
+        ]
+      },
+      {
+        id: "charlotte",
+        name: "Charlotte",
+        thaiName: "ชาร์ลอตต์",
+        chapter: "Chapter 7 (Side Quest)",
+        category: "tank",
+        role: "Sentinel / Magic Wall & Cover",
+        rarity: "S-Tier (Tank)",
+        passives: [
+          {
+            id: "charlotte_shell",
+            name: "Auto-Shell",
+            thaiName: "เปิดเทิร์นด้วยเกราะเวท Shell",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.8,
+            role: "tank",
+            desc: "ได้รับบัฟ Shell (ลดดาเมจเวทมนตร์ 30%) อัตโนมัติเมื่อเข้าสู่สนามรบ",
+            synergy: ["wilhelm_bastion"]
+          },
+          {
+            id: "charlotte_protection",
+            name: "Royal Protection",
+            thaiName: "พิทักษ์ราชันย์ (รับดาเมจแทนเพื่อน)",
+            mr: "MR 7",
+            ap: 35,
+            tier: "S",
+            efficiency: 8.3,
+            role: "tank",
+            desc: "มีโอกาสสูงที่จะพุ่งเข้าไปรับความเสียหายรุนแรงแทนเพื่อนที่ HP วิกฤต",
+            synergy: ["wilhelm_bastion", "cecil_pdef"]
+          }
+        ]
+      },
+      {
+        id: "clive",
+        name: "Clive",
+        thaiName: "ไคลฟ์",
+        chapter: "Chapter 5 (Airship)",
+        category: "phys_dps",
+        role: "Breaker / Fire Eikon & LB Burst",
+        rarity: "S-Tier",
+        passives: [
+          {
+            id: "clive_lb_dmg",
+            name: "Limit Burst Damage +40%",
+            thaiName: "เพิ่มความแรง Limit Break +40%",
+            mr: "MR 7",
+            ap: 45,
+            tier: "S",
+            efficiency: 8.7,
+            role: "phys_dps",
+            desc: "เพิ่มตัวคูณความเสียหายของท่าไม้ตาย Limit Break ขึ้นถึง 40% เหมาะใช้ปิดฉากบอสในฮิตเดียว",
+            synergy: ["onion_lb_triple", "terra_lb_double", "ayaka_lb_heal"]
+          },
+          {
+            id: "clive_flames",
+            name: "Boundless Flames",
+            thaiName: "เพลิงนิรันดร์ (+30% Fire Dmg & Stagger)",
+            mr: "MR 3",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.6,
+            role: "phys_dps",
+            desc: "เพิ่มความเสียหายธาตุไฟและเร่งเกจ Stagger ขึ้น 30%",
+            synergy: ["firion_arms_akimbo"]
+          }
+        ]
+      },
+      {
+        id: "amelia",
+        name: "Amelia",
+        thaiName: "อมีเลีย",
+        chapter: "Chapter 6 (Side Quest)",
+        category: "breaker",
+        role: "Saboteur / Defense Breaker",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "amelia_deprotect",
+            name: "Deprotect Opener",
+            thaiName: "เปิดฉากลดเกราะศัตรูทั้งสนาม (Deprotect)",
+            mr: "MR 3",
+            ap: 25,
+            tier: "S",
+            efficiency: 8.9,
+            role: "breaker",
+            desc: "ร่าย Deprotect (ลดพลังป้องกันกายภาพ) ใส่ศัตรูทุกตัวทันทีที่เริ่มการต่อสู้ ซินเนอร์จี้ชั้นยอดกับสายกายภาพและ Zidane",
+            synergy: ["tidus_first_strike", "zidane_aggravation", "firion_arms_akimbo"]
+          }
+        ]
+      },
+      {
+        id: "camille",
+        name: "Camille",
+        thaiName: "คามิลล์",
+        chapter: "Chapter 5 (Side Quest)",
+        category: "breaker",
+        role: "Hybrid / Speed & Slow Hex",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "camille_haste",
+            name: "Auto-Haste",
+            thaiName: "เปิดเทิร์นด้วยสถานะ Haste",
+            mr: "MR 3",
+            ap: 30,
+            tier: "S",
+            efficiency: 8.4,
+            role: "breaker",
+            desc: "ได้รับสถานะ Haste (เร่งความเร็วการกระทำ 30%) อัตโนมัติเมื่อเริ่มการต่อสู้",
+            synergy: ["tidus_first_strike", "firion_arms_akimbo"]
+          },
+          {
+            id: "camille_slow",
+            name: "Add Slow",
+            thaiName: "โจมตีแถมสถานะสโลว์ (Slow Inflict)",
+            mr: "MR 5",
+            ap: 25,
+            tier: "A",
+            efficiency: 7.6,
+            role: "breaker",
+            desc: "การโจมตีธรรมดามีโอกาสทำให้ศัตรูติดสถานะ Slow ชะลอเทิร์นศัตรู",
+            synergy: ["zidane_aggravation"]
+          }
+        ]
+      },
+      {
+        id: "lightning",
+        name: "Lightning",
+        thaiName: "ไลท์นิ่ง",
+        chapter: "Chapter 5 (Airship)",
+        category: "phys_dps",
+        role: "Commando / Chain Striker",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "lightning_overdrive",
+            name: "Overdrive Rush",
+            thaiName: "คอมโบระห่ำ (+5% Dmg ต่อย่างต่อเนื่อง สูงสุด 40%)",
+            mr: "MR 5",
+            ap: 35,
+            tier: "A",
+            efficiency: 7.9,
+            role: "phys_dps",
+            desc: "การโจมตีติดต่อกันจะเพิ่มพลังทำลายสะสมครั้งละ 5% สูงสุดถึง 40%",
+            synergy: ["firion_arms_akimbo", "squall_improvement"]
+          }
+        ]
+      },
+      {
+        id: "noctis",
+        name: "Noctis",
+        thaiName: "น็อคติส",
+        chapter: "Chapter 2 (Dirnado)",
+        category: "phys_dps",
+        role: "Commando / Stagger Finisher",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "noctis_bonus_dmg",
+            name: "Bonus Damage on Stagger",
+            thaiName: "ดาเมจโบนัสช่วงศัตรู Stagger +25%",
+            mr: "MR 5",
+            ap: 40,
+            tier: "A",
+            efficiency: 7.8,
+            role: "phys_dps",
+            desc: "ทำความเสียหายเพิ่มเติม 25% ขณะศัตรูกำลังติดสถานะ Stagger",
+            synergy: ["tronn_stagger_power", "firion_arms_akimbo"]
+          },
+          {
+            id: "noctis_bravery",
+            name: "Bravery Opener",
+            thaiName: "เบิกโรงด้วย Bravery (+25% Atk)",
+            mr: "MR 1",
+            ap: 20,
+            tier: "A",
+            efficiency: 7.7,
+            role: "phys_dps",
+            desc: "เริ่มสู้ด้วยสถานะ Bravery เพิ่มพลังโจมตี 25%",
+            synergy: ["tidus_first_strike"]
+          }
+        ]
+      },
+      {
+        id: "yshtola",
+        name: "Y'shtola",
+        thaiName: "อิชโทลา",
+        chapter: "Chapter 4",
+        category: "magic_dps",
+        role: "Mage / Aether & MP Regen",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "yshtola_aetherflow",
+            name: "Aetherflow",
+            thaiName: "กระแสเอเธอร์ไหลเวียน (รีเจน MP 5% ทุกเทิร์น)",
+            mr: "MR 9",
+            ap: 45,
+            tier: "S",
+            efficiency: 8.2,
+            role: "magic_dps",
+            desc: "ฟื้นฟู 5% MP อัตโนมัติทุกๆ เทิร์น ช่วยให้ร่ายเวทได้ไม่หมดหลอด",
+            synergy: ["tronn_half_mp", "shantotto_aoe"]
+          }
+        ]
+      },
+      {
+        id: "vaan",
+        name: "Vaan",
+        thaiName: "วาน",
+        chapter: "Chapter 5 (Airship)",
+        category: "breaker",
+        role: "Utility / Free Attacker",
+        rarity: "B-Tier",
+        passives: [
+          {
+            id: "vaan_observe",
+            name: "Observe and Attack",
+            thaiName: "สังเกตการณ์พร้อมโจมตี (ฟรี Normal Attack)",
+            mr: "MR 7",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.4,
+            role: "phys_dps",
+            desc: "เมื่อทำการกระทำที่ไม่สร้างความเสียหาย (เช่น บัฟหรือใช้ไอเทม) จะปล่อยการโจมตีธรรมดาใส่ศัตรูฟรี 1 ครั้ง",
+            synergy: ["firion_arms_akimbo"]
+          }
+        ]
+      },
+      {
+        id: "aileen",
+        name: "Aileen",
+        thaiName: "ไอลีน",
+        chapter: "Chapter 5 (Side Quest)",
+        category: "support",
+        role: "Breaker / Observe & Charge LB",
+        rarity: "A-Tier",
+        passives: [
+          {
+            id: "aileen_observe_lb",
+            name: "Observe and Charge LB",
+            thaiName: "สังเกตการณ์ชาร์จเกจ LB +15%",
+            mr: "MR 7",
+            ap: 30,
+            tier: "A",
+            efficiency: 7.7,
+            role: "support",
+            desc: "เมื่อทำการกระทำที่ไม่สร้างดาเมจ จะชาร์จเกจ Limit Break ขึ้น 15%",
+            synergy: ["terra_lb_double", "clive_lb_dmg"]
+          }
+        ]
+      },
+      {
+        id: "leah",
+        name: "Leah",
+        thaiName: "ลีอาห์",
+        chapter: "Chapter 1 (Story Unlock)",
+        category: "support",
+        role: "Utility / Item Master",
+        rarity: "B-Tier",
+        passives: [
+          {
+            id: "leah_pharmacology",
+            name: "Pharmacology",
+            thaiName: "เภสัชวิทยาชั้นสูง (ไอเทมแรงขึ้น +50%)",
+            mr: "MR 7",
+            ap: 30,
+            tier: "B",
+            efficiency: 6.8,
+            role: "support",
+            desc: "เพิ่มประสิทธิภาพการฟื้นฟูและผลของไอเทมที่ใช้ในการต่อสู้ขึ้น 50%",
+            synergy: []
+          }
+        ]
+      }
+    ];
+
+    // -------------------------------------------------------------
+    // PRESET META BUILDS
+    // -------------------------------------------------------------
+    const PRESET_BUILDS = [
+      {
+        name: "Double-Action Stagger Meta (กายภาพเบิ้ลเทิร์นระดับพระเจ้า)",
+        category: "phys_dps",
+        recommendedAP: 100,
+        reqVisions: ["firion", "squall", "tidus", "cloud"],
+        skills: ["firion_arms_akimbo", "squall_improvement", "tidus_first_strike", "cloud_crit_boost"],
+        desc: "บิลด์ยอดนิยมอันดับ 1 ของเกม: เปิดด้วย First Strike โจมตีเป็นคนแรก + Arms Akimbo ทำ 2 แอคชั่น/เทิร์น + สะสม Improvement ดาเมจพุ่ง 50% และติด Critical Boost รุนแรงสุดๆ รวม 100 AP พอดีเป๊ะ!"
+      },
+      {
+        name: "Infinite Arcane Nuke (มหาเวทล้างสนาม MP ไม่มีวันหมด)",
+        category: "magic_dps",
+        recommendedAP: 125,
+        reqVisions: ["tronn", "shantotto", "terra"],
+        skills: ["tronn_half_mp", "shantotto_aoe", "terra_break_limit"],
+        desc: "คอมโบเวทมนตร์ล้างบอส: ใช้ Half MP Cost ลดค่าร่ายครึ่งหนึ่ง คู่กับ Area Effect Adept ยิงเวทหมู่ความแรงเต็ม 100% ทุกตัว และปลดขีดจำกัดด้วย Break the Limit ทะลุเพดาน 9,999 ดาเมจ"
+      },
+      {
+        name: "Immortal Aegis Tank (แทงก์อมตะป้องกันทีมสมบูรณ์แบบ)",
+        category: "tank",
+        recommendedAP: 120,
+        reqVisions: ["wilhelm", "wol", "charlotte", "cecil"],
+        skills: ["wilhelm_bastion", "charlotte_shell", "wol_phys_def", "cecil_pdef"],
+        desc: "บิลด์แทงก์สายยืนทน: เปิดเกราะ Auto-Shell ลดดาเมจเวท + Bastion ลดดาเมจทั้งทีม 20% + ลดดาเมจกายภาพส่วนตัวอีก 20% ยืนรับดาเมจได้ทุกคอนเทนต์โหดของเกม"
+      },
+      {
+        name: "Ultimate Limit Burst Loop (ปั๊มท่าไม้ตายวนลูปไม่จำกัด)",
+        category: "support",
+        recommendedAP: 105,
+        reqVisions: ["onion_knight", "clive", "ayaka"],
+        skills: ["onion_lb_triple", "ayaka_lb_heal", "clive_lb_dmg"],
+        desc: "คอมโบระเบิด Limit Break: Onion Knight เร่งชาร์จเกจ 3 เท่า + Ayaka ฮีลทีเดียวชาร์จ LB อีก 25% + Clive บูสต์ความแรง Limit Break ขึ้น 40% กดใช้ท่าไม้ตายได้ทุกเทิร์น!"
+      },
+      {
+        name: "Speedrun MRP Farmer (สูตรฟาร์มเร่งเวลวิชั่นทะลุหลอด)",
+        category: "mrp_farm",
+        recommendedAP: 70,
+        reqVisions: ["victoria", "tidus", "firion"],
+        skills: ["victoria_mrp", "tidus_first_strike", "firion_arms_akimbo"],
+        desc: "บิลด์ฟาร์มที่ดีที่สุด: Victoria ให้ MRP +50% ผสานกับ Tidus ออกตัวก่อน และ Firion เบิ้ล 2 แอคชั่นกวาดศัตรูจบใน 1 เทิร์น เหมาะกับการเปิดโหมด Expert ฟาร์ม MR 9 สบายๆ"
+      }
+    ];
+
+    // State
+    let ownedVisionIds = new Set(VISIONS_DATA.map(v => v.id)); // Default: all owned
+    let currentAPCapacity = 100;
+    let equippedSkillIds = new Set();
+    let currentRole = "phys_dps";
+
+    // DOM Elements
+    const apSlider = document.getElementById('ap-slider');
+    const apInput = document.getElementById('ap-input');
+    const apDisplayBadge = document.getElementById('ap-display-badge');
+    const roleSelect = document.getElementById('role-select');
+    const ownedCountEl = document.getElementById('owned-count');
+    const visionsListEl = document.getElementById('visions-list');
+    const visionSearchInput = document.getElementById('vision-search');
+    const currentApUsedEl = document.getElementById('current-ap-used');
+    const currentApMaxEl = document.getElementById('current-ap-max');
+    const apRemainingTag = document.getElementById('ap-remaining-tag');
+    const apProgressBar = document.getElementById('ap-progress-bar');
+    const equippedCountEl = document.getElementById('equipped-count');
+    const equippedSkillsContainer = document.getElementById('equipped-skills-container');
+    const availableSkillsContainer = document.getElementById('available-skills-container');
+    const presetBuildsContainer = document.getElementById('preset-builds-container');
+    const synergyBanner = document.getElementById('synergy-banner');
+    const synergyDescription = document.getElementById('synergy-description');
+
+    // Initialize UI
+    function init() {
+      // Load saved state if any
+      const savedOwned = localStorage.getItem('ffr_owned_visions');
+      if (savedOwned) {
+        try {
+          ownedVisionIds = new Set(JSON.parse(savedOwned));
+        } catch(e) {}
+      }
+
+      renderVisionsList();
+      renderPresetBuilds();
+      updateAPDisplay();
+      autoOptimizeBuild();
+
+      // Listeners
+      apSlider.addEventListener('input', (e) => {
+        currentAPCapacity = parseInt(e.target.value);
+        apInput.value = currentAPCapacity;
+        updateAPDisplay();
+        checkAPBudget();
+      });
+
+      apInput.addEventListener('change', (e) => {
+        let val = parseInt(e.target.value) || 20;
+        val = Math.max(20, Math.min(300, val));
+        currentAPCapacity = val;
+        apSlider.value = val;
+        apInput.value = val;
+        updateAPDisplay();
+        checkAPBudget();
+      });
+
+      roleSelect.addEventListener('change', (e) => {
+        currentRole = e.target.value;
+      });
+
+      document.getElementById('btn-auto-optimize').addEventListener('click', () => {
+        autoOptimizeBuild();
+      });
+
+      document.getElementById('btn-select-all').addEventListener('click', () => {
+        VISIONS_DATA.forEach(v => ownedVisionIds.add(v.id));
+        saveOwnedVisions();
+        renderVisionsList();
+        renderAvailableSkills();
+      });
+
+      document.getElementById('btn-clear-all').addEventListener('click', () => {
+        ownedVisionIds.clear();
+        saveOwnedVisions();
+        renderVisionsList();
+        renderAvailableSkills();
+      });
+
+      document.getElementById('btn-select-early').addEventListener('click', () => {
+        ownedVisionIds.clear();
+        const earlyIds = ["cloud", "terra", "tronn", "leah", "wol", "noctis", "onion_knight", "zidane"];
+        earlyIds.forEach(id => ownedVisionIds.add(id));
+        saveOwnedVisions();
+        renderVisionsList();
+        renderAvailableSkills();
+      });
+
+      document.getElementById('btn-select-mid').addEventListener('click', () => {
+        ownedVisionIds.clear();
+        const midIds = ["cloud", "terra", "tronn", "leah", "wol", "noctis", "onion_knight", "zidane", "squall", "tidus", "firion", "cecil", "shantotto", "yshtola"];
+        midIds.forEach(id => ownedVisionIds.add(id));
+        saveOwnedVisions();
+        renderVisionsList();
+        renderAvailableSkills();
+      });
+
+      visionSearchInput.addEventListener('input', () => {
+        renderVisionsList();
+      });
+
+      document.getElementById('btn-clear-loadout').addEventListener('click', () => {
+        equippedSkillIds.clear();
+        updateEquippedUI();
+      });
+
+      document.getElementById('skill-filter-input').addEventListener('input', () => {
+        renderAvailableSkills();
+      });
+
+      document.getElementById('sort-skill-select').addEventListener('change', () => {
+        renderAvailableSkills();
+      });
+
+      document.getElementById('btn-copy-build').addEventListener('click', copyBuildToClipboard);
+      document.getElementById('btn-save-build').addEventListener('click', () => {
+        alert("บันทึกการตั้งค่าบิลด์และวิชั่นลงหน่วยความจำของเครื่องเรียบร้อยแล้ว!");
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function saveOwnedVisions() {
+      localStorage.setItem('ffr_owned_visions', JSON.stringify(Array.from(ownedVisionIds)));
+    }
+
+    function updateAPDisplay() {
+      apDisplayBadge.textContent = `${currentAPCapacity} AP`;
+      currentApMaxEl.textContent = currentAPCapacity;
+    }
+
+    // Render Visions List (Left Pane)
+    function renderVisionsList() {
+      const query = visionSearchInput.value.toLowerCase().trim();
+      ownedCountEl.textContent = `${ownedVisionIds.size} / ${VISIONS_DATA.length}`;
+
+      visionsListEl.innerHTML = '';
+      VISIONS_DATA.forEach(vision => {
+        if (query && !vision.name.toLowerCase().includes(query) && !vision.thaiName.toLowerCase().includes(query)) {
+          return;
+        }
+
+        const isChecked = ownedVisionIds.has(vision.id);
+        const card = document.createElement('label');
+        card.className = `flex items-center justify-between p-2 rounded-xl cursor-pointer border transition select-none ${
+          isChecked 
+            ? 'bg-slate-800/80 border-cyan-500/40 text-slate-100 shadow-sm' 
+            : 'bg-slate-950/60 border-slate-800/80 text-slate-400 opacity-60 hover:opacity-100'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center space-x-2.5">
+            <input type="checkbox" ${isChecked ? 'checked' : ''} class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-0 focus:ring-offset-0 cursor-pointer">
+            <div>
+              <div class="font-bold flex items-center gap-1.5">
+                <span>${vision.name}</span>
+                <span class="text-[10px] text-slate-400 font-normal">(${vision.thaiName})</span>
+              </div>
+              <div class="text-[10px] text-slate-400">${vision.chapter}</div>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded ${
+            vision.rarity.includes('S-Tier') ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'bg-slate-800 text-slate-400'
+          }">${vision.rarity}</span>
+        `;
+
+        const checkbox = card.querySelector('input');
+        checkbox.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            ownedVisionIds.add(vision.id);
+          } else {
+            ownedVisionIds.delete(vision.id);
+            // unequip skills from this vision if equipped
+            vision.passives.forEach(p => equippedSkillIds.delete(p.id));
+          }
+          saveOwnedVisions();
+          renderVisionsList();
+          renderAvailableSkills();
+          updateEquippedUI();
+        });
+
+        visionsListEl.appendChild(card);
+      });
+
+      renderAvailableSkills();
+    }
+
+    // Get all unlocked passives from owned visions
+    function getUnlockedPassives() {
+      const passives = [];
+      VISIONS_DATA.forEach(v => {
+        if (ownedVisionIds.has(v.id)) {
+          v.passives.forEach(p => {
+            passives.push({
+              ...p,
+              visionName: v.name,
+              visionThai: v.thaiName,
+              visionId: v.id
+            });
+          });
+        }
+      });
+      return passives;
+    }
+
+    // Auto Optimizer Algorithm: 0/1 Knapsack Dynamic Programming with Synergies
+    function autoOptimizeBuild() {
+      const availablePassives = getUnlockedPassives();
+      if (availablePassives.length === 0) {
+        alert("กรุณาเลือกวิชั่นที่คุณมีทางซ้ายอย่างน้อย 1 ตัว เพื่อทำการคำนวณบิลด์");
+        return;
+      }
+
+      // Clear current loadout
+      equippedSkillIds.clear();
+
+      // Weight multiplier based on chosen archetype
+      const scoredPassives = availablePassives.map(p => {
+        let weight = p.efficiency; // Base 1-10
+
+        // Role affinity bonus
+        if (currentRole === "all") {
+          // Keep base
+        } else if (currentRole === p.role) {
+          weight += 3.0;
+        } else if (p.tier === "SSS") {
+          weight += 1.5; // SSS tier passives like Arms Akimbo or Half MP are universally amazing
+        }
+
+        return {
+          ...p,
+          effectiveScore: weight
+        };
+      });
+
+      // 0/1 Knapsack Dynamic Programming
+      const n = scoredPassives.length;
+      const budget = currentAPCapacity;
+      const dp = Array.from({ length: n + 1 }, () => new Float64Array(budget + 1));
+
+      for (let i = 1; i <= n; i++) {
+        const item = scoredPassives[i - 1];
+        const w = item.ap;
+        const v = item.effectiveScore;
+        for (let cap = 0; cap <= budget; cap++) {
+          if (w <= cap) {
+            const valWith = dp[i - 1][cap - w] + v;
+            const valWithout = dp[i - 1][cap];
+            dp[i][cap] = valWith > valWithout ? valWith : valWithout;
+          } else {
+            dp[i][cap] = dp[i - 1][cap];
+          }
+        }
+      }
+
+      // Backtrack
+      const selected = [];
+      let cap = budget;
+      for (let i = n; i > 0; i--) {
+        if (dp[i][cap] !== dp[i - 1][cap]) {
+          selected.push(scoredPassives[i - 1]);
+          cap -= scoredPassives[i - 1].ap;
+        }
+      }
+      selected.reverse();
+
+      // Populate equipped skills
+      selected.forEach(s => equippedSkillIds.add(s.id));
+      updateEquippedUI();
+
+      // Show synergy explanation
+      updateSynergyExplanation(selected);
+    }
+
+    function updateSynergyExplanation(skills) {
+      if (skills.length === 0) {
+        synergyDescription.textContent = "ยังไม่มีสกิลที่ติดตั้ง";
+        return;
+      }
+
+      let explanation = "";
+      const ids = skills.map(s => s.id);
+
+      if (ids.includes("firion_arms_akimbo") && ids.includes("squall_improvement")) {
+        explanation += "🔥 <strong>คอมโบมหาประลัย:</strong> Arms Akimbo (โจมตี 2 แอคชั่น/เทิร์น) ทำให้สกิล Improvement ของ Squall สะสมค่าความเสียหายและเกจ Stagger พุ่งแตะ +50% ภายในเวลาแค่ครึ่งเดียว! ";
+      }
+      if (ids.includes("tidus_first_strike")) {
+        explanation += "⚡ <strong>การันตีความได้เปรียบ:</strong> First Strike ช่วยให้ออกตัวฟาดฟันหรือกางบัฟได้ก่อนมอนสเตอร์ทุกตัวในสนาม ";
+      }
+      if (ids.includes("tronn_half_mp") && (ids.includes("shantotto_aoe") || ids.includes("bartz_dual_spellblade"))) {
+        explanation += "🔮 <strong>วงจรเวทไร้ขีดจำกัด:</strong> Half MP Cost แก้ทางข้อเสียการเสีย MP สองเท่าของ Area Effect Adept ทำให้ถล่มเวทหมู่ความแรงเต็ม 100% ได้ต่อเนื่องทุกเทิร์น ";
+      }
+      if (ids.includes("onion_lb_triple") || ids.includes("ayaka_lb_heal")) {
+        explanation += "🌟 <strong>Limit Burst Loop:</strong> สามารถกดใช้ท่าไม้ตายใหญ่ได้ถี่แทบทุกเทิร์นจากเกจที่ชาร์จไวถึง 300% ";
+      }
+      if (ids.includes("victoria_mrp")) {
+        explanation += "🌾 <strong>ฟาร์มไวขึ้น 50%:</strong> ได้รับ MRP มหาศาลในการเร่งอัพวิชั่นตัวอื่นๆ สู่ MR 9 ";
+      }
+
+      if (!explanation) {
+        explanation = `จัดสกิลครบ ${skills.length} ท่า ใช้งาน AP ทั้งสิ้น ${currentAPCapacity - skills.reduce((acc, s) => acc + s.ap, 0)} AP คงเหลือ เพื่อประสิทธิภาพสูงสุดของสาย ${roleSelect.options[roleSelect.selectedIndex].text}`;
+      }
+
+      synergyDescription.innerHTML = explanation;
+    }
+
+    // Render Equipped Skills List
+    function updateEquippedUI() {
+      const unlocked = getUnlockedPassives();
+      const equipped = unlocked.filter(p => equippedSkillIds.has(p.id));
+
+      let totalAP = 0;
+      equipped.forEach(p => totalAP += p.ap);
+
+      currentApUsedEl.textContent = totalAP;
+      equippedCountEl.textContent = equipped.length;
+
+      const remainingAP = currentAPCapacity - totalAP;
+      apRemainingTag.textContent = remainingAP >= 0 ? `เหลือ ${remainingAP} AP` : `เกินงบ ${Math.abs(remainingAP)} AP!`;
+      apRemainingTag.className = `text-xs px-2 py-0.5 rounded-full font-mono border ${
+        remainingAP >= 0 
+          ? 'bg-emerald-950 text-emerald-400 border-emerald-800' 
+          : 'bg-rose-950 text-rose-400 border-rose-800 animate-pulse font-bold'
+      }`;
+
+      // Progress Bar width & color
+      const percent = Math.min(100, Math.round((totalAP / currentAPCapacity) * 100));
+      apProgressBar.style.width = `${percent}%`;
+      if (totalAP > currentAPCapacity) {
+        apProgressBar.className = "h-full rounded-full transition-all duration-300 bg-rose-500";
+      } else if (percent > 90) {
+        apProgressBar.className = "h-full rounded-full transition-all duration-300 bg-amber-500";
+      } else {
+        apProgressBar.className = "h-full rounded-full transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-500";
+      }
+
+      // Render items
+      equippedSkillsContainer.innerHTML = '';
+      if (equipped.length === 0) {
+        equippedSkillsContainer.innerHTML = `
+          <div class="text-center py-6 text-slate-500 text-xs">
+            ยังไม่ได้ติดตั้งสกิลใดๆ — คลิกเลือกสกิลจากคลังด้านล่าง หรือกด "คำนวณบิลด์ที่คุ้มค่า AP ที่สุด"
+          </div>
+        `;
+        return;
+      }
+
+      equipped.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = "p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between gap-3 hover:border-slate-700 transition";
+        item.innerHTML = `
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-800 flex items-center justify-center text-cyan-400 font-mono font-bold text-xs shrink-0 mt-0.5">
+              ${skill.ap}
+            </span>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-100 text-sm">${skill.name}</span>
+                <span class="text-xs text-slate-400 font-normal">(${skill.thaiName})</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300 font-mono">${skill.visionName} (${skill.mr})</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
+                  skill.tier === 'SSS' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'bg-slate-800 text-slate-300'
+                }">${skill.tier}-Tier</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-0.5">${skill.desc}</p>
+            </div>
+          </div>
+          <button class="btn-remove-skill text-xs text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-900 transition" title="ถอดสกิลออก">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        `;
+
+        item.querySelector('.btn-remove-skill').addEventListener('click', () => {
+          equippedSkillIds.delete(skill.id);
+          updateEquippedUI();
+          renderAvailableSkills();
+        });
+
+        equippedSkillsContainer.appendChild(item);
+      });
+
+      renderAvailableSkills();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Render Available Passives Pool (Right Lower Pane)
+    function renderAvailableSkills() {
+      const unlocked = getUnlockedPassives();
+      const filterQuery = document.getElementById('skill-filter-input').value.toLowerCase().trim();
+      const sortBy = document.getElementById('sort-skill-select').value;
+
+      // Filter
+      let filtered = unlocked.filter(p => {
+        if (filterQuery) {
+          const matchName = p.name.toLowerCase().includes(filterQuery);
+          const matchThai = p.thaiName.toLowerCase().includes(filterQuery);
+          const matchVision = p.visionName.toLowerCase().includes(filterQuery);
+          if (!matchName && !matchThai && !matchVision) return false;
+        }
+        return true;
+      });
+
+      // Sort
+      if (sortBy === 'tier') {
+        filtered.sort((a, b) => b.efficiency - a.efficiency);
+      } else if (sortBy === 'ap_asc') {
+        filtered.sort((a, b) => a.ap - b.ap);
+      } else if (sortBy === 'ap_desc') {
+        filtered.sort((a, b) => b.ap - a.ap);
+      }
+
+      availableSkillsContainer.innerHTML = '';
+      if (filtered.length === 0) {
+        availableSkillsContainer.innerHTML = `
+          <div class="text-center py-6 text-slate-500 text-xs">
+            ไม่พบสกิลที่ค้นหา หรือคุณยังไม่ได้ติ๊กเลือกวิชั่นที่เป็นเจ้าของทางซ้าย
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(skill => {
+        const isEquipped = equippedSkillIds.has(skill.id);
+        const card = document.createElement('div');
+        card.className = `p-2.5 rounded-xl border flex items-center justify-between gap-3 transition ${
+          isEquipped 
+            ? 'bg-cyan-950/30 border-cyan-700/60 text-slate-200' 
+            : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700 text-slate-300'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg ${isEquipped ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-cyan-400'} font-mono font-bold text-xs flex items-center justify-center shrink-0">
+              ${skill.ap}
+            </span>
+            <div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-bold text-slate-100 text-xs">${skill.name}</span>
+                <span class="text-[11px] text-slate-400 font-normal">(${skill.thaiName})</span>
+                <span class="text-[10px] px-1 py-0.2 rounded bg-slate-800 text-slate-400 font-mono">${skill.visionName}</span>
+                <span class="text-[10px] px-1 py-0.2 rounded font-mono ${
+                  skill.tier === 'SSS' ? 'bg-amber-950 text-amber-400 font-bold border border-amber-800' : 'bg-slate-800 text-slate-400'
+                }">${skill.tier}</span>
+              </div>
+              <div class="text-[11px] text-slate-400 mt-0.5 line-clamp-1">${skill.desc}</div>
+            </div>
+          </div>
+          <button class="btn-toggle-skill text-xs px-2.5 py-1 rounded-lg font-medium transition shrink-0 ${
+            isEquipped 
+              ? 'bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800' 
+              : 'bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white border border-slate-700'
+          }">
+            ${isEquipped ? 'ถอดออก' : '+ ติดตั้ง'}
+          </button>
+        `;
+
+        card.querySelector('.btn-toggle-skill').addEventListener('click', () => {
+          if (isEquipped) {
+            equippedSkillIds.delete(skill.id);
+          } else {
+            equippedSkillIds.add(skill.id);
+          }
+          updateEquippedUI();
+        });
+
+        availableSkillsContainer.appendChild(card);
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Render Preset Meta Builds
+    function renderPresetBuilds() {
+      presetBuildsContainer.innerHTML = '';
+      PRESET_BUILDS.forEach(preset => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-cyan-500/50 transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <h3 class="font-bold text-slate-100 text-xs">${preset.name}</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800">
+                ${preset.recommendedAP} AP
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 mb-2.5">${preset.desc}</p>
+            <div class="text-[10px] text-slate-400 mb-3">
+              วิชั่นที่ต้องใช้: <strong class="text-cyan-400">${preset.reqVisions.map(id => {
+                const found = VISIONS_DATA.find(v => v.id === id);
+                return found ? found.name : id;
+              }).join(', ')}</strong>
+            </div>
+          </div>
+          <button class="btn-load-preset w-full py-1.5 rounded-lg bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white text-xs font-medium transition flex items-center justify-center gap-1.5">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> โหลดเทมเพลตนี้
+          </button>
+        `;
+
+        card.querySelector('.btn-load-preset').addEventListener('click', () => {
+          // Check if user owns required visions
+          const missing = preset.reqVisions.filter(id => !ownedVisionIds.has(id));
+          if (missing.length > 0) {
+            const missingNames = missing.map(id => {
+              const f = VISIONS_DATA.find(v => v.id === id);
+              return f ? f.name : id;
+            }).join(', ');
+            if (confirm(`คุณยังไม่ได้เลือกวิชั่นต่อไปนี้: ${missingNames}\nต้องการให้ระบบติ๊กเลือกวิชั่นเหล่านี้ให้อัตโนมัติหรือไม่?`)) {
+              missing.forEach(id => ownedVisionIds.add(id));
+              saveOwnedVisions();
+              renderVisionsList();
+            } else {
+              return;
+            }
+          }
+
+          // Set AP capacity if lower than recommended
+          if (currentAPCapacity < preset.recommendedAP) {
+            currentAPCapacity = preset.recommendedAP;
+            apSlider.value = currentAPCapacity;
+            apInput.value = currentAPCapacity;
+            updateAPDisplay();
+          }
+
+          // Equip preset skills
+          equippedSkillIds.clear();
+          preset.skills.forEach(sid => equippedSkillIds.add(sid));
+          updateEquippedUI();
+
+          const unlocked = getUnlockedPassives();
+          const equipped = unlocked.filter(p => equippedSkillIds.has(p.id));
+          updateSynergyExplanation(equipped);
+        });
+
+        presetBuildsContainer.appendChild(card);
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function checkAPBudget() {
+      updateEquippedUI();
+    }
+
+    function copyBuildToClipboard() {
+      const unlocked = getUnlockedPassives();
+      const equipped = unlocked.filter(p => equippedSkillIds.has(p.id));
+      if (equipped.length === 0) {
+        alert("ยังไม่มีสกิลที่ติดตั้ง กรุณาเลือกสกิลก่อนทำการคัดลอก");
+        return;
+      }
+
+      let totalAP = 0;
+      equipped.forEach(p => totalAP += p.ap);
+
+      let text = `🎮 FINAL FANTASY RESONANCE - VISION & AP BUILD 🎮\n`;
+      text += `สายการเล่น: ${roleSelect.options[roleSelect.selectedIndex].text}\n`;
+      text += `AP ที่ใช้: ${totalAP} / ${currentAPCapacity} AP\n`;
+      text += `------------------------------------------------\n`;
+      text += `สกิลและพาสซีฟที่ติดตั้ง:\n`;
+      equipped.forEach((s, idx) => {
+        text += `${idx + 1}. [${s.ap} AP] ${s.name} (${s.thaiName}) - จาก ${s.visionName} (${s.mr})\n   └ ${s.desc}\n`;
+      });
+      text += `------------------------------------------------\n`;
+      text += `คำแนะนำ Synergy: ${synergyDescription.innerText}\n`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("คัดลอกสรุปบิลด์ลง Clipboard เรียบร้อยแล้ว!");
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+
+    // Start application
+    init();
+  </script>
+</body>
+</html>
