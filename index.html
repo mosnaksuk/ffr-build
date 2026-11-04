@@ -251,7 +251,7 @@
           </div>
           <div class="flex justify-between items-center mt-2 text-[11px] text-slate-400">
             <span>ช่องสกิลล็อกไว้ไม่เกิน <strong>8 ช่อง</strong> (ไม่นับวิชั่นหลักที่ได้ฟรี)</span>
-            <span class="text-cyan-400 font-medium" id="auto-exclude-notice">🚫 ตัดสกิลของวิชั่นหลักออกอัตโนมัติ</span>
+            <span class="text-cyan-400 font-medium" id="auto-exclude-notice">🚫 ตัดสกิลของวิชั่นหลัก & สกิลซ้ำกับ Spirit Bundle ออกอัตโนมัติ</span>
           </div>
         </div>
 
@@ -891,13 +891,13 @@
       },
       {
         id: "breaker_amelia",
-        name: "⚡ บิลด์เบรกเกอร์ Nichol/Lid (Breaker 455 AP)",
+        name: "⚡ บิลด์เบรกเกอร์ Nichol/Lid (Breaker 470 AP)",
         subtitle: "วิชั่นหลัก: Amelia • Turn 1 Stagger Shredder",
         requiredBaseVis: 13017,
         actionBadge: "Turn 1 Instant Break & Stagger",
-        desc: "บิลด์สลายเกราะบอส: ออกตัวคนแรกด้วย First Strike รัวสกิล Breaker 2 ครั้งซ้อนเร่งเกจ Stagger +30% และดาเมจดีบัฟ +60% ใช้ 455 / 484 AP",
-        skills: ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"],
-        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Firion + Clive + Zidane (Aggravation 60%) รวม 455 / 484 AP"
+        desc: "บิลด์สลายเกราะบอส: ออกตัวคนแรกด้วย First Strike รัวสกิล Breaker 2 ครั้งซ้อนเร่งเกจ Stagger และดาเมจดีบัฟ ใช้ 470 / 484 AP",
+        skills: ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
+        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Firion + Clive + Zidane + Break the Limit + Reflex รวม 470 / 484 AP"
       },
       {
         id: "quad_attack",
@@ -906,7 +906,7 @@
         requiredBaseVis: 13113,
         actionBadge: "4 Actions (16 Hits)",
         desc: "2 คำสั่ง x ฟันซ้ำ 2 รอบ = 4 ท่าใหญ่ (16 ฮิต)! พร้อมรีฟันด์ MP คืนเข้าหลอดทุกคริ ใช้ 470 / 484 AP",
-        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"],
+        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
         synergyText: "Arms Akimbo x Double Action = 4 ท่าใหญ่ รีฟันด์ MP เต็มหลอดวนลูปไม่จำกัด รวม 470 / 484 AP"
       }
     ];
@@ -3758,11 +3758,42 @@
     // -------------------------------------------------------------
     // SMART VISION SUGGESTER (TAILORED TO BASE VISION & MAX AP PACKING)
     // -------------------------------------------------------------
-        function suggestOptimalBuildForVision(visId, targetAP = currentAPCapacity) {
-      const vis = VISIONS.find(v => v.id === visId) || VISIONS[0];
-      const excluded = vis.providedSkillIds || [];
+        function canEquipSkill(candidate, currentList, baseVision) {
+      if (!candidate) return false;
+      if (currentList.length >= 8) return false;
+      if (currentList.some(s => s.id === candidate.id)) return false;
 
-      let recommendedSkills = [];
+      // Base vision conflict: cannot equip abilities granted by the base vision for free (0 AP)
+      if (baseVision) {
+        if (candidate.sourceVision && baseVision.name && candidate.sourceVision.toLowerCase() === baseVision.name.toLowerCase()) {
+          return false;
+        }
+        if (baseVision.providedSkillIds && baseVision.providedSkillIds.includes(candidate.id)) {
+          return false;
+        }
+        if (candidate.id === baseVision.spiritSkillId) {
+          return false;
+        }
+      }
+
+      // Spirit bundle vs standalone conflict:
+      // If equipping a Spirit bundle, no standalone ability from that vision can be equipped
+      if (candidate.isSpirit) {
+        if (currentList.some(s => !s.isSpirit && s.sourceVision === candidate.sourceVision)) {
+          return false;
+        }
+      } else {
+        // If equipping a standalone ability, its Spirit bundle cannot be equipped
+        if (currentList.some(s => s.isSpirit && s.sourceVision === candidate.sourceVision)) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function suggestOptimalBuildForVision(visId, targetAP = currentAPCapacity) {
+      const vis = VISIONS.find(v => v.id === visId) || VISIONS[0];
       let synergySummary = "";
       let actionBadge = "4 Actions / Turn";
 
@@ -3778,72 +3809,33 @@
       // 4. MAGIC DPS (Archwitch Fina, Sakura, or Shantotto / Terra / Y'shtola / Tronn / Victoria)
       const isMage = !isHealer && !isBreaker && !isTank && ((vis.role === "magic_dps") || [13123, 13127, 13108, 13024, 13027].includes(vis.id) || [1006, 1008].includes(currentChar.id));
 
-      // -------------------------------------------------------------
-      // BUILD LOGIC BY ROLE
-      // -------------------------------------------------------------
+      let primarySpirits = [];
+      let corePassives = [];
+      let maxSpirits = 3;
+
       // A. HEALER
       if (isHealer) {
-        if (vis.id === 13051) {
-          // Ayaka base: provide Leah (Auto-Cure), Firion (Arms Akimbo), Shantotto (Dualcast)
-          recommendedSkills = ["spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"];
-        } else if (vis.id === 13045) {
-          // Leah base: provide Ayaka (The Hand That Heals), Firion, Shantotto
-          recommendedSkills = ["spirit_ayaka", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"];
-        } else {
-          recommendedSkills = ["spirit_ayaka", "spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex"];
-        }
+        primarySpirits = ["spirit_leah", "spirit_ayaka", "spirit_firion", "spirit_shantotto", "spirit_onion"];
+        corePassives = ["half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg", "preemptive_strike", "break_the_limit", "tip_top_shape"];
+        maxSpirits = 3;
         synergySummary = `💖 <strong>สุดยอดคอมโบฮีลเลอร์ & ชุบชีวิตไร้พ่าย (${vis.name} / ${currentChar.name}):</strong> ผสาน <em>Arms Akimbo</em> (2 แอคชั่น) x <em>Dualcast</em> (ร่ายเวท 2 ครั้งซ้อน) = ร่ายเวทขาวได้สูงสุด <strong>4 ครั้งใน 1 เทิร์น</strong> (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟในเทิร์นเดียว!) ไม่เปลือง MP ด้วย <em>Half MP Cost</em> พร้อม <em>First Strike</em> ออกตัวคนแรกเพื่อชุบเพื่อนฉุกเฉินก่อนโดนศัตรูซ้ำ และมีบาเรีย <em>LB Shield</em> + <em>Reflex</em> เอาตัวรอด!`;
         actionBadge = "Dualcast White Magic (2-4 Spells)";
       }
       // B. BREAKER / SABOTEUR / STRATEGIST
       else if (isBreaker) {
-        if (vis.id === 13130) {
-          // Clive base: has Vigorous Staggerer innate
-          recommendedSkills = ["spirit_firion", "spirit_onion", "spirit_zidane", "half_mp_cost", "first_strike", "preemptive_strike", "power_stagger", "aggravation"];
-        } else if (vis.id === 13118) {
-          // Zidane base: has Insult to Injury & Aggravation innate
-          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_onion", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"];
-        } else if (vis.id === 13017) {
-          // Amelia base: has LB Shield innate
-          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "power_stagger"];
-        } else {
-          recommendedSkills = ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "first_strike", "vigorous_staggerer", "preemptive_strike", "aggravation"];
-        }
-        synergySummary = `⚡ <strong>สุดยอดคอมโบเบรกเกอร์ & สลายเกราะบอส (${vis.name} / ${currentChar.name}):</strong> ออกตัวคนแรกด้วย <em>First Strike</em> รัวสกิล Breaker 2 ครั้งซ้อนด้วย <em>Arms Akimbo</em> เร่งเกจ Stagger พุ่งกระฉูด +30% (<em>Vigorous Staggerer</em>) และทวีคูณดาเมจซ้ำเติมศัตรูที่ติดดีบัฟขึ้นถึง +60% (<em>Aggravation</em>) พร้อม <em>Half MP Cost</em> สแปมสกิลเบรกเกอร์ได้ต่อเนื่องไม่จำกัด!`;
+        primarySpirits = ["spirit_firion", "spirit_onion", "spirit_zidane", "spirit_clive"];
+        corePassives = ["half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "vigorous_staggerer", "power_stagger", "reflex", "restore_mp_dmg", "lb_shield"];
+        maxSpirits = 3;
+        synergySummary = `⚡ <strong>สุดยอดคอมโบเบรกเกอร์ & สลายเกราะบอส (${vis.name} / ${currentChar.name}):</strong> ออกตัวคนแรกด้วย <em>First Strike</em> รัวสกิล Breaker 2 ครั้งซ้อนด้วย <em>Arms Akimbo</em> เร่งเกจ Stagger พุ่งกระฉูด +30% และทวีคูณดาเมจซ้ำเติมศัตรูที่ติดดีบัฟขึ้นถึง +60% (<em>Aggravation / Zidane</em>) พร้อม <em>Half MP Cost</em> สแปมสกิลเบรกเกอร์ได้ต่อเนื่องไม่จำกัด!`;
         actionBadge = "Turn 1 Instant Break & Stagger";
       }
-            // C. TANK
+      // C. TANK
       else if (isTank) {
-        recommendedSkills = [];
-        
-        // 1. Primary Tank Spirit (Wilhelm is top tier tank)
-        if (vis.id !== 13062) {
-          // If NOT Wilhelm base -> Wilhelm is #1 priority!
-          recommendedSkills.push("spirit_wilhelm");
-        } else {
-          // Wilhelm base -> WoL is #1 priority!
-          recommendedSkills.push("spirit_wol");
-        }
-
-        // 2. Secondary Tank Spirit
-        if (vis.id !== 13100 && !recommendedSkills.includes("spirit_wol")) {
-          recommendedSkills.push("spirit_wol");
-        } else if (vis.id !== 13103 && !recommendedSkills.includes("spirit_cecil")) {
-          recommendedSkills.push("spirit_cecil");
-        }
-
-        // 3. Firion (Arms Akimbo 2 actions + Blood Weapon leech)
-        recommendedSkills.push("spirit_firion");
-
-        // 4. Onion Knight (LB Triple Charge 300% + Spry Steps)
-        recommendedSkills.push("spirit_onion");
-
-        // 5. Core Tank Passives
-        recommendedSkills.push("lb_shield");
-        recommendedSkills.push("reflex");
-        recommendedSkills.push("restore_mp_dmg");
-        recommendedSkills.push("power_stagger");
-
+        primarySpirits = (vis.id === 13062)
+          ? ["spirit_wol", "spirit_cecil", "spirit_firion", "spirit_onion", "spirit_charlotte"]
+          : ["spirit_wilhelm", "spirit_wol", "spirit_cecil", "spirit_firion", "spirit_onion", "spirit_charlotte"];
+        corePassives = ["half_mp_cost", "lb_shield", "reflex", "restore_mp_dmg", "power_stagger", "first_strike", "auto_shell", "magic_counter", "break_the_limit"];
+        maxSpirits = 3;
         synergySummary = `🛡️ <strong>คอมโบสูงสุดสำหรับแทงก์ (${vis.name} / ${currentChar.name}):</strong> ${
           vis.id !== 13062 
             ? 'ดึงสุดยอดความสามารถของ <em>Spirit of Wilhelm</em> (ลดดาเมจ 75% + Critical Counter สวนกลับติดคริ) ผสานกับ Spirit of Cecil/WoL' 
@@ -3853,67 +3845,74 @@
       }
       // D. MAGIC DPS
       else if (isMage) {
-        if (vis.id === 13123) {
-          // Shantotto base: already has Dualcast
-          recommendedSkills = ["spirit_firion", "spirit_victoria", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"];
-        } else {
-          recommendedSkills = ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike"];
-        }
+        primarySpirits = (vis.id === 13123)
+          ? ["spirit_firion", "spirit_victoria", "spirit_yshtola", "spirit_terra"]
+          : ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "spirit_terra", "spirit_victoria"];
+        corePassives = ["half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike", "tip_top_shape", "reflex", "restore_mp_dmg"];
+        maxSpirits = 3;
         synergySummary = `🔮 <strong>คอมโบมหาเวทสูงสุด (${vis.name}):</strong> ร่ายมหาเวทหมู่เต็ม 100% ซ้ำ 4 ครั้งซ้อนใน 1 เทิร์น (Arms Akimbo x Dualcast) พร้อมรีเจน MP 5% ต่อเทิร์น ล้างศัตรูทั้งสนาม!`;
         actionBadge = "4 Spells / Turn";
       }
       // E. PHYSICAL DPS / HYBRID
       else {
-        if (vis.id === 13110) {
-          // Cloud base: already has Cloud Soul
-          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_bartz", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
-        } else if (vis.id === 13105) {
-          // Bartz base: already has Dual Spellblade
-          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "power_stagger", "vigorous_staggerer", "tip_top_shape"];
-        } else {
-          // Sephiroth / General Physical
-          recommendedSkills = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "decimating_attacks"];
-        }
+        primarySpirits = ["spirit_firion", "spirit_squall", "spirit_cloud", "spirit_bartz", "spirit_onion", "spirit_sephiroth"];
+        corePassives = ["half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike", "vigorous_staggerer", "power_stagger", "aggravation", "reflex", "restore_mp_dmg"];
+        maxSpirits = 3;
         synergySummary = `⚔️ <strong>คอมโบกายภาพสูงสุด (${vis.name}):</strong> Arms Akimbo (2 แอคชั่น) x Double Action (ฟันซ้ำ 2 รอบ) = <strong>4 ท่าใหญ่ (16 ฮิต)</strong> คืน MP เต็มหลอดจาก Cloud Soul ฟันทะลุ 99,999 ได้ไม่จำกัด!`;
         actionBadge = "4 Actions (16 Hits)";
       }
 
-            // Filter out any skills provided by this base vision
-      let filtered = recommendedSkills.map(id => PASSIVES_DATABASE.find(s => s.id === id)).filter(Boolean)
-        .filter(s => !excluded.includes(s.id));
+      const filtered = [];
+      let currentCost = 0;
 
-      // Ensure initial filtered list does not exceed targetAP
-      while (filtered.reduce((sum, s) => sum + s.ap, 0) > targetAP && filtered.length > 0) {
-        filtered.pop();
+      // 1. Equip high-priority Spirit Bundles up to maxSpirits
+      let spiritCount = 0;
+      for (const sId of primarySpirits) {
+        if (spiritCount >= maxSpirits || filtered.length >= 8) break;
+        const skill = PASSIVES_DATABASE.find(s => s.id === sId);
+        if (!skill) continue;
+        if (canEquipSkill(skill, filtered, vis)) {
+          if (currentCost + skill.ap <= targetAP) {
+            filtered.push(skill);
+            currentCost += skill.ap;
+            spiritCount++;
+          }
+        }
       }
 
-      // Maximize AP packing up to 8 slots: backfill if there's remaining slots
-      if (filtered.length < 8) {
-        let fillers = [];
-        if (isHealer) {
-          fillers = ["spirit_onion", "reflex", "restore_mp_dmg", "lb_shield", "first_strike"];
-        } else if (isBreaker) {
-          fillers = ["spirit_onion", "aggravation", "power_stagger", "lb_shield", "tip_top_shape"];
-        } else if (isTank) {
-          fillers = ["spirit_cecil", "spirit_charlotte", "auto_shell", "power_stagger"];
-        } else if (isMage) {
-          fillers = ["spirit_terra", "spirit_tronn", "aggravation", "tip_top_shape"];
-        } else {
-          fillers = ["spirit_bartz", "spirit_cloud", "spirit_squall", "spirit_onion", "decimating_attacks", "power_stagger", "tip_top_shape"];
+      // 2. Equip Core Passives up to 8 slots
+      for (const pId of corePassives) {
+        if (filtered.length >= 8) break;
+        const skill = PASSIVES_DATABASE.find(s => s.id === pId);
+        if (!skill) continue;
+        if (canEquipSkill(skill, filtered, vis)) {
+          if (currentCost + skill.ap <= targetAP) {
+            filtered.push(skill);
+            currentCost += skill.ap;
+          }
         }
+      }
 
-        for (const fId of fillers) {
+      // 3. Fallback fill if still < 8 slots
+      if (filtered.length < 8) {
+        const generalPool = [
+          "preemptive_strike", "first_strike", "tip_top_shape", "reflex", "restore_mp_dmg",
+          "power_stagger", "vigorous_staggerer", "lb_shield", "aggravation", "auto_shell", "break_the_limit"
+        ];
+        for (const gId of generalPool) {
           if (filtered.length >= 8) break;
-          if (!excluded.includes(fId) && !filtered.some(s => s.id === fId)) {
-            const skill = PASSIVES_DATABASE.find(s => s.id === fId);
-            if (skill && (filtered.reduce((sum, s) => sum + s.ap, 0) + skill.ap <= targetAP)) {
+          const skill = PASSIVES_DATABASE.find(s => s.id === gId);
+          if (!skill) continue;
+          if (canEquipSkill(skill, filtered, vis)) {
+            if (currentCost + skill.ap <= targetAP) {
               filtered.push(skill);
+              currentCost += skill.ap;
             }
           }
         }
       }
 
-      const totalAP = filtered.reduce((sum, s) => sum + s.ap, 0);
+      const totalAP = currentCost;
 
       return {
         presetName: `✨ บิลด์แนะนำอัตโนมัติสำหรับ ${vis.name} (${currentChar.name})`,
