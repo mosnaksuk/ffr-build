@@ -1140,6 +1140,19 @@
       { id: "mrp_gain_50", name: "MRP Gain +50%", thai: "เร่งฟาร์มแต้มวิชั่น MRP +50%", ap: 30, isSpirit: false, role: "mrp_farm", sourceVision: "Victoria", sourceRank: "MR 7", visSprite: "assets/images/visions/13027.png", desc: "เพิ่มแต้มฟาร์ม MRP หลังจบการต่อสู้ขึ้น 50% (ปลดล็อคจาก Victoria MR 7)" }
     ];
 
+    // Cache buster for all visual sprites and portraits to ensure instant, clean loading from CDN
+    const ASSET_VERSION = '?v=2';
+    VISIONS.forEach(v => {
+      if (v.sprite && !v.sprite.includes('?')) v.sprite += ASSET_VERSION;
+    });
+    CHARACTERS.forEach(c => {
+      if (c.portrait && !c.portrait.includes('?')) c.portrait += ASSET_VERSION;
+      if (c.face && !c.face.includes('?')) c.face += ASSET_VERSION;
+    });
+    PASSIVES_DATABASE.forEach(p => {
+      if (p.visSprite && !p.visSprite.includes('?')) p.visSprite += ASSET_VERSION;
+    });
+
     // Presets
         const META_PRESETS = [
       {
@@ -4731,7 +4744,7 @@
           <div>
             <div class="flex items-start justify-between gap-2 mb-2">
               <div class="flex items-center gap-2.5 min-w-0">
-                <img src="${v.sprite}" class="w-10 h-10 pixelated object-contain shrink-0" alt="">
+                <img src="${v.sprite}" class="w-10 h-10 pixelated object-contain shrink-0" alt="" onerror="this.onerror=null; this.src=this.src.split('?')[0] + '?t=' + Date.now();">
                 <div class="min-w-0">
                   <h4 class="font-bold text-xs text-white truncate flex items-center gap-1">
                     ${v.name}
