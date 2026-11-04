@@ -757,6 +757,29 @@
 
   <!-- SCRIPT -->
   <script>
+    // -------------------------------------------------------------
+    // AI BUILD ARCHITECT CONFIGURATION
+    // -------------------------------------------------------------
+    const DEFAULT_AI_CONFIG = {
+      baseUrl: 'https://ninerouter-cloud-eht2.onrender.com/v1',
+      apiKey: 'sk-ba0406de105c6bd1-63vsz0-ec40c926',
+      model: 'ag/gemini-3.8-flash-medium'
+    };
+
+    function getAIConfig() {
+      try {
+        const saved = localStorage.getItem('ffr_ai_config');
+        if (saved) return { ...DEFAULT_AI_CONFIG, ...JSON.parse(saved) };
+      } catch (e) {}
+      return { ...DEFAULT_AI_CONFIG };
+    }
+
+    function saveAIConfig(cfg) {
+      localStorage.setItem('ffr_ai_config', JSON.stringify(cfg));
+    }
+
+    let lastAIBuildResult = null;
+
     const CHARACTERS = [
       { id: 1001, name: "Rain", thai: "เรน", role: "Vanguard / Tank", lv: 42, hp: 3771, mp: 316, baseVis: 13062, visName: "Wilhelm", face: "assets/images/faces/1001.png", portrait: "assets/images/portraits/1001.png" },
       { id: 1002, name: "Lasswell", thai: "ลาสเวลล์", role: "Commando / Katana", lv: 42, hp: 3011, mp: 484, baseVis: 13110, visName: "Cloud", face: "assets/images/faces/1002.png", portrait: "assets/images/portraits/1002.png" },
@@ -5058,27 +5081,8 @@
     }
 
     // -------------------------------------------------------------
-    // AI BUILD ARCHITECT AGENT (GEMINI 3.8 FLASH)
+    // AI BUILD ARCHITECT AGENT CONTROLLER
     // -------------------------------------------------------------
-    const DEFAULT_AI_CONFIG = {
-      baseUrl: 'https://ninerouter-cloud-eht2.onrender.com/v1',
-      apiKey: 'sk-ba0406de105c6bd1-63vsz0-ec40c926',
-      model: 'ag/gemini-3.8-flash-medium'
-    };
-
-    function getAIConfig() {
-      try {
-        const saved = localStorage.getItem('ffr_ai_config');
-        if (saved) return { ...DEFAULT_AI_CONFIG, ...JSON.parse(saved) };
-      } catch (e) {}
-      return { ...DEFAULT_AI_CONFIG };
-    }
-
-    function saveAIConfig(cfg) {
-      localStorage.setItem('ffr_ai_config', JSON.stringify(cfg));
-    }
-
-    let lastAIBuildResult = null;
 
     function initAIAgent() {
       const cfg = getAIConfig();
