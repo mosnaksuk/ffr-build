@@ -5197,69 +5197,93 @@
       });
     }
 
+    function resolveCharacterAndVision(parsed, promptText, currentChar) {
+      const p = (promptText || '').toLowerCase();
+
+      // 1. Resolve Character from user prompt first
+      let targetChar = null;
+      for (const c of CHARACTERS) {
+        if (p.includes(c.name.toLowerCase()) || (c.thai && p.includes(c.thai.toLowerCase()))) {
+          targetChar = c;
+          break;
+        }
+      }
+      // If not in prompt, check parsed
+      if (!targetChar && parsed && parsed.characterId) {
+        targetChar = CHARACTERS.find(c => c.id === Number(parsed.characterId));
+      }
+      if (!targetChar && parsed && parsed.characterName) {
+        const cName = String(parsed.characterName).toLowerCase();
+        targetChar = CHARACTERS.find(c => c.name.toLowerCase().includes(cName) || (c.thai && c.thai.toLowerCase().includes(cName)));
+      }
+      if (!targetChar) targetChar = currentChar;
+
+      // 2. Resolve Base Vision from user prompt first (CRITICAL for explicit user requests)
+      let targetVis = null;
+      for (const v of VISIONS) {
+        if (p.includes(v.name.toLowerCase()) || (v.thai && p.includes(v.thai.toLowerCase()))) {
+          targetVis = v;
+          break;
+        }
+      }
+      // If not in prompt, check parsed
+      if (!targetVis && parsed && parsed.baseVisName) {
+        const vName = String(parsed.baseVisName).toLowerCase();
+        targetVis = VISIONS.find(v => v.name.toLowerCase() === vName || (v.thai && v.thai.toLowerCase() === vName) || v.name.toLowerCase().includes(vName));
+      }
+      if (!targetVis && parsed && parsed.baseVisId) {
+        targetVis = VISIONS.find(v => v.id === Number(parsed.baseVisId));
+      }
+      // Fallback to character's current base vision or default
+      if (!targetVis) {
+        targetVis = VISIONS.find(v => v.id === targetChar.baseVis) || VISIONS[0];
+      }
+
+      return { char: targetChar, vis: targetVis };
+    }
+
     function generateHeuristicAIBuild(userPrompt, char, maxAP) {
-      const promptLower = (userPrompt || '').toLowerCase();
+      const p = (userPrompt || '').toLowerCase();
       
-      const isTankIntent = promptLower.includes('tank') || promptLower.includes('แทงก์') || promptLower.includes('ถึก') || promptLower.includes('อมตะ') || promptLower.includes('เรน') || promptLower.includes('wilhelm') || promptLower.includes('wol');
-      const isHealIntent = promptLower.includes('heal') || promptLower.includes('ฮีล') || promptLower.includes('ฟื้นฟู') || promptLower.includes('ชุบ') || promptLower.includes('ayaka') || promptLower.includes('leah') || promptLower.includes('fina');
-      const isBreakIntent = promptLower.includes('break') || promptLower.includes('เบรก') || promptLower.includes('stagger') || promptLower.includes('สปีด') || promptLower.includes('turn 1') || promptLower.includes('nichol') || promptLower.includes('lid') || promptLower.includes('amelia');
-      const isFarmIntent = promptLower.includes('farm') || promptLower.includes('ฟาร์ม') || promptLower.includes('mrp') || promptLower.includes('exp') || promptLower.includes('เงิน');
-      const isMageIntent = promptLower.includes('เวท') || promptLower.includes('mage') || promptLower.includes('magic') || promptLower.includes('คาถา') || promptLower.includes('archwitch') || promptLower.includes('sakura') || promptLower.includes('shantotto') || promptLower.includes('yshtola');
-      
-      let targetVisId = 13101; // default Cloud
-      let targetChar = char;
+      const { char: targetChar, vis: targetVis } = resolveCharacterAndVision(null, userPrompt, char);
+
+      const isHealer = (targetVis.role === "healer") || [13051, 13045].includes(targetVis.id) || (targetChar.id === 1003);
+      const isMage = !isHealer && ((targetVis.role === "magic_dps") || [13123, 13127, 13108, 13024, 13027].includes(targetVis.id) || [1006, 1008].includes(targetChar.id));
+      const isTank = !isHealer && !isMage && ((targetVis.role === "tank") || [13062, 13103, 13100, 13060].includes(targetVis.id) || (targetChar.id === 1001));
+      const isBreaker = !isHealer && !isMage && !isTank && ((targetVis.role === "breaker") || [13017, 13130, 13118, 13124, 13033].includes(targetVis.id) || [1004, 1005].includes(targetChar.id));
+
       let buildTitle = "";
       let actionBadge = "";
       let desiredSkillIds = [];
       let strategyText = "";
 
-      if (isTankIntent) {
-        targetVisId = 13116; // Wilhelm
-        targetChar = CHARACTERS.find(c => c.id === 1001) || char;
-        buildTitle = "🛡️ AI Aegis Fortress (แทงก์อมตะ เคาน์เตอร์คู่)";
+      if (isHealer) {
+        buildTitle = `💖 AI Divine Salvation (${targetVis.name} / ${targetChar.name})`;
+        actionBadge = "Dualcast White Magic (2-4 Spells)";
+        desiredSkillIds = ["spirit_firion", "spirit_shantotto", "spirit_leah", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"];
+        strategyText = `บิลด์ฮีลเลอร์ & ชุบชีวิตระดับสูงสุด ผสาน Arms Akimbo (2 แอคชั่น) x Dualcast ร่ายเวทขาวได้ถึง 4 สเปลล์/เทิร์น พร้อมชุบเพื่อนฉุกเฉินคนแรกด้วย First Strike และฮีลฟูลทีม`;
+      } else if (isTank) {
+        buildTitle = `🛡️ AI Aegis Fortress (${targetVis.name} / ${targetChar.name})`;
         actionBadge = "Guard & Counter x2";
         desiredSkillIds = ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"];
-        strategyText = "บิลด์แทงก์สาย Counter & Grit โดยผสาน Bastion ของ Wilhelm สวนกลับกายภาพ 30% ร่วมกับ Spirit of Wol (รับดาเมจแทนทีม + รอด 1 HP) และ Spirit of Firion เพิ่มแอคชั่นและดูดเลือด 10% ทุกครั้งที่สวนกลับ";
-      } else if (isHealIntent && !isMageIntent) {
-        targetVisId = 13120; // Ayaka
-        targetChar = CHARACTERS.find(c => c.id === 1003) || char;
-        buildTitle = "💖 AI Divine Salvation (ฮีลมหาเวท ชุบชีวิตหมู่อัตโนมัติ)";
-        actionBadge = "Dualcast White Magic (2-4 Spells)";
-        desiredSkillIds = ["spirit_firion", "spirit_shantotto", "spirit_leah", "half_mp_cost", "auto_cure_ailments", "auto_shell", "restore_mp_dmg", "lb_shield"];
-        strategyText = "บิลด์ฮีลเลอร์ฉุกเฉินระดับสูงสุด ผสาน Dualcast White Magic ของ Ayaka และ Spirit of Firion ร่ายคาถาชุบชีวิตและฟื้นฟูเลือดทั้งทีม 4 รอบในเทิร์นเดียว พร้อมล้างสถานะผิดปกติอัตโนมัติ";
-      } else if (isBreakIntent) {
-        targetVisId = 13110; // Amelia
-        targetChar = CHARACTERS.find(c => c.id === 1007 || c.id === 1004) || char;
-        buildTitle = "⚡ AI Turn 1 Stagger Shredder (เบรกบอสล้มทันทีเทิร์นแรก)";
+        strategyText = `บิลด์แทงก์อมตะเคาน์เตอร์คู่ ผสาน Bastion ป้องกันดาเมจปาร์ตี้ 20% และ Spirit of WoL สละชีวิตรับแทนเพื่อน รอด 1 HP และฟื้นฟูเลือดด้วย Lifesteal 10%`;
+      } else if (isBreaker) {
+        buildTitle = `⚡ AI Turn 1 Stagger Shredder (${targetVis.name} / ${targetChar.name})`;
         actionBadge = "Turn 1 Instant Break";
-        desiredSkillIds = ["spirit_clive", "spirit_squall", "spirit_firion", "preemptive_strike", "first_strike", "power_stagger", "vigorous_staggerer", "break_the_limit"];
-        strategyText = "บิลด์เบรกเกอร์เจาะเกราะบอสเทิร์น 1 ด้วยคอมโบ Spirit of Clive (+30% Stagger) และ Squall ผสาน Amelia Rapid Fire ทำ Stagger เกิน 300% ภายในแอคชั่นแรก";
-      } else if (isFarmIntent) {
-        targetVisId = 13105; // Victoria
-        buildTitle = "💰 AI Ultra MRP & Resource Extractor (ฟาร์มของและ MRP สูงสุด)";
-        actionBadge = "MRP & Drop Booster";
-        desiredSkillIds = ["spirit_firion", "spirit_shantotto", "mrp_gain_50", "half_mp_cost", "break_the_limit", "mana_overload", "first_strike", "preemptive_strike"];
-        strategyText = "บิลด์ฟาร์ม MRP สูงสุด (+50% MRP Gain) ร่วมกับ Quad-Cast ล้างศัตรูทั้งสนามในเทิร์นแรก ทำให้เก็บเลเวลและฟาร์มทรัพยากรได้อย่างรวดเร็วและปลอดภัย";
-      } else if (isMageIntent) {
-        targetVisId = 13127; // Y'shtola
-        targetChar = CHARACTERS.find(c => c.id === 1006 || c.id === 1005) || char;
-        buildTitle = "🔮 AI Cataclysmic Quad-Witch (มหาเวท 4 คาถาล้านดาเมจ)";
+        desiredSkillIds = ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"];
+        strategyText = `บิลด์สลายเกราะบอสเทิร์นแรก ออกตัวคนแรกด้วย First Strike รัวสกิล Breaker 2 ครั้งซ้อนเร่งเกจ Stagger +30% และคูณดาเมจ +60% ซ้ำเติมศัตรูที่ติดดีบัฟ`;
+      } else if (isMage) {
+        buildTitle = `🔮 AI Arcane Cataclysm (${targetVis.name} / ${targetChar.name})`;
         actionBadge = "4 Spells / Turn";
-        desiredSkillIds = ["spirit_firion", "spirit_shantotto", "spirit_onion", "half_mp_cost", "break_the_limit", "mana_overload", "first_strike", "preemptive_strike"];
-        strategyText = "บิลด์มหาเวทคอมโบ Quad-Cast (Arms Akimbo x Dualcast) ร่ายเวทหมู่พลังเต็ม 100% ซ้อนกัน 4 ครั้งในเทิร์นเดียว ปลดล็อกขีดจำกัด 99,999 ดาเมจต่อฮิตด้วย Break the Limit ล้างศัตรูตายยกกระดาน";
+        desiredSkillIds = ["spirit_firion", "spirit_shantotto", "spirit_terra", "half_mp_cost", "mana_overload", "aggravation", "first_strike", "preemptive_strike"];
+        strategyText = `บิลด์จอมเวททำลายล้างสูงสุด Arms Akimbo x Dualcast ยิงมหาเวท AoE 100% ได้ถึง 4 ครั้งซ้อนต่อเทิร์น ปลดล็อคเพดาน 99,999 ด้วย Break the Limit`;
       } else {
-        // Physical DPS default
-        targetVisId = 13101; // Cloud
-        targetChar = CHARACTERS.find(c => c.id === 1002 || c.id === 1001) || char;
-        buildTitle = "⚔️ AI Hyper Quad-Assault (16 ฮิต ดาเมจทะลุขีดจำกัด)";
+        // Physical DPS (Sephiroth, Cloud, Lasswell, Squall, etc.)
+        buildTitle = `⚔️ AI One-Winged Godspeed (${targetVis.name} / ${targetChar.name})`;
         actionBadge = "4 Actions (16 Hits)";
-        desiredSkillIds = ["spirit_firion", "spirit_squall", "spirit_onion", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"];
-        strategyText = "บิลด์สายกายภาพโจมตีต่อเนื่อง 4 ท่าใหญ่ (16 ฮิต) ผ่านคอมโบ Firion Arms Akimbo x Squall Double Action ฟันทะลุเพดานดาเมจ 99,999 ทุกการฟัน พร้อมฟื้นฟู MP เต็มหลอดจากคริติคอล";
+        desiredSkillIds = ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"];
+        strategyText = `บิลด์เพลงดาบกายภาพระดับ Meta Endgame สำหรับ ${targetChar.name} (วิชั่นหลัก: ${targetVis.name}) ผสาน Arms Akimbo x Double Action ออกแอคชั่นใหญ่ได้ 4 ท่า (16 ฮิต) ปลดเพดานดาเมจ 99,999 พร้อมรีฟันด์ MP ทุกฮิตคริติคอล`;
       }
-
-      const vis = VISIONS.find(v => v.id === targetVisId) || VISIONS[0];
-      const isHealer = (vis.role === "healer") || [13051, 13045].includes(vis.id) || (targetChar.id === 1003);
-      const isMage = !isHealer && ((vis.role === "magic_dps") || [13123, 13127, 13108, 13024, 13027].includes(vis.id) || [1006, 1008].includes(targetChar.id));
 
       const validSkills = [];
       let runningCost = 0;
@@ -5267,7 +5291,7 @@
       for (const sId of desiredSkillIds) {
         if (validSkills.length >= 8) break;
         const s = PASSIVES_DATABASE.find(item => item.id === sId);
-        if (s && canEquipSkill(s, validSkills, vis, isMage, isHealer)) {
+        if (s && canEquipSkill(s, validSkills, targetVis, isMage, isHealer)) {
           if (runningCost + s.ap <= maxAP) {
             validSkills.push(s);
             runningCost += s.ap;
@@ -5283,7 +5307,7 @@
       for (const fId of fallbackPool) {
         if (validSkills.length >= 8) break;
         const s = PASSIVES_DATABASE.find(item => item.id === fId);
-        if (s && canEquipSkill(s, validSkills, vis, isMage, isHealer)) {
+        if (s && canEquipSkill(s, validSkills, targetVis, isMage, isHealer)) {
           if (runningCost + s.ap <= maxAP) {
             validSkills.push(s);
             runningCost += s.ap;
@@ -5293,7 +5317,7 @@
 
       return {
         character: targetChar,
-        baseVis: vis,
+        baseVis: targetVis,
         buildName: buildTitle,
         actionBadge: actionBadge,
         skills: validSkills,
@@ -5327,35 +5351,80 @@
       const cfg = getAIConfig();
 
       const ownedVisionsList = VISIONS.filter(v => ownedVisionIds.has(v.id));
-      const ownedVisionNames = ownedVisionsList.map(v => `${v.name} (${v.thai})`).join(', ');
 
       const systemPrompt = `You are the master build optimization AI for Final Fantasy Resonance (FFR).
 Available Characters:
-${CHARACTERS.map(c => `${c.id}: ${c.name} (${c.thai}) - ${c.role}`).join('\n')}
+${CHARACTERS.map(c => `- ID ${c.id}: ${c.name} (${c.thai}) [${c.role}]`).join('\n')}
 
-INVENTORY RESTRICTION (CRITICAL):
-The player currently ONLY OWNS these ${ownedVisionsList.length} visions:
-${ownedVisionNames}
+PLAYER OWNED BASE VISIONS (You MUST pick one for "baseVisId" that matches user request):
+${ownedVisionsList.map(v => `- ID ${v.id}: ${v.name} (${v.thai}) [${v.role}] -> Innate (0 AP): ${v.innateDesc}`).join('\n')}
 
-Database of passives (use these exact IDs):
-Spirits: spirit_firion (120), spirit_shantotto (120), spirit_squall (105), spirit_cloud (105), spirit_bartz (110), spirit_onion (100), spirit_wol (95), spirit_yshtola (95), spirit_wilhelm (90), spirit_sephiroth (130), spirit_ayaka (95), spirit_leah (105), spirit_clive (115), spirit_amelia (100), spirit_zidane (95), spirit_noctis (100), spirit_terra (95), spirit_victoria (100), spirit_tronn (110), spirit_tidus (100), spirit_charlotte (105), spirit_cecil (95)
-Standalones: half_mp_cost (50, Tronn), break_the_limit (30, Terra), mana_overload (20, Victoria), first_strike (20, Tidus), tip_top_shape (20, Tidus - Phys only!), preemptive_strike (20, Camille), aggravation (25, Zidane), reflex (20, Noctis), restore_mp_dmg (20, Victoria), auto_shell (20, Charlotte), lb_shield (20, Amelia), magic_counter (20, Cecil), auto_cure_ailments (40, Leah), mrp_gain_50 (30, Victoria), power_stagger (15, Clive - Phys only!), vigorous_staggerer (20, Clive - Phys only!)
+DATABASE OF PASSIVES (Use exact IDs in "skills" array):
+--- SPIRIT BUNDLES (Pick 2 to 3 spirits, max 3):
+- spirit_firion (120 AP): Arms Akimbo (2 actions/turn) + Blood Weapon + Arsenal [TOP ENGINE]
+- spirit_squall (105 AP): Double Action (2 hits/command) + Stagger +50% + MP on hit
+- spirit_cloud (105 AP): Cloud Soul (refunds MP 3% on crit) + Crit Boost 35% + Crit Rate 10%
+- spirit_shantotto (120 AP): Dualcast (2 spells/cast) + AoE 100% [MAGE ENGINE]
+- spirit_terra (95 AP): Break the Limit 99,999 + LB Double Charge 200%
+- spirit_yshtola (95 AP): Aetherflow MP 5%/turn + Magic Def 20%
+- spirit_wol (95 AP): Physical Counter 30% + Multi-Cover + Grit (Endure 1 HP)
+- spirit_wilhelm (90 AP): Bastion (-20% party dmg) + Def 30% + Critical Counter
+- spirit_clive (115 AP): LB Damage +40% + Vigorous Staggerer 30%
+- spirit_zidane (95 AP): Aggravation (+60% Dmg on debuffed enemies)
+- spirit_noctis (100 AP): Reflex 25% Phys Evade + Warp-Strike Armor Pierce
+- spirit_onion (100 AP): LB Triple Charge (300% faster LB) + Spry Steps
+- spirit_leah (105 AP): Auto-Cure Ailments + Curaga + Pharmacology +50%
+- spirit_bartz (110 AP): Dual Spellblade (ฟันเวทดาบ 2 ครั้ง - for spellblades only)
+- spirit_amelia (100 AP): LB Shield + Deprotect Opener
+- spirit_cecil (95 AP): Cover + Magic Counter + Dark Immunity
+- spirit_tidus (100 AP): First Strike + Tip-Top Shape + Full Charge
+- spirit_tronn (110 AP): Half MP Cost 50% + Stagger Power +20%
+- spirit_victoria (100 AP): MRP Gain +50% + Arcane Reclamation
 
-Strict Build Rules:
-1. Exactly 8 passive skills in "skills" array.
-2. Total AP <= ${currentAPCapacity} AP. Maximize AP packing (450-${currentAPCapacity} AP, >95% efficiency).
-3. If Spirit of [X] is equipped, NO standalone skills from [X] can be equipped!
-4. Cannot equip skills or spirit from the base vision (granted for 0 AP).
-5. Never equip physical passives (tip_top_shape, decimating_attacks, double_action_standalone, power_stagger, vigorous_staggerer) on pure magic casters or healers!
+--- STANDALONE PASSIVES:
+- half_mp_cost (50 AP, Tronn): Reduces all MP cost by 50% [Mandatory for spamming]
+- break_the_limit (30 AP, Terra): Damage cap unlocked 9,999 -> 99,999
+- tip_top_shape (20 AP, Tidus): +25% Phys Dmg when HP > 80% [PHYSICAL DPS ONLY, NEVER ON MAGE/HEALER]
+- first_strike (20 AP, Tidus): Act first in combat turn 1
+- preemptive_strike (20 AP, Camille): +30% Dmg turn 1
+- reflex (20 AP, Noctis): 25% Phys Evade + Warp-Strike
+- lb_shield (20 AP, Amelia): Barrier shield when low HP
+- restore_mp_dmg (20 AP, Victoria): Restore MP when taking damage
+- mana_overload (20 AP, Victoria): +25% Magic Dmg [MAGES ONLY]
+- auto_cure_ailments (40 AP, Leah): Auto-cure debuffs
+- auto_shell (20 AP, Charlotte): Auto Shell magic barrier
+- magic_counter (20 AP, Cecil): Counter magic attacks
+
+PROVEN META TEMPLATES:
+1. Physical Katana/Slasher Meta (Lasswell / Sephiroth / Cloud):
+   - Engine: spirit_firion (120) + spirit_squall (105) + spirit_cloud (105) = 4 Actions / 16 Hits!
+   - Support: half_mp_cost (50) + break_the_limit (30) + tip_top_shape (20) + first_strike (20) + preemptive_strike (20) = 470 AP!
+2. Magic DPS Meta (Sakura / Archwitch Fina):
+   - Engine: spirit_firion (120) + spirit_shantotto (120) + spirit_terra (95) = 4 Spells / turn!
+   - Support: half_mp_cost (50) + mana_overload (20) + aggravation (25) + first_strike (20) + preemptive_strike (20) = 470 AP!
+3. Healer Meta (Fina / Leah):
+   - Engine: spirit_firion (120) + spirit_shantotto (120) + spirit_leah (105) = 4 White Magics / turn!
+   - Support: half_mp_cost (50) + first_strike (20) + lb_shield (20) + reflex (20) + restore_mp_dmg (20) = 475 AP!
+4. Tank Fortress Meta (Rain / Wilhelm):
+   - Wilhelm Base + spirit_wol (95) + spirit_firion (120) + spirit_onion (100) + reflex (20) + restore_mp_dmg (20) + first_strike (20) + lb_shield (20) + magic_counter (20) = 415 AP!
+5. Breaker Meta (Lid / Nichol / Amelia):
+   - Amelia Base + spirit_firion (120) + spirit_clive (115) + spirit_zidane (95) + half_mp_cost (50) + break_the_limit (30) + first_strike (20) + preemptive_strike (20) + reflex (20) = 470 AP!
+
+STRICT RULES:
+1. "baseVisId": MUST match the user request if specified (e.g. if user asks for Sephiroth / เซฟิรอธ, set "baseVisId": 13113 and "baseVisName": "Sephiroth").
+2. "skills": MUST contain EXACTLY 8 skills totaling between 450 AP and ${currentAPCapacity} AP.
+3. CANNOT equip abilities or spirit from the chosen base vision (granted for free 0 AP).
+4. If Spirit of [X] is equipped, do NOT equip standalone skills from [X].
+5. Never equip physical passives (tip_top_shape, power_stagger, vigorous_staggerer) on mages or healers.
 6. Respond ONLY in valid JSON matching this schema:
 {
-  "characterId": 1006,
-  "characterName": "Archwitch Fina",
-  "baseVisId": 13127,
-  "baseVisName": "Y'shtola",
-  "buildName": "ชื่อบิลด์...",
-  "actionBadge": "4 Spells / Turn",
-  "skills": ["spirit_firion", "spirit_shantotto", "spirit_terra", "half_mp_cost", "mana_overload", "aggravation", "preemptive_strike", "first_strike"],
+  "characterId": 1002,
+  "characterName": "Lasswell",
+  "baseVisId": 13113,
+  "baseVisName": "Sephiroth",
+  "buildName": "...",
+  "actionBadge": "4 Actions (16 Hits)",
+  "skills": ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
   "totalAP": 470,
   "strategyThai": "อธิบายจุดเด่นของบิลด์และคอมโบแอคชั่นเป็นภาษาไทยอย่างละเอียด..."
 }`;
@@ -5401,9 +5470,8 @@ Strict Build Rules:
         }
         const parsed = JSON.parse(contentStr);
 
-        // Sanitize and Validate Build
-        const char = CHARACTERS.find(c => c.id === parsed.characterId) || currentChar;
-        const vis = VISIONS.find(v => v.id === parsed.baseVisId) || VISIONS.find(v => v.id === char.baseVis) || VISIONS[0];
+        // Sanitize and Validate Build using intelligent resolution
+        const { char, vis } = resolveCharacterAndVision(parsed, userPrompt, currentChar);
 
         const isHealer = (vis.role === "healer") || [13051, 13045].includes(vis.id) || (char.id === 1003);
         const isMage = !isHealer && ((vis.role === "magic_dps") || [13123, 13127, 13108, 13024, 13027].includes(vis.id) || [1006, 1008].includes(char.id));
@@ -5422,7 +5490,7 @@ Strict Build Rules:
           }
         }
 
-        // Backfill if needed
+        // Backfill if needed to reach 8 skills
         if (validSkills.length < 8) {
           const fallbackPool = (isMage || isHealer)
             ? ["preemptive_strike", "first_strike", "reflex", "restore_mp_dmg", "lb_shield", "aggravation", "auto_shell", "break_the_limit"]
@@ -5444,7 +5512,7 @@ Strict Build Rules:
           character: char,
           baseVis: vis,
           buildName: parsed.buildName || `✨ บิลด์ AI สำหรับ ${vis.name}`,
-          actionBadge: parsed.actionBadge || "Custom Combo",
+          actionBadge: parsed.actionBadge || (isMage ? "4 Spells / Turn" : (isHealer ? "Dualcast White Magic" : "4 Actions (16 Hits)")),
           skills: validSkills,
           totalAP: runningCost,
           remainingAP: currentAPCapacity - runningCost,
@@ -5464,7 +5532,8 @@ Strict Build Rules:
         if (window.lucide) lucide.createIcons();
       }
     }
-function renderAIResult(res) {
+
+    function renderAIResult(res) {
       const resultCard = document.getElementById('ai-result-card');
       resultCard.classList.remove('hidden');
 
@@ -5486,7 +5555,7 @@ function renderAIResult(res) {
         item.innerHTML = `
           <div class="flex items-center gap-1.5 overflow-hidden">
             <span class="w-4 h-4 rounded bg-slate-800 text-[10px] text-slate-400 font-bold flex items-center justify-center shrink-0">${idx + 1}</span>
-            <img src="${s.visSprite || 'assets/images/visions/13101.png'}" class="w-5 h-5 pixelated object-contain shrink-0" alt="">
+            <img src="${s.visSprite || 'assets/images/visions/13101.png'}" class="w-5 h-5 pixelated object-contain shrink-0" alt="" onerror="this.onerror=null; this.src=this.src.split('?')[0] + '?t=' + Date.now();">
             <div class="truncate">
               <span class="font-bold text-[11px] block truncate ${s.isSpirit ? 'text-amber-300' : 'text-slate-200'}">${s.name}</span>
               <span class="text-[9px] text-slate-400 truncate block">${s.sourceVision}</span>
@@ -5514,16 +5583,24 @@ function renderAIResult(res) {
       // 2. Set Base Vision
       currentChar.baseVis = res.baseVis.id;
       currentChar.visName = res.baseVis.name;
-      document.getElementById('base-vision-select').value = res.baseVis.id;
-      document.getElementById('vis-name-mini').textContent = res.baseVis.name;
-      document.getElementById('vis-sprite-mini').src = res.baseVis.sprite;
-      document.getElementById('banner-base-vis-name').textContent = res.baseVis.name;
+      const baseSelect = document.getElementById('base-vision-select');
+      if (baseSelect) baseSelect.value = res.baseVis.id;
+      
+      const visMini = document.getElementById('vis-name-mini');
+      if (visMini) visMini.textContent = res.baseVis.name;
+
+      const spriteMini = document.getElementById('vis-sprite-mini');
+      if (spriteMini) spriteMini.src = res.baseVis.sprite;
+
+      const bannerVis = document.getElementById('banner-base-vis-name');
+      if (bannerVis) bannerVis.textContent = res.baseVis.name;
+
       updateInnateVisionDisplay();
 
       // 3. Render Custom Build
       renderCustomBuild({
         presetName: res.buildName,
-        presetDesc: `บิลด์ออกแบบพิเศษโดย AI สอดคล้องกับงบ AP ${res.totalAP} / ${currentAPCapacity} AP`,
+        presetDesc: `บิลด์ออกแบบพิเศษโดย AI (${res.character.name} + ${res.baseVis.name}) สอดคล้องกับงบ AP ${res.totalAP} / ${currentAPCapacity} AP`,
         actionBadge: res.actionBadge,
         skills: res.skills,
         synergyText: `<span class="text-cyan-300 font-bold">🤖 คำแนะนำกลยุทธ์จาก AI:</span><br>${res.strategy.replace(/\n/g, '<br>')}`,
@@ -5532,7 +5609,7 @@ function renderAIResult(res) {
       });
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      alert(`✅ ติดตั้งบิลด์ "${res.buildName}" ให้ ${currentChar.name} เรียบร้อยแล้ว!`);
+      alert(`✅ ติดตั้งบิลด์ "${res.buildName}" ให้ ${currentChar.name} (วิชั่นหลัก: ${res.baseVis.name}) เรียบร้อยแล้ว!`);
     }
 
     // Initialize entire application on startup
