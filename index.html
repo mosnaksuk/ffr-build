@@ -591,16 +591,16 @@
           </div>
           <input type="range" id="manual-mr-slider" min="0" max="26" value="24" class="w-full accent-cyan-500 cursor-pointer">
           <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
-            <span>0 ตัว (68 AP)</span>
-            <span>13 ตัว (276 AP)</span>
-            <span>26 ตัวเต็ม (484 AP)</span>
+            <span>0 ตัว (100 AP)</span>
+            <span>24 ตัว (484 AP เซฟปัจจุบัน)</span>
+            <span>26 ตัวเต็ม (516 AP)</span>
           </div>
         </div>
 
         <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-1.5 font-mono">
           <div class="flex justify-between text-slate-400">
-            <span>Base AP ของตัวละคร:</span>
-            <span class="text-slate-200">68 AP</span>
+            <span>Base AP ของตัวละคร (Lv.42):</span>
+            <span class="text-slate-200">100 AP</span>
           </div>
           <div class="flex justify-between text-slate-400">
             <span>Permanent AP Bonus (วิชั่นละ 16 AP):</span>
@@ -612,7 +612,15 @@
           </div>
         </div>
 
-        <button id="btn-apply-manual-ap" class="w-full py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition">
+        <div class="pt-2 border-t border-slate-800 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <label for="manual-direct-ap-input" class="text-slate-300 font-medium">หรือกำหนด Max AP ที่ต้องการเองโดยตรง:</label>
+            <input type="number" id="manual-direct-ap-input" min="50" max="999" value="484" class="w-24 px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-700 font-mono text-cyan-400 font-bold text-right focus:border-cyan-400 focus:outline-none">
+          </div>
+          <p class="text-[10px] text-slate-500">ใส่ตัวเลขเพื่อล็อกค่า Max AP สำหรับจัดบิลด์ได้ตามใจชอบ</p>
+        </div>
+
+        <button id="btn-apply-manual-ap" class="w-full py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition shadow-lg shadow-cyan-600/20">
           บันทึกและคำนวณบิลด์ใหม่
         </button>
       </div>
@@ -690,7 +698,7 @@
         <div class="flex items-center gap-2">
           <input type="checkbox" id="sync-ap-with-visions" checked class="w-4 h-4 rounded bg-slate-950 border-slate-700 text-cyan-500 focus:ring-0 cursor-pointer">
           <label for="sync-ap-with-visions" class="text-xs text-slate-300 cursor-pointer">
-            คำนวณ Max AP อัตโนมัติ (68 + [จำนวนวิชั่น x 16] AP)
+            คำนวณ Max AP อัตโนมัติ: 100 + (จำนวนวิชั่น x 16) AP [มี 24 ตัว = 484 AP]
           </label>
         </div>
         <div class="flex items-center gap-2">
@@ -1187,13 +1195,13 @@
       },
       {
         id: "healer_ayaka",
-        name: "💖 บิลด์ฮีลเลอร์ Fina (Healer 475 AP)",
-        subtitle: "วิชั่นหลัก: Ayaka • Dualcast x4 White Magic",
-        requiredBaseVis: 13051,
+        name: "💖 บิลด์ฮีลเลอร์ Fina (Healer / Leah 475 AP)",
+        subtitle: "วิชั่นหลัก: Leah (หรือ Ayaka) • Dualcast x4 White Magic",
+        requiredBaseVis: 13045,
         actionBadge: "Dualcast White Magic (2-4 Spells)",
         desc: "บิลด์หมอยาชุบชีวิตไร้พ่าย: ร่ายเวทขาวได้สูงสุด 4 ครั้งใน 1 เทิร์น (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟ) ใช้ 475 / 484 AP",
         skills: ["spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"],
-        synergyText: "Ayaka มอบ The Hand That Heals ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Leah + Firion + Shantotto (Dualcast) รวม 475 / 484 AP"
+        synergyText: "Leah มอบ Auto-Cure ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Leah + Firion + Shantotto (Dualcast) รวม 475 / 484 AP"
       },
       {
         id: "breaker_amelia",
@@ -4057,7 +4065,7 @@
     // State
     let currentChar = CHARACTERS[1]; // Lasswell default
     let currentAPCapacity = 484;
-    let ownedMR9Count = 26;
+    let ownedMR9Count = 24;
     let activePresetId = "quad_attack";
     let currentInspectVisId = 13103;
 
@@ -4067,6 +4075,13 @@
     let ownedVisionIds = new Set();
     const STARTER_VISION_IDS = [13100, 13101, 13103, 13105, 13108, 13110, 13024, 13045, 13033, 13017, 13062];
 
+    // Default: 24 visions from player's save file (excludes Ayaka 13051 and Charlotte 13060)
+    const DEFAULT_OWNED_VISION_IDS = [
+      13017, 13024, 13027, 13033, 13045, 13062, 13080, 13100, 13101, 13102,
+      13103, 13105, 13108, 13110, 13113, 13116, 13118, 13120, 13123, 13124,
+      13125, 13127, 13128, 13130
+    ];
+
     function loadOwnedVisions() {
       try {
         const saved = localStorage.getItem('ffr_owned_visions');
@@ -4075,20 +4090,25 @@
           if (Array.isArray(arr) && arr.length > 0) {
             ownedVisionIds = new Set(arr);
             ownedMR9Count = ownedVisionIds.size;
+            const customAP = localStorage.getItem('ffr_custom_max_ap');
+            currentAPCapacity = customAP ? parseInt(customAP) : (100 + (ownedMR9Count * 16));
             return;
           }
         }
       } catch (e) {}
-      // Default: All 26 visions
-      ownedVisionIds = new Set(VISIONS.map(v => v.id));
+      // Default: 24 visions from player's save profile (MR 9, Max AP 484)
+      ownedVisionIds = new Set(DEFAULT_OWNED_VISION_IDS);
       ownedMR9Count = ownedVisionIds.size;
+      const customAP = localStorage.getItem('ffr_custom_max_ap');
+      currentAPCapacity = customAP ? parseInt(customAP) : (100 + (ownedMR9Count * 16));
     }
 
     function saveOwnedVisions(syncAP = true) {
       localStorage.setItem('ffr_owned_visions', JSON.stringify(Array.from(ownedVisionIds)));
       ownedMR9Count = ownedVisionIds.size;
       if (syncAP) {
-        currentAPCapacity = 68 + (ownedMR9Count * 16);
+        currentAPCapacity = 100 + (ownedMR9Count * 16);
+        localStorage.removeItem('ffr_custom_max_ap');
       }
       updateOwnedCountsDisplay();
     }
@@ -4125,6 +4145,9 @@
       if (headerSaveTag) {
         headerSaveTag.textContent = `Visions: ${count}/26 (${currentAPCapacity} AP)`;
       }
+
+      const apMaxNum = document.getElementById('ap-max-num');
+      if (apMaxNum) apMaxNum.textContent = currentAPCapacity;
     }
 
     // -------------------------------------------------------------
@@ -4931,25 +4954,44 @@
       const mrText = document.getElementById('manual-mr-count-text');
       const bonusCalc = document.getElementById('manual-bonus-ap-calc');
       const totalCalc = document.getElementById('manual-total-ap-calc');
+      const directApInput = document.getElementById('manual-direct-ap-input');
 
-      mrSlider.addEventListener('input', (e) => {
-        const count = parseInt(e.target.value);
-        mrText.textContent = `${count} / 26 ตัว`;
-        const bonus = count * 16;
-        const total = 68 + bonus;
-        bonusCalc.textContent = `+${bonus} AP`;
-        totalCalc.textContent = `${total} AP`;
-      });
+      if (mrSlider) {
+        mrSlider.value = ownedMR9Count;
+        if (mrText) mrText.textContent = `${ownedMR9Count} / 26 ตัว`;
+        if (bonusCalc) bonusCalc.textContent = `+${ownedMR9Count * 16} AP`;
+        if (totalCalc) totalCalc.textContent = `${100 + (ownedMR9Count * 16)} AP`;
+        if (directApInput) directApInput.value = currentAPCapacity;
 
-      document.getElementById('btn-apply-manual-ap').addEventListener('click', () => {
-        ownedMR9Count = parseInt(mrSlider.value);
-        currentAPCapacity = 68 + (ownedMR9Count * 16);
-        updateCharacterDisplay();
-        applySmartSuggestBuild();
-        renderAllArchetypesComparison();
-        modal.classList.add('hidden');
-        alert(`✅ ปรับค่าเรียบร้อย! วิชั่น MR 9 = ${ownedMR9Count} ตัว, Max AP ใหม่ = ${currentAPCapacity} AP`);
-      });
+        mrSlider.addEventListener('input', (e) => {
+          const count = parseInt(e.target.value);
+          if (mrText) mrText.textContent = `${count} / 26 ตัว`;
+          const bonus = count * 16;
+          const total = 100 + bonus;
+          if (bonusCalc) bonusCalc.textContent = `+${bonus} AP`;
+          if (totalCalc) totalCalc.textContent = `${total} AP`;
+          if (directApInput) directApInput.value = total;
+        });
+      }
+
+      const applyManualBtn = document.getElementById('btn-apply-manual-ap');
+      if (applyManualBtn) {
+        applyManualBtn.addEventListener('click', () => {
+          if (directApInput && directApInput.value) {
+            currentAPCapacity = Math.max(50, parseInt(directApInput.value) || 484);
+            localStorage.setItem('ffr_custom_max_ap', currentAPCapacity);
+          } else {
+            ownedMR9Count = parseInt(mrSlider.value);
+            currentAPCapacity = 100 + (ownedMR9Count * 16);
+            localStorage.removeItem('ffr_custom_max_ap');
+          }
+          updateCharacterDisplay();
+          applySmartSuggestBuild();
+          renderAllArchetypesComparison();
+          modal.classList.add('hidden');
+          alert(`✅ ปรับค่าเรียบร้อย! วิชั่น MR 9 = ${ownedMR9Count} ตัว, Max AP ใหม่ = ${currentAPCapacity} AP`);
+        });
+      }
 
       // File Drag & Drop
       dropZone.addEventListener('click', () => fileInput.click());
@@ -4998,7 +5040,7 @@
                 populateBaseVisions();
               } else {
                 ownedMR9Count = data.visions.filter(v => v.masteryRank >= 9 || v.mrp >= 2000).length;
-                currentAPCapacity = 68 + (ownedMR9Count * 16);
+                currentAPCapacity = 100 + (ownedMR9Count * 16);
               }
             }
             updateCharacterDisplay();
@@ -5051,7 +5093,7 @@
             }
 
             ownedMR9Count = mr9Count;
-            currentAPCapacity = 68 + (ownedMR9Count * 16);
+            currentAPCapacity = 100 + (ownedMR9Count * 16);
 
             updateCharacterDisplay();
             applySmartSuggestBuild();

@@ -153,8 +153,15 @@ VISIONS_DATABASE: List[Dict[str, Any]] = [
 ]
 
 def calculate_max_ap(level: int, max_mr_count: int) -> int:
-    # Formula: 30 + (Level * 1.25) + (max_mr_count * 10)
-    return int(round(30 + (level * 1.25) + (max_mr_count * 10)))
+    # In-Game Verified Formula at Lv.42:
+    # Base Character AP = 100
+    # Each MR 9 Vision = +16 AP
+    # 24 Visions = 100 + (24 * 16) = 484 AP (matches in-game save exactly)
+    # 26 Visions = 100 + (26 * 16) = 516 AP
+    base_ap = 100
+    if level < 42:
+        base_ap = int(round(30 + (level * 1.66)))
+    return base_ap + (max_mr_count * 16)
 
 def optimize_for_role(role: str, ap_budget: int, base_vis: str = "") -> Dict[str, Any]:
     available = []
