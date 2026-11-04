@@ -726,7 +726,8 @@
             "providedSkillIds": [
                   "spirit_victoria",
                   "mrp_gain_50",
-                  "restore_mp_dmg"
+                  "restore_mp_dmg",
+                  "mana_overload"
             ]
       },
       {
@@ -844,6 +845,7 @@
       { id: "auto_shell", name: "Auto-Shell", thai: "เปิดเทิร์นด้วยเกราะ Shell", ap: 20, isSpirit: false, role: "tank", sourceVision: "Charlotte", sourceRank: "MR 1", visSprite: "assets/images/visions/13060.png", desc: "สละ MP 3% เพื่อลดดาเมจเวทลง 15% ทันทีที่ถูกโจมตี (ปลดล็อคจาก Charlotte MR 1)" },
       { id: "lb_shield", name: "LB Shield", thai: "โล่บาเรีย Limit Break", ap: 20, isSpirit: false, role: "support", sourceVision: "Amelia", sourceRank: "MR 7", visSprite: "assets/images/visions/13017.png", desc: "ลดดาเมจลง 50% เมื่อเลือดลดต่ำกว่า 50% (ปลดล็อคจาก Amelia MR 7)" },
       { id: "auto_cure_ailments", name: "Auto-Cure Ailments", thai: "ล้างสถานะผิดปกติอัตโนมัติ", ap: 40, isSpirit: false, role: "healer", sourceVision: "Leah", sourceRank: "MR 9", visSprite: "assets/images/visions/13045.png", desc: "ใช้ Esuna หรือยารักษาอัตโนมัติเมื่อติดสถานะผิดปกติ (ปลดล็อคจาก Leah MR 9)" },
+      { id: "mana_overload", name: "Mana Overload", thai: "เพิ่มดาเมจเวท +35% เมื่อ MP > 75%", ap: 20, isSpirit: false, role: "magic_dps", sourceVision: "Victoria", sourceRank: "MR 3", visSprite: "assets/images/visions/13027.png", desc: "เพิ่มความเสียหายเวทมนตร์ขึ้น 35% เมื่อ MP คงเหลือมากกว่า 75% (ปลดล็อคจาก Victoria MR 3)" },
       { id: "mrp_gain_50", name: "MRP Gain +50%", thai: "เร่งฟาร์มแต้มวิชั่น MRP +50%", ap: 30, isSpirit: false, role: "mrp_farm", sourceVision: "Victoria", sourceRank: "MR 7", visSprite: "assets/images/visions/13027.png", desc: "เพิ่มแต้มฟาร์ม MRP หลังจบการต่อสู้ขึ้น 50% (ปลดล็อคจาก Victoria MR 7)" }
     ];
 
@@ -3758,10 +3760,17 @@
     // -------------------------------------------------------------
     // SMART VISION SUGGESTER (TAILORED TO BASE VISION & MAX AP PACKING)
     // -------------------------------------------------------------
-        function canEquipSkill(candidate, currentList, baseVision) {
+        const PURE_PHYSICAL_PASSIVES = ["tip_top_shape", "decimating_attacks", "double_action_standalone", "power_stagger", "vigorous_staggerer"];
+
+    function canEquipSkill(candidate, currentList, baseVision, isMage = false, isHealer = false) {
       if (!candidate) return false;
       if (currentList.length >= 8) return false;
       if (currentList.some(s => s.id === candidate.id)) return false;
+
+      // Never give pure physical passives to mages or healers
+      if ((isMage || isHealer) && PURE_PHYSICAL_PASSIVES.includes(candidate.id)) {
+        return false;
+      }
 
       // Base vision conflict: cannot equip abilities granted by the base vision for free (0 AP)
       if (baseVision) {
@@ -3816,7 +3825,7 @@
       // A. HEALER
       if (isHealer) {
         primarySpirits = ["spirit_leah", "spirit_ayaka", "spirit_firion", "spirit_shantotto", "spirit_onion"];
-        corePassives = ["half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg", "preemptive_strike", "break_the_limit", "tip_top_shape"];
+        corePassives = ["half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg", "auto_cure_ailments", "preemptive_strike", "auto_shell"];
         maxSpirits = 3;
         synergySummary = `💖 <strong>สุดยอดคอมโบฮีลเลอร์ & ชุบชีวิตไร้พ่าย (${vis.name} / ${currentChar.name}):</strong> ผสาน <em>Arms Akimbo</em> (2 แอคชั่น) x <em>Dualcast</em> (ร่ายเวท 2 ครั้งซ้อน) = ร่ายเวทขาวได้สูงสุด <strong>4 ครั้งใน 1 เทิร์น</strong> (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟในเทิร์นเดียว!) ไม่เปลือง MP ด้วย <em>Half MP Cost</em> พร้อม <em>First Strike</em> ออกตัวคนแรกเพื่อชุบเพื่อนฉุกเฉินก่อนโดนศัตรูซ้ำ และมีบาเรีย <em>LB Shield</em> + <em>Reflex</em> เอาตัวรอด!`;
         actionBadge = "Dualcast White Magic (2-4 Spells)";
@@ -3847,10 +3856,10 @@
       else if (isMage) {
         primarySpirits = (vis.id === 13123)
           ? ["spirit_firion", "spirit_victoria", "spirit_yshtola", "spirit_terra"]
-          : ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "spirit_terra", "spirit_victoria"];
-        corePassives = ["half_mp_cost", "break_the_limit", "aggravation", "preemptive_strike", "first_strike", "tip_top_shape", "reflex", "restore_mp_dmg"];
+          : ["spirit_firion", "spirit_shantotto", "spirit_terra", "spirit_yshtola", "spirit_victoria"];
+        corePassives = ["half_mp_cost", "mana_overload", "aggravation", "preemptive_strike", "first_strike", "break_the_limit", "reflex", "lb_shield", "restore_mp_dmg", "auto_shell"];
         maxSpirits = 3;
-        synergySummary = `🔮 <strong>คอมโบมหาเวทสูงสุด (${vis.name}):</strong> ร่ายมหาเวทหมู่เต็ม 100% ซ้ำ 4 ครั้งซ้อนใน 1 เทิร์น (Arms Akimbo x Dualcast) พร้อมรีเจน MP 5% ต่อเทิร์น ล้างศัตรูทั้งสนาม!`;
+        synergySummary = `🔮 <strong>คอมโบมหาเวทสูงสุด (${vis.name}):</strong> ร่ายมหาเวทหมู่เต็ม 100% ซ้ำ 4 ครั้งซ้อนใน 1 เทิร์น (Arms Akimbo x Dualcast) พร้อมรีเจน MP และเร่งดาเมจมหาศาล ล้างศัตรูทั้งสนาม!`;
         actionBadge = "4 Spells / Turn";
       }
       // E. PHYSICAL DPS / HYBRID
@@ -3871,7 +3880,7 @@
         if (spiritCount >= maxSpirits || filtered.length >= 8) break;
         const skill = PASSIVES_DATABASE.find(s => s.id === sId);
         if (!skill) continue;
-        if (canEquipSkill(skill, filtered, vis)) {
+        if (canEquipSkill(skill, filtered, vis, isMage, isHealer)) {
           if (currentCost + skill.ap <= targetAP) {
             filtered.push(skill);
             currentCost += skill.ap;
@@ -3885,7 +3894,7 @@
         if (filtered.length >= 8) break;
         const skill = PASSIVES_DATABASE.find(s => s.id === pId);
         if (!skill) continue;
-        if (canEquipSkill(skill, filtered, vis)) {
+        if (canEquipSkill(skill, filtered, vis, isMage, isHealer)) {
           if (currentCost + skill.ap <= targetAP) {
             filtered.push(skill);
             currentCost += skill.ap;
@@ -3895,15 +3904,15 @@
 
       // 3. Fallback fill if still < 8 slots
       if (filtered.length < 8) {
-        const generalPool = [
-          "preemptive_strike", "first_strike", "tip_top_shape", "reflex", "restore_mp_dmg",
-          "power_stagger", "vigorous_staggerer", "lb_shield", "aggravation", "auto_shell", "break_the_limit"
-        ];
+        const generalPool = (isMage || isHealer)
+          ? ["preemptive_strike", "first_strike", "reflex", "restore_mp_dmg", "lb_shield", "aggravation", "auto_shell", "break_the_limit"]
+          : ["preemptive_strike", "first_strike", "tip_top_shape", "reflex", "restore_mp_dmg", "power_stagger", "vigorous_staggerer", "lb_shield", "aggravation", "auto_shell", "break_the_limit"];
+
         for (const gId of generalPool) {
           if (filtered.length >= 8) break;
           const skill = PASSIVES_DATABASE.find(s => s.id === gId);
           if (!skill) continue;
-          if (canEquipSkill(skill, filtered, vis)) {
+          if (canEquipSkill(skill, filtered, vis, isMage, isHealer)) {
             if (currentCost + skill.ap <= targetAP) {
               filtered.push(skill);
               currentCost += skill.ap;
