@@ -62,7 +62,11 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+        <button id="btn-open-visions-modal" class="text-xs px-3 py-1.5 rounded-xl bg-amber-950/70 hover:bg-amber-900/90 text-amber-300 border border-amber-600/50 font-bold flex items-center gap-1.5 shadow-md shadow-amber-950/40 transition cursor-pointer">
+          <i data-lucide="gem" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>คลังวิชั่นที่ครอบครอง (<span id="header-owned-count">26</span>/26)</span>
+        </button>
         <button id="btn-open-sync-modal" class="text-xs px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 font-medium flex items-center gap-1.5 shadow transition">
           <i data-lucide="folder-sync" class="w-3.5 h-3.5 text-cyan-400"></i>
           <span>จัดการเซฟ / นำเข้าเซฟ</span>
@@ -178,9 +182,11 @@
               <span class="text-slate-400">Max AP:</span>
               <span class="font-mono font-black text-cyan-400" id="stat-ap">484</span>
             </div>
-            <div class="p-2 rounded-lg bg-slate-950/60 border border-slate-800/80 flex justify-between">
-              <span class="text-slate-400">MR 9 Max:</span>
-              <span class="font-mono font-bold text-amber-400" id="stat-mr9-count">24 / 26 ตัว ⭐⭐⭐</span>
+            <div id="btn-open-visions-mgr-card" class="p-2 rounded-lg bg-slate-950/60 hover:bg-slate-900 border border-slate-800/80 hover:border-amber-500/50 flex justify-between cursor-pointer transition group" title="คลิกเพื่อเลือกเพิ่ม/ลดวิชั่นที่ครอบครอง">
+              <span class="text-slate-400 flex items-center gap-1 group-hover:text-amber-300">
+                <i data-lucide="gem" class="w-3 h-3 text-amber-400"></i> วิชั่นที่ครอบครอง:
+              </span>
+              <span class="font-mono font-bold text-amber-400 group-hover:text-amber-300 underline decoration-dotted" id="stat-mr9-count">26 / 26 ตัว (แก้ไข)</span>
             </div>
           </div>
 
@@ -613,6 +619,90 @@
 
       <!-- Status Message Area -->
       <div id="modal-status-msg" class="text-xs p-2.5 rounded-xl hidden"></div>
+    </div>
+  </div>
+
+  <!-- Owned Visions Management Modal -->
+  <div id="owned-visions-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-4xl w-full p-4 sm:p-6 space-y-4 shadow-2xl relative flex flex-col max-h-[92vh]">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold">
+            <i data-lucide="gem" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="font-bold text-base text-white">จัดการวิชั่นที่ครอบครอง (Owned Visions)</h3>
+              <span id="modal-owned-count-badge" class="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800 text-xs font-mono font-bold">26 / 26 วิชั่น</span>
+            </div>
+            <p class="text-xs text-slate-400">เลือกเพิ่ม/ลดวิชั่นที่คุณปลดล็อกแล้วในเกม เพื่อให้ระบบและ AI แนะนำเฉพาะสกิลและ Spirit ที่คุณมีจริงเท่านั้น</p>
+          </div>
+        </div>
+        <button id="btn-close-visions-modal" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Action Controls & Role Filters -->
+      <div class="space-y-2.5 shrink-0">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <!-- Search box -->
+          <div class="relative flex-1 min-w-[200px]">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+            <input type="text" id="visions-search-input" placeholder="ค้นหาชื่อวิชั่น (เช่น Cloud, Firion, เซฟิรอธ...)" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button id="btn-select-all-visions" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-medium transition flex items-center gap-1 cursor-pointer">
+              <i data-lucide="check-square" class="w-3.5 h-3.5"></i> เลือกทั้งหมด
+            </button>
+            <button id="btn-deselect-all-visions" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-300 border border-slate-700 text-xs font-medium transition flex items-center gap-1 cursor-pointer">
+              <i data-lucide="square" class="w-3.5 h-3.5"></i> ยกเลิกทั้งหมด
+            </button>
+            <button id="btn-select-starter-visions" class="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900/80 text-amber-300 border border-amber-700/60 text-xs font-medium transition flex items-center gap-1 cursor-pointer" title="เลือกวิชั่นตัวละครเริ่มต้นและแจกฟรีเนื้อเรื่อง">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i> ตัวหลักฟรี/เนื้อเรื่อง (11)
+            </button>
+          </div>
+        </div>
+
+        <!-- Role Filter Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs" id="visions-role-filters">
+          <button data-role="all" class="px-3 py-1 rounded-lg bg-cyan-600 text-white font-bold transition">ทั้งหมด (26)</button>
+          <button data-role="phys_dps" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">⚔️ กายภาพ</button>
+          <button data-role="magic_dps" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">🔮 เวทมนตร์</button>
+          <button data-role="tank" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">🛡️ แทงก์</button>
+          <button data-role="healer" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">💖 ฮีลเลอร์</button>
+          <button data-role="breaker" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">⚡ เบรกเกอร์</button>
+        </div>
+      </div>
+
+      <!-- Visions Grid List (Scrollable) -->
+      <div class="flex-1 overflow-y-auto pr-1 border border-slate-800 rounded-xl p-2 bg-slate-950/40">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5" id="owned-visions-grid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between flex-wrap gap-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="sync-ap-with-visions" checked class="w-4 h-4 rounded bg-slate-950 border-slate-700 text-cyan-500 focus:ring-0 cursor-pointer">
+          <label for="sync-ap-with-visions" class="text-xs text-slate-300 cursor-pointer">
+            คำนวณ Max AP อัตโนมัติ (68 + [จำนวนวิชั่น x 16] AP)
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-cancel-visions-modal" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition cursor-pointer">
+            ยกเลิก
+          </button>
+          <button id="btn-save-visions-modal" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/20 transition flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>บันทึกและคำนวณบิลด์ใหม่</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3931,19 +4021,90 @@
     // State
     let currentChar = CHARACTERS[1]; // Lasswell default
     let currentAPCapacity = 484;
-    let ownedMR9Count = 24;
+    let ownedMR9Count = 26;
     let activePresetId = "quad_attack";
     let currentInspectVisId = 13103;
 
     // -------------------------------------------------------------
+    // OWNED VISIONS REPOSITORY & INVENTORY FILTER
+    // -------------------------------------------------------------
+    let ownedVisionIds = new Set();
+    const STARTER_VISION_IDS = [13100, 13101, 13103, 13105, 13108, 13110, 13024, 13045, 13033, 13017, 13062];
+
+    function loadOwnedVisions() {
+      try {
+        const saved = localStorage.getItem('ffr_owned_visions');
+        if (saved) {
+          const arr = JSON.parse(saved);
+          if (Array.isArray(arr) && arr.length > 0) {
+            ownedVisionIds = new Set(arr);
+            ownedMR9Count = ownedVisionIds.size;
+            return;
+          }
+        }
+      } catch (e) {}
+      // Default: All 26 visions
+      ownedVisionIds = new Set(VISIONS.map(v => v.id));
+      ownedMR9Count = ownedVisionIds.size;
+    }
+
+    function saveOwnedVisions(syncAP = true) {
+      localStorage.setItem('ffr_owned_visions', JSON.stringify(Array.from(ownedVisionIds)));
+      ownedMR9Count = ownedVisionIds.size;
+      if (syncAP) {
+        currentAPCapacity = 68 + (ownedMR9Count * 16);
+      }
+      updateOwnedCountsDisplay();
+    }
+
+    function isSkillVisionOwned(skill) {
+      if (!skill) return false;
+      if (!ownedVisionIds || ownedVisionIds.size === 0) return true;
+      const v = VISIONS.find(vis => 
+        (vis.providedSkillIds && vis.providedSkillIds.includes(skill.id)) ||
+        (vis.name && skill.sourceVision && vis.name.toLowerCase() === skill.sourceVision.toLowerCase())
+      );
+      if (!v) return true;
+      return ownedVisionIds.has(v.id);
+    }
+
+    function updateOwnedCountsDisplay() {
+      const count = ownedVisionIds.size;
+      const headerCount = document.getElementById('header-owned-count');
+      if (headerCount) headerCount.textContent = count;
+      
+      const modalBadge = document.getElementById('modal-owned-count-badge');
+      if (modalBadge) modalBadge.textContent = `${count} / 26 วิชั่น`;
+
+      const statMR9 = document.getElementById('stat-mr9-count');
+      if (statMR9) statMR9.textContent = `${count} / 26 ตัว (คลิกแก้ไข)`;
+
+      const statAP = document.getElementById('stat-ap');
+      if (statAP) statAP.textContent = currentAPCapacity;
+
+      const headerAP = document.getElementById('header-ap-badge');
+      if (headerAP) headerAP.textContent = `AP ${currentAPCapacity}`;
+
+      const headerSaveTag = document.getElementById('header-save-tag');
+      if (headerSaveTag) {
+        headerSaveTag.textContent = `Visions: ${count}/26 (${currentAPCapacity} AP)`;
+      }
+    }
+
+    // -------------------------------------------------------------
     // SMART VISION SUGGESTER (TAILORED TO BASE VISION & MAX AP PACKING)
     // -------------------------------------------------------------
-        const PURE_PHYSICAL_PASSIVES = ["tip_top_shape", "decimating_attacks", "double_action_standalone", "power_stagger", "vigorous_staggerer"];
+    const PURE_PHYSICAL_PASSIVES = ["tip_top_shape", "decimating_attacks", "double_action_standalone", "power_stagger", "vigorous_staggerer"];
 
     function canEquipSkill(candidate, currentList, baseVision, isMage = false, isHealer = false) {
       if (!candidate) return false;
       if (currentList.length >= 8) return false;
       if (currentList.some(s => s.id === candidate.id)) return false;
+
+      // Vision ownership check: must own the vision that provides this skill
+      if (!isSkillVisionOwned(candidate)) {
+        return false;
+      }
 
       // Never give pure physical passives to mages or healers
       if ((isMage || isHealer) && PURE_PHYSICAL_PASSIVES.includes(candidate.id)) {
@@ -4113,6 +4274,9 @@
     }
 
     function init() {
+      loadOwnedVisions();
+      setupOwnedVisionsModal();
+      updateOwnedCountsDisplay();
       renderCharacters();
       populateBaseVisions();
       populateMasteryInspectorSelect();
@@ -4244,13 +4408,49 @@
     function populateBaseVisions() {
       const select = document.getElementById('base-vision-select');
       select.innerHTML = '';
-      VISIONS.forEach(v => {
+
+      // Check if current base vision is owned, if not, find fallback
+      if (ownedVisionIds && ownedVisionIds.size > 0 && !ownedVisionIds.has(currentChar.baseVis)) {
+        const fallback = VISIONS.find(v => ownedVisionIds.has(v.id) && v.role === currentChar.role) 
+                      || VISIONS.find(v => ownedVisionIds.has(v.id)) 
+                      || VISIONS[0];
+        if (fallback) {
+          currentChar.baseVis = fallback.id;
+          currentChar.visName = fallback.name;
+        }
+      }
+
+      const ownedGroup = document.createElement('optgroup');
+      ownedGroup.label = `✨ วิชั่นที่ครอบครอง (${VISIONS.filter(v => ownedVisionIds.has(v.id)).length})`;
+
+      const unownedGroup = document.createElement('optgroup');
+      unownedGroup.label = `🔒 วิชั่นที่ยังไม่มี (${VISIONS.filter(v => !ownedVisionIds.has(v.id)).length})`;
+
+      // Sort owned first, then alphabetically
+      const sorted = [...VISIONS].sort((a, b) => {
+        const aO = ownedVisionIds.has(a.id);
+        const bO = ownedVisionIds.has(b.id);
+        if (aO === bO) return a.name.localeCompare(b.name);
+        return aO ? -1 : 1;
+      });
+
+      sorted.forEach(v => {
         const opt = document.createElement('option');
         opt.value = v.id;
-        opt.textContent = `${v.name} (${v.thai}) - ${v.role.toUpperCase()}`;
+        const isO = ownedVisionIds.has(v.id);
+        opt.textContent = `${v.name} (${v.thai}) - ${v.role.toUpperCase()}${isO ? '' : ' 🔒 (ยังไม่มี)'}`;
         if (v.id === currentChar.baseVis) opt.selected = true;
-        select.appendChild(opt);
+
+        if (isO) {
+          ownedGroup.appendChild(opt);
+        } else {
+          opt.className = "text-slate-500 bg-slate-900";
+          unownedGroup.appendChild(opt);
+        }
       });
+
+      if (ownedGroup.children.length > 0) select.appendChild(ownedGroup);
+      if (unownedGroup.children.length > 0) select.appendChild(unownedGroup);
     }
 
     function updateInnateVisionDisplay() {
@@ -4458,6 +4658,208 @@
     // -------------------------------------------------------------
     // SAVE IMPORT & REFRESH MODAL LOGIC (IN-BROWSER AES-256-ECB)
     // -------------------------------------------------------------
+    // -------------------------------------------------------------
+    // OWNED VISIONS MODAL CONTROLLER & GRID RENDERER
+    // -------------------------------------------------------------
+    let tempOwnedVisionIds = new Set();
+    let currentVisionsFilterRole = 'all';
+    let currentVisionsSearchQuery = '';
+
+    function getRoleBadgeInfo(role) {
+      switch (role) {
+        case 'tank': return { label: '🛡️ TANK', class: 'bg-amber-950 text-amber-300 border-amber-800' };
+        case 'magic_dps': return { label: '🔮 MAGIC', class: 'bg-indigo-950 text-indigo-300 border-indigo-800' };
+        case 'healer': return { label: '💖 HEALER', class: 'bg-emerald-950 text-emerald-300 border-emerald-800' };
+        case 'breaker': return { label: '⚡ BREAKER', class: 'bg-orange-950 text-orange-300 border-orange-800' };
+        default: return { label: '⚔️ PHYS', class: 'bg-cyan-950 text-cyan-300 border-cyan-800' };
+      }
+    }
+
+    function renderOwnedVisionsGrid(filterRole = currentVisionsFilterRole, query = currentVisionsSearchQuery) {
+      const grid = document.getElementById('owned-visions-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const q = query.trim().toLowerCase();
+      let list = VISIONS.filter(v => {
+        if (filterRole !== 'all' && v.role !== filterRole) return false;
+        if (q) {
+          const matchName = v.name.toLowerCase().includes(q);
+          const matchThai = v.thai.toLowerCase().includes(q);
+          const matchRole = v.role.toLowerCase().includes(q);
+          const matchDesc = (v.innateDesc || '').toLowerCase().includes(q);
+          if (!matchName && !matchThai && !matchRole && !matchDesc) return false;
+        }
+        return true;
+      });
+
+      list.forEach(v => {
+        const isOwned = tempOwnedVisionIds.has(v.id);
+        const roleInfo = getRoleBadgeInfo(v.role);
+
+        const card = document.createElement('div');
+        card.className = `cursor-pointer p-3 rounded-xl border transition-all duration-200 select-none flex flex-col justify-between ${
+          isOwned 
+            ? 'bg-slate-900 border-cyan-500/60 shadow-lg shadow-cyan-950/40 ring-1 ring-cyan-500/30' 
+            : 'bg-slate-950/60 border-slate-800/80 opacity-40 grayscale hover:opacity-75'
+        }`;
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <img src="${v.sprite}" class="w-10 h-10 pixelated object-contain shrink-0" alt="">
+                <div class="min-w-0">
+                  <h4 class="font-bold text-xs text-white truncate flex items-center gap-1">
+                    ${v.name}
+                    <span class="text-[10px] text-slate-400 font-normal">(${v.thai})</span>
+                  </h4>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded border font-bold ${roleInfo.class}">${roleInfo.label}</span>
+                </div>
+              </div>
+              <div class="w-5 h-5 rounded-md flex items-center justify-center shrink-0 border transition ${
+                isOwned ? 'bg-cyan-500 border-cyan-400 text-slate-950 font-black text-xs' : 'bg-slate-900 border-slate-700 text-transparent'
+              }">
+                ${isOwned ? '✓' : ''}
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-300 leading-tight line-clamp-2 mb-2">${v.innateDesc}</p>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px]">
+            <span class="text-amber-400 font-mono font-bold">${v.providedSkillIds ? v.providedSkillIds.length : 1} สกิลที่ปลดล็อก</span>
+            <span class="font-bold ${isOwned ? 'text-emerald-400' : 'text-slate-500'}">${isOwned ? '✓ ครอบครองแล้ว' : '✕ ยังไม่มี'}</span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          if (tempOwnedVisionIds.has(v.id)) {
+            tempOwnedVisionIds.delete(v.id);
+          } else {
+            tempOwnedVisionIds.add(v.id);
+          }
+          const badge = document.getElementById('modal-owned-count-badge');
+          if (badge) badge.textContent = `${tempOwnedVisionIds.size} / 26 วิชั่น`;
+          renderOwnedVisionsGrid(filterRole, query);
+        });
+
+        grid.appendChild(card);
+      });
+
+      const badge = document.getElementById('modal-owned-count-badge');
+      if (badge) badge.textContent = `${tempOwnedVisionIds.size} / 26 วิชั่น`;
+    }
+
+    function setupOwnedVisionsModal() {
+      const modal = document.getElementById('owned-visions-modal');
+      const openBtnHeader = document.getElementById('btn-open-visions-modal');
+      const openBtnCard = document.getElementById('btn-open-visions-mgr-card');
+      const closeBtn = document.getElementById('btn-close-visions-modal');
+      const cancelBtn = document.getElementById('btn-cancel-visions-modal');
+      const saveBtn = document.getElementById('btn-save-visions-modal');
+
+      const openModal = () => {
+        tempOwnedVisionIds = new Set(ownedVisionIds);
+        currentVisionsFilterRole = 'all';
+        currentVisionsSearchQuery = '';
+        const searchInput = document.getElementById('visions-search-input');
+        if (searchInput) searchInput.value = '';
+
+        // Reset filter pills styling
+        document.querySelectorAll('#visions-role-filters button').forEach(btn => {
+          if (btn.dataset.role === 'all') {
+            btn.className = "px-3 py-1 rounded-lg bg-cyan-600 text-white font-bold transition";
+          } else {
+            btn.className = "px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition";
+          }
+        });
+
+        renderOwnedVisionsGrid('all', '');
+        modal.classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
+      };
+
+      const closeModal = () => {
+        modal.classList.add('hidden');
+      };
+
+      if (openBtnHeader) openBtnHeader.addEventListener('click', openModal);
+      if (openBtnCard) openBtnCard.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+      // Search input
+      const searchInput = document.getElementById('visions-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentVisionsSearchQuery = e.target.value;
+          renderOwnedVisionsGrid(currentVisionsFilterRole, currentVisionsSearchQuery);
+        });
+      }
+
+      // Role filter pills
+      document.querySelectorAll('#visions-role-filters button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentVisionsFilterRole = btn.dataset.role || 'all';
+          document.querySelectorAll('#visions-role-filters button').forEach(b => {
+            b.className = (b === btn)
+              ? "px-3 py-1 rounded-lg bg-cyan-600 text-white font-bold transition"
+              : "px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition";
+          });
+          renderOwnedVisionsGrid(currentVisionsFilterRole, currentVisionsSearchQuery);
+        });
+      });
+
+      // Quick actions: Select All, Deselect All, Starter
+      const btnSelectAll = document.getElementById('btn-select-all-visions');
+      if (btnSelectAll) {
+        btnSelectAll.addEventListener('click', () => {
+          tempOwnedVisionIds = new Set(VISIONS.map(v => v.id));
+          renderOwnedVisionsGrid(currentVisionsFilterRole, currentVisionsSearchQuery);
+        });
+      }
+
+      const btnDeselectAll = document.getElementById('btn-deselect-all-visions');
+      if (btnDeselectAll) {
+        btnDeselectAll.addEventListener('click', () => {
+          tempOwnedVisionIds.clear();
+          renderOwnedVisionsGrid(currentVisionsFilterRole, currentVisionsSearchQuery);
+        });
+      }
+
+      const btnStarter = document.getElementById('btn-select-starter-visions');
+      if (btnStarter) {
+        btnStarter.addEventListener('click', () => {
+          tempOwnedVisionIds = new Set(STARTER_VISION_IDS);
+          renderOwnedVisionsGrid(currentVisionsFilterRole, currentVisionsSearchQuery);
+        });
+      }
+
+      // Save button
+      if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+          if (tempOwnedVisionIds.size === 0) {
+            if (!confirm('คุณยังไม่ได้เลือกวิชั่นเลย ต้องการเลือกอย่างน้อย 1 วิชั่นหรือไม่?')) {
+              return;
+            }
+          }
+
+          ownedVisionIds = new Set(tempOwnedVisionIds);
+          const syncAP = document.getElementById('sync-ap-with-visions').checked;
+          saveOwnedVisions(syncAP);
+
+          // Update Base Vision & UI
+          populateBaseVisions();
+          updateCharacterDisplay();
+          updateInnateVisionDisplay();
+          applySmartSuggestBuild();
+          renderAllArchetypesComparison();
+
+          closeModal();
+          alert(`✅ บันทึกคลังวิชั่นที่ครอบครอง (${ownedVisionIds.size}/26 วิชั่น) และคำนวณบิลด์ใหม่เรียบร้อยแล้ว!`);
+        });
+      }
+    }
+
     function setupSyncModal() {
       const modal = document.getElementById('sync-modal');
       const openBtn = document.getElementById('btn-open-sync-modal');
@@ -4552,9 +4954,16 @@
                 }
               });
             }
-            if (data.visions) {
-              ownedMR9Count = data.visions.filter(v => v.masteryRank >= 9 || v.mrp >= 2000).length;
-              currentAPCapacity = 68 + (ownedMR9Count * 16);
+            if (data.visions && Array.isArray(data.visions)) {
+              const detectedIds = data.visions.map(v => v.id).filter(id => VISIONS.some(vis => vis.id === id));
+              if (detectedIds.length > 0) {
+                ownedVisionIds = new Set(detectedIds);
+                saveOwnedVisions(true);
+                populateBaseVisions();
+              } else {
+                ownedMR9Count = data.visions.filter(v => v.masteryRank >= 9 || v.mrp >= 2000).length;
+                currentAPCapacity = 68 + (ownedMR9Count * 16);
+              }
             }
             updateCharacterDisplay();
             applySmartSuggestBuild();
@@ -4647,8 +5056,6 @@
       t += `------------------------------------------------\n`;
       navigator.clipboard.writeText(t).then(() => alert("คัดลอกสรุปบิลด์เมต้าลง Clipboard เรียบร้อยแล้ว!"));
     }
-
-    init();
 
     // -------------------------------------------------------------
     // AI BUILD ARCHITECT AGENT (GEMINI 3.8 FLASH)
@@ -4860,9 +5267,16 @@
 
       const cfg = getAIConfig();
 
+      const ownedVisionsList = VISIONS.filter(v => ownedVisionIds.has(v.id));
+      const ownedVisionNames = ownedVisionsList.map(v => `${v.name} (${v.thai})`).join(', ');
+
       const systemPrompt = `You are the master build optimization AI for Final Fantasy Resonance (FFR).
 Available Characters:
 ${CHARACTERS.map(c => `${c.id}: ${c.name} (${c.thai}) - ${c.role}`).join('\n')}
+
+INVENTORY RESTRICTION (CRITICAL):
+The player currently ONLY OWNS these ${ownedVisionsList.length} visions:
+${ownedVisionNames}
 
 Database of passives (use these exact IDs):
 Spirits: spirit_firion (120), spirit_shantotto (120), spirit_squall (105), spirit_cloud (105), spirit_bartz (110), spirit_onion (100), spirit_wol (95), spirit_yshtola (95), spirit_wilhelm (90), spirit_sephiroth (130), spirit_ayaka (95), spirit_leah (105), spirit_clive (115), spirit_amelia (100), spirit_zidane (95), spirit_noctis (100), spirit_terra (95), spirit_victoria (100), spirit_tronn (110), spirit_tidus (100), spirit_charlotte (105), spirit_cecil (95)
@@ -5061,6 +5475,9 @@ function renderAIResult(res) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       alert(`✅ ติดตั้งบิลด์ "${res.buildName}" ให้ ${currentChar.name} เรียบร้อยแล้ว!`);
     }
+
+    // Initialize entire application on startup
+    init();
 
   </script>
 </body>
