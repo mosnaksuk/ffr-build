@@ -395,17 +395,31 @@
           </div>
         </div>
 
-        <!-- PRESET SELECTOR (Save Accurate & Meta Archetypes) -->
+        <!-- PRESET SELECTOR (IGN Best Builds & Community S-Tier) -->
         <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
-              <i data-lucide="layout-grid" class="w-4 h-4 text-amber-400"></i>
-              <span>เลือกพรีเซ็ตบิลด์ (ตรงตามรูปในเซฟ & เมต้าคอมโบ):</span>
-            </h3>
-            <span class="text-[10px] text-slate-400">คลิกเพื่อสลับบิลด์ทันที</span>
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-amber-400"></i>
+                <span>เลือกพรีเซ็ตบิลด์เมต้า (IGN Best Builds & Community S-Tier):</span>
+              </h3>
+              <p class="text-[10px] text-slate-400 mt-0.5">รวมบิลด์แนะนำระดับ Meta สำหรับทุกตัวละคร (Lasswell, Rain, Nichol, Fina, Sakura, Lid, Jake, Archwitch)</p>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800">10 บิลด์พร้อมใช้งาน</span>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="meta-presets-container">
+          <!-- Preset Category Filter Pills -->
+          <div class="flex items-center gap-1.5 flex-wrap text-xs pb-1 border-b border-slate-800/80" id="preset-filter-bar">
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-cyan-600 text-white font-bold transition text-[11px]" data-category="all">ทั้งหมด (10)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="phys">⚔️ กายภาพ (4)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="tank">🛡️ แทงก์ (1)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="magic">🔮 มหาเวท (2)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="heal">💖 ฮีลเลอร์ (1)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="support">⚡ ซัพพอร์ต/เบรก (2)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="farm">💰 ฟาร์ม (1)</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5" id="meta-presets-container">
             <!-- Injected via JS -->
           </div>
         </div>
@@ -1164,68 +1178,128 @@
     // Presets
         const META_PRESETS = [
       {
-        id: "tank_wilhelm",
-        name: "📸 บิลด์แทงก์ Wilhelm (Image 1)",
-        subtitle: "วิชั่นหลัก: Wilhelm • WoL + Firion Counter",
-        requiredBaseVis: 13062,
-        actionBadge: "Guard & Counter x2",
-        desc: "บิลด์รถถังอมตะตรงตามรูปเซฟ 1: Wilhelm มอบ Bastion ฟรี! ใน 8 ช่องสวมใส่ Spirit of WoL + Spirit of Firion + Onion Knight ครบ 8 สกิล",
-        skills: ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"],
-        synergyText: "Wilhelm มอบ Bastion ฟรี 0 AP ใน 8 ช่องใส่ Spirit of WoL + Spirit of Firion + Spirit of Onion Knight รวม 415 / 484 AP"
+        id: "katana_lasswell",
+        targetCharId: 1002,
+        name: "⚔️ Lasswell: One-Winged Masamune",
+        subtitle: "วิชั่นหลัก: Sephiroth • Arms Akimbo x Double Action 16 ฮิต",
+        category: "phys",
+        requiredBaseVis: 13113,
+        actionBadge: "4 Actions (16 Hits)",
+        desc: "บิลด์เพลงดาบคาตานะ S-Tier จาก IGN & Reddit: Sephiroth มอบ Perfect Serenity (+50% Dmg) + Ultimate Aggression ฟรี 0 AP ใน 8 ช่องสวมใส่ Arms Akimbo x Double Action ฟัน 4 ท่าใหญ่ (16 ฮิต) พร้อม Cloud Soul รีฟันด์ MP ทุกฮิตคริติคอล และปลดเพดาน 99,999",
+        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
+        synergyText: "Arms Akimbo (2 แอคชั่น) x Double Action (ฟันซ้ำ 2 ครั้ง) = 4 ท่าใหญ่ (16 ฮิต)! Cloud Soul รีฟันด์ MP 3% ทุกครั้งที่คริติคอล ฟันบอสทะลุ 99,999 ต่อเนื่องโดย MP ไม่หมดหลอด รวม 470 / 484 AP"
       },
       {
-        id: "phys_cloud",
-        name: "📸 บิลด์กายภาพ Cloud (Image 2)",
-        subtitle: "วิชั่นหลัก: Cloud • Squall + Stagger Shredder",
-        requiredBaseVis: 13110,
-        actionBadge: "4 Actions",
-        desc: "บิลด์นักดาบกายภาพตรงตามรูปเซฟ 2: Cloud มอบ Cloud Soul ฟรี! ใน 8 ช่องสวมใส่ Spirit of Squall + Arms Akimbo + Half MP Cost รวม 300 / 484 AP",
-        skills: ["spirit_squall", "vigorous_staggerer", "arms_akimbo_standalone", "half_mp_cost", "break_the_limit", "tip_top_shape", "power_stagger"],
-        synergyText: "Cloud มอบ Cloud Soul ฟรี 0 AP ใน 7 ช่องใส่ Spirit of Squall + Arms Akimbo + Half MP Cost รวม 300 / 484 AP"
+        id: "tank_rain",
+        targetCharId: 1001,
+        name: "🛡️ Rain: Aegis Fortress Tank",
+        subtitle: "วิชั่นหลัก: Wilhelm • WoL Cover + ดูดเลือด + สวนกลับคู่",
+        category: "tank",
+        requiredBaseVis: 13062,
+        actionBadge: "Guard & Counter x2",
+        desc: "บิลด์รถถังอมตะ IGN Sentinel Meta: Wilhelm มอบ Bastion ลดดาเมจให้ทั้งทีม 20% ฟรี 0 AP สวมใส่ Spirit of WoL รับดาเมจแทนเพื่อนทุกคน + รอดตายด้วย Grit (1 HP) ผสาน Arms Akimbo และดูดเลือด 10% สวนกลับทั้งกายภาพและเวทมนตร์",
+        skills: ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"],
+        synergyText: "Wilhelm Bastion ลดทอนดาเมจทีม 20% ใน 8 ช่องใส่ Spirit of WoL (Multi-Cover + Grit) + Firion (Lifesteal 10% + 2 แอคชั่น) + Onion Knight (LB เร็ว 3 เท่า) รวม 415 / 484 AP"
+      },
+      {
+        id: "buffer_nichol",
+        targetCharId: 1005,
+        name: "⚡ Nichol: Infinite LB Formation",
+        subtitle: "วิชั่นหลัก: Amelia • ปั๊มเกจ LB เต็มทั้งทีมตั้งแต่เทิร์น 1",
+        category: "support",
+        requiredBaseVis: 13017,
+        actionBadge: "Turn 1 LB Battery",
+        desc: "สุดยอดบิลด์ซัพพอร์ตระดับตำนานจาก IGN & Reddit: Nichol มีสกิล Formation ปั๊มเกจ LB ผสาน Arms Akimbo (กดได้ 2 Formation ต่อเทิร์น) + Onion Knight (LB เร่ง 300%) แจกบัฟเร่งเกจท่าไม้ตายให้ทั้งทีมเต็มหลอดทันทีตั้งแต่เทิร์นแรกก่อนศัตรูขยับ",
+        skills: ["spirit_firion", "spirit_onion", "spirit_clive", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
+        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x LB Triple Charge กด Formation 2 ชุดซ้อน ปั๊มเกจ Limit Break ให้ทั้ง 4 ตัวละครพร้อมใช้ท่าไม้ตายทันทีเทิร์น 1 รวม 475 / 484 AP"
+      },
+      {
+        id: "healer_fina",
+        targetCharId: 1003,
+        name: "💖 Fina: Miracle Healer & Infinite Revive",
+        subtitle: "วิชั่นหลัก: Leah • Dualcast ร่ายเวทขาว 4 ครั้ง ชุบชีวิตหมู่อัตโนมัติ",
+        category: "heal",
+        requiredBaseVis: 13045,
+        actionBadge: "4 White Magics / Turn",
+        desc: "บิลด์หมอยาชุบชีวิตไร้พ่าย IGN Medic Meta: Leah มอบ Auto-Cure Ailments และ Curaga ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Dualcast ทำให้ร่ายเวทขาวได้สูงสุด 4 ครั้งต่อเทิร์น (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟ) ออกตัวคนแรกด้วย First Strike กู้สถานการณ์ได้ 100%",
+        skills: ["spirit_firion", "spirit_shantotto", "spirit_onion", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"],
+        synergyText: "Leah มอบ Auto-Cure ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Firion (2 แอคชั่น) x Shantotto (Dualcast) = ร่ายเวทขาว 4 ครั้งซ้อน พร้อม Onion Knight เร่งท่าไม้ตายชุบหมู่เต็มหลอด รวม 470 / 484 AP"
       },
       {
         id: "mage_sakura",
-        name: "📸 บิลด์จอมเวท Sakura (Image 3)",
-        subtitle: "วิชั่นหลัก: Sephiroth • Dualcast + AoE 100%",
-        requiredBaseVis: 13113,
-        actionBadge: "4 Spells / Turn",
-        desc: "บิลด์จอมเวททำลายล้างตรงตามรูปเซฟ 3: Sephiroth มอบ Bravery ฟรี! ใน 8 ช่องสวมใส่ Spirit of Shantotto + Spirit of Y'shtola + Arms Akimbo ใช้ 410 / 484 AP",
-        skills: ["arms_akimbo_standalone", "decimating_attacks", "preemptive_strike", "insult_to_injury", "spirit_yshtola", "half_mp_cost", "aggravation", "spirit_shantotto"],
-        synergyText: "Sephiroth มอบ Bravery ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Shantotto + Spirit of Y'shtola + Arms Akimbo รวม 410 / 484 AP"
+        targetCharId: 1008,
+        name: "🔮 Sakura: Quad-Cast Cataclysm",
+        subtitle: "วิชั่นหลัก: Shantotto • มหาเวทล้างโลก 4 สเปลล์ ทะลุ 99,999",
+        category: "magic",
+        requiredBaseVis: 13123,
+        actionBadge: "4 Spells (AoE 100%)",
+        desc: "บิลด์จอมเวททำลายล้างสูงสุด IGN Sorceress Meta: Shantotto มอบ Dualcast + พลังเวทหมู่เต็ม 100% ฟรี 0 AP ใน 8 ช่องใส่ Arms Akimbo ร่ายมหาเวทได้ 4 ครั้งซ้อนต่อเทิร์น ผสาน Terra ปลดเพดานดาเมจ 99,999 และ Mana Overload + Aggravation ยิงกวาดศัตรูทั้งสนาม",
+        skills: ["spirit_firion", "spirit_terra", "spirit_yshtola", "half_mp_cost", "mana_overload", "aggravation", "first_strike", "preemptive_strike"],
+        synergyText: "Shantotto Dualcast ฟรี 0 AP x Arms Akimbo = ยิงมหาเวท 4 สเปลล์/เทิร์น พลังเต็ม 100% ทุกตัว ทะลุเพดาน 99,999 ด้วย Terra พร้อม Aetherflow ฟื้น MP 5% ไม่ขาดสาย รวม 445 / 484 AP"
       },
       {
-        id: "healer_ayaka",
-        name: "💖 บิลด์ฮีลเลอร์ Fina (Healer / Leah 475 AP)",
-        subtitle: "วิชั่นหลัก: Leah (หรือ Ayaka) • Dualcast x4 White Magic",
-        requiredBaseVis: 13045,
-        actionBadge: "Dualcast White Magic (2-4 Spells)",
-        desc: "บิลด์หมอยาชุบชีวิตไร้พ่าย: ร่ายเวทขาวได้สูงสุด 4 ครั้งใน 1 เทิร์น (ชุบชีวิต + ฮีลเต็มหลอด + ล้างดีบัฟ) ใช้ 475 / 484 AP",
-        skills: ["spirit_leah", "spirit_firion", "spirit_shantotto", "half_mp_cost", "first_strike", "lb_shield", "reflex", "restore_mp_dmg"],
-        synergyText: "Leah มอบ Auto-Cure ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Leah + Firion + Shantotto (Dualcast) รวม 475 / 484 AP"
+        id: "breaker_lid",
+        targetCharId: 1004,
+        name: "🔨 Lid: Stagger Shredder & Saboteur",
+        subtitle: "วิชั่นหลัก: Clive • สลายเกราะบอสเทิร์นแรก + คูณดาเมจดีบัฟ 60%",
+        category: "support",
+        requiredBaseVis: 13130,
+        actionBadge: "Turn 1 Instant Break",
+        desc: "บิลด์สลายเกราะบอสระดับท็อป IGN Saboteur Guide: Clive มอบ Boundless Flames (LB Dmg +40% + Stagger 30%) ฟรี 0 AP ใน 8 ช่องใส่ Arms Akimbo x Double Action หวดค้อน 4 ครั้งซ้อนสะสมเกจ Stagger พุ่งกระฉูด ผสาน Zidane เพิ่มดาเมจซ้ำเติมศัตรูที่ติดดีบัฟขึ้นอีก 60%",
+        skills: ["spirit_firion", "spirit_squall", "spirit_zidane", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
+        synergyText: "Clive มอบ Stagger +30% ฟรี 0 AP ใน 8 ช่องใส่ Firion x Squall รัวสกิล Breaker 4 ฮิตทำเกจเบรกบอสพุ่งทะลุ 300% พร้อมทวีคูณดาเมจศัตรูติดดีบัฟ +60% ด้วย Zidane รวม 460 / 484 AP"
       },
       {
-        id: "breaker_amelia",
-        name: "⚡ บิลด์เบรกเกอร์ Nichol/Lid (Breaker 470 AP)",
-        subtitle: "วิชั่นหลัก: Amelia • Turn 1 Stagger Shredder",
-        requiredBaseVis: 13017,
-        actionBadge: "Turn 1 Instant Break & Stagger",
-        desc: "บิลด์สลายเกราะบอส: ออกตัวคนแรกด้วย First Strike รัวสกิล Breaker 2 ครั้งซ้อนเร่งเกจ Stagger และดาเมจดีบัฟ ใช้ 470 / 484 AP",
-        skills: ["spirit_firion", "spirit_clive", "spirit_zidane", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
-        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องใส่ Spirit of Firion + Clive + Zidane + Break the Limit + Reflex รวม 470 / 484 AP"
-      },
-      {
-        id: "quad_attack",
-        name: "⚡ สิงห์ปืนคู่ 4-16 ฮิต (Quad-Attack 470 AP)",
-        subtitle: "วิชั่นหลัก: Sephiroth • Arms Akimbo x Double Action",
-        requiredBaseVis: 13113,
-        actionBadge: "4 Actions (16 Hits)",
-        desc: "2 คำสั่ง x ฟันซ้ำ 2 รอบ = 4 ท่าใหญ่ (16 ฮิต)! พร้อมรีฟันด์ MP คืนเข้าหลอดทุกคริ ใช้ 470 / 484 AP",
+        id: "sniper_jake",
+        targetCharId: 1007,
+        name: "🎯 Jake: Critical Gatling Striker",
+        subtitle: "วิชั่นหลัก: Onion Knight • สไนเปอร์ยิงคริติคอล 16 ฮิต เร่งเกจ LB 3 เท่า",
+        category: "phys",
+        requiredBaseVis: 13102,
+        actionBadge: "16-Hit Sniper Burst",
+        desc: "บิลด์มือปืนระดับพระกาฬ IGN Gunner Guide: Onion Knight มอบเร่งเกจ LB 300% ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Double Action รัวกระสุน 4 ชุด (16 ฮิต) ติดคริติคอลคืน MP ต่อเนื่องด้วย Cloud Soul และปลดเพดานดาเมจทะลุ 99,999",
         skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
-        synergyText: "Arms Akimbo x Double Action = 4 ท่าใหญ่ รีฟันด์ MP เต็มหลอดวนลูปไม่จำกัด รวม 470 / 484 AP"
+        synergyText: "Onion Knight เร่งเกจท่าไม้ตาย 3 เท่าฟรี 0 AP ใน 8 ช่องใส่ Firion x Squall ยิงปืนกลหนัก 16 ฮิต รีฟันด์ MP คืนเต็มหลอดจาก Cloud Soul ทะลุ 99,999 ทุกนัด รวม 470 / 484 AP"
+      },
+      {
+        id: "dark_archwitch",
+        targetCharId: 1006,
+        name: "🌑 Archwitch Fina: Dark Apocalypse",
+        subtitle: "วิชั่นหลัก: Terra • Dualcast เวทมืด 4 สเปลล์ + Break 99,999",
+        category: "magic",
+        requiredBaseVis: 13108,
+        actionBadge: "4 Dark Spells / Turn",
+        desc: "บิลด์แม่มดดำทำลายล้าง Community Meta: Terra มอบ Break the Limit 99,999 และ LB Double Charge ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Dualcast ยิงเวทสายมืด/ระเบิดวิญญาณ 4 สเปลล์ซ้อน ผสาน Mana Overload + Aggravation ระเบิดดาเมจทะลุหลักแสน",
+        skills: ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "mana_overload", "aggravation", "first_strike", "preemptive_strike"],
+        synergyText: "Terra มอบ Break the Limit 99,999 ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Dualcast สาดมหาเวทมืด 4 ครั้งรวด บูสต์พลังเวท +25% และซ้ำเติมดีบัฟ +60% รวม 470 / 484 AP"
+      },
+      {
+        id: "buster_cloud",
+        targetCharId: 1002,
+        name: "🗡️ Cloud: Buster Critical Slasher",
+        subtitle: "วิชั่นหลัก: Cloud • ฟื้น MP 3% ทุกคริ + Clive LB Boost 40%",
+        category: "phys",
+        requiredBaseVis: 13110,
+        actionBadge: "4 Actions (Crit Boost)",
+        desc: "บิลด์นักดาบพลังทำลายล้างสูงสุดตรงตามรูปเซฟ 2 & IGN Meta: Cloud มอบ Cloud Soul รีฟันด์ MP 3% ทุกคริติคอล + Critical Boost ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Double Action หวด 4 ท่าใหญ่ เสริมพลังท่าไม้ตายด้วย Spirit of Clive +40%",
+        skills: ["spirit_firion", "spirit_squall", "spirit_clive", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
+        synergyText: "Cloud Soul รีฟันด์ MP ฟรี 0 AP ใน 8 ช่องใส่ Firion x Squall (4 แอคชั่น) + Clive (LB Dmg +40% + Stagger 30%) ทุบบอสเกราะแตกในเทิร์นเดียว รวม 480 / 484 AP"
+      },
+      {
+        id: "farm_victoria",
+        targetCharId: 1002,
+        name: "💰 Victoria: Ultra MRP & EXP Farm",
+        subtitle: "วิชั่นหลัก: Victoria • เร่งฟาร์มแต้มวิชั่น x2 ปิดเกม 1 เทิร์น",
+        category: "farm",
+        requiredBaseVis: 13027,
+        actionBadge: "MRP +50% Farm",
+        desc: "บิลด์ฟาร์มทรัพยากรระดับเมต้า Game8: Victoria มอบ MRP Gain +50% ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Double Action กวาดล้างมอนสเตอร์ทั้งสนามตั้งแต่เทิร์นแรกด้วย First Strike เคลียร์เวฟใน 5 วินาที เร่งอัปเกรดวิชั่นทุกตัวถึง MR 9 อย่างรวดเร็ว",
+        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
+        synergyText: "Victoria มอบ MRP +50% ฟาร์มวิชั่นไวขึ้นเท่าตัวฟรี 0 AP ใน 8 ช่องใส่ Arms Akimbo x Double Action ฟันกวาดเรียบ 1 เทิร์นจบ ไม่เปลืองเวลา รวม 470 / 484 AP"
       }
     ];
 
-        const GAME8_MASTERY_DATABASE = {
+    const GAME8_MASTERY_DATABASE = {
       "13024": {
             "name": "Tronn",
             "thai": "",
@@ -4340,6 +4414,7 @@
       populateBaseVisions();
       populateMasteryInspectorSelect();
       renderMetaPresets();
+      setupPresetFilters();
       updateCharacterDisplay();
       applySmartSuggestBuild(); // Auto-suggest on load
       renderAllArchetypesComparison();
@@ -4547,27 +4622,56 @@
       updateInnateVisionDisplay();
     }
 
-    function renderMetaPresets() {
+    let currentPresetCategory = 'all';
+
+    function renderMetaPresets(filterCategory = currentPresetCategory) {
       const container = document.getElementById('meta-presets-container');
+      if (!container) return;
       container.innerHTML = '';
 
-      META_PRESETS.forEach(p => {
-        const btn = document.createElement('button');
-        btn.className = 'p-2.5 rounded-xl border text-left transition select-none flex flex-col justify-between bg-slate-950/70 border-slate-800 hover:border-slate-700 text-slate-300';
-        btn.innerHTML = `
+      const filtered = META_PRESETS.filter(p => filterCategory === 'all' || p.category === filterCategory);
+
+      filtered.forEach(p => {
+        const skills = p.skills.map(id => PASSIVES_DATABASE.find(s => s.id === id)).filter(Boolean);
+        const totalAP = skills.reduce((sum, s) => sum + s.ap, 0);
+        const targetChar = CHARACTERS.find(c => c.id === p.targetCharId) || currentChar;
+        const targetVis = VISIONS.find(v => v.id === p.requiredBaseVis) || VISIONS[0];
+
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-xl border text-left transition select-none flex flex-col justify-between bg-slate-950/70 border-slate-800 hover:border-cyan-500/60 hover:bg-slate-900/90 shadow-md group cursor-pointer';
+        
+        card.innerHTML = `
           <div>
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-xs font-bold truncate text-slate-200">${p.name}</span>
+            <div class="flex items-center justify-between gap-1 mb-1.5">
+              <span class="text-xs font-bold truncate text-slate-100 group-hover:text-cyan-300 transition">${p.name}</span>
+              <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 shrink-0">${totalAP} AP</span>
             </div>
-            <p class="text-[10px] text-slate-400 line-clamp-1">${p.subtitle}</p>
+            <div class="flex items-center gap-2 mb-2">
+              <img src="${targetChar.face}" class="w-6 h-6 rounded-md border border-slate-700 shrink-0" alt="">
+              <div class="min-w-0">
+                <span class="text-[10px] text-slate-300 font-medium block truncate">${targetChar.name} (${targetChar.thai})</span>
+                <span class="text-[9px] text-amber-400/90 font-mono block truncate">วิชั่น: ${targetVis.name}</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-2 leading-relaxed mb-2">${p.subtitle}</p>
           </div>
-          <div class="mt-2 flex items-center justify-between text-[10px] font-mono">
-            <span class="px-1.5 py-0.2 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">${p.actionBadge}</span>
-            <span class="text-slate-500">เลือก</span>
+          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono">
+            <span class="px-1.5 py-0.5 rounded bg-indigo-950/90 text-indigo-300 border border-indigo-800/80 font-bold truncate max-w-[130px]">${p.actionBadge}</span>
+            <span class="text-cyan-400 group-hover:translate-x-0.5 transition font-bold flex items-center gap-0.5">เลือก <i data-lucide="chevron-right" class="w-3 h-3"></i></span>
           </div>
         `;
 
-        btn.addEventListener('click', () => {
+        card.addEventListener('click', () => {
+          // 1. Switch character if specified
+          if (p.targetCharId) {
+            const char = CHARACTERS.find(c => c.id === p.targetCharId);
+            if (char) {
+              currentChar = char;
+              renderCharacters();
+            }
+          }
+
+          // 2. Switch base vision if specified
           if (p.requiredBaseVis) {
             currentChar.baseVis = p.requiredBaseVis;
             document.getElementById('base-vision-select').value = p.requiredBaseVis;
@@ -4579,8 +4683,10 @@
             }
             updateInnateVisionDisplay();
           }
-          const skills = p.skills.map(id => PASSIVES_DATABASE.find(s => s.id === id)).filter(Boolean);
-          const totalAP = skills.reduce((sum, s) => sum + s.ap, 0);
+
+          updateCharacterDisplay();
+
+          // 3. Render Custom Build
           renderCustomBuild({
             presetName: p.name,
             presetDesc: p.desc,
@@ -4590,20 +4696,38 @@
             totalAP: totalAP,
             remainingAP: currentAPCapacity - totalAP
           });
+
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        container.appendChild(btn);
+        container.appendChild(card);
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function setupPresetFilters() {
+      const filterBtns = document.querySelectorAll('.preset-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.className = "preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]";
+          });
+          btn.className = "preset-filter-btn px-2.5 py-1 rounded-lg bg-cyan-600 text-white font-bold transition text-[11px]";
+          currentPresetCategory = btn.getAttribute('data-category');
+          renderMetaPresets(currentPresetCategory);
+        });
       });
     }
 
-        function renderAllArchetypesComparison() {
+    function renderAllArchetypesComparison() {
       const container = document.getElementById('all-archetypes-comparison');
       container.innerHTML = '';
 
       // Test builds for 5 popular archetypes with current character
       const testVisions = [
         { visId: 13113, label: "⚔️ กายภาพคริติคอล (Sephiroth)" },
-        { visId: 13051, label: "💖 ฮีลเลอร์ชุบชีวิต (Ayaka)" },
+        { visId: 13045, label: "💖 ฮีลเลอร์ชุบชีวิต (Leah)" },
         { visId: 13017, label: "⚡ เบรกเกอร์สลายเกราะ (Amelia)" },
         { visId: 13123, label: "🔮 มหาเวทล้างโลก (Shantotto)" },
         { visId: 13062, label: "🛡️ แทงก์สวนกลับ (Wilhelm)" }
