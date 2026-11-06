@@ -405,14 +405,14 @@
               </h3>
               <p class="text-[10px] text-slate-400 mt-0.5">รวมบิลด์แนะนำระดับ Meta สำหรับทุกตัวละคร (Lasswell, Rain, Nichol, Fina, Sakura, Lid, Jake, Archwitch)</p>
             </div>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800">10 บิลด์พร้อมใช้งาน</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono border border-cyan-800">11 บิลด์พร้อมใช้งาน (รวม IGN Official)</span>
           </div>
 
           <!-- Preset Category Filter Pills -->
           <div class="flex items-center gap-1.5 flex-wrap text-xs pb-1 border-b border-slate-800/80" id="preset-filter-bar">
-            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-cyan-600 text-white font-bold transition text-[11px]" data-category="all">ทั้งหมด (10)</button>
-            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="phys">⚔️ กายภาพ (4)</button>
-            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="tank">🛡️ แทงก์ (1)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-cyan-600 text-white font-bold transition text-[11px]" data-category="all">ทั้งหมด (11)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="phys">⚔️ กายภาพ (3)</button>
+            <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="tank">🛡️ แทงก์ (2)</button>
             <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="magic">🔮 มหาเวท (2)</button>
             <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="heal">💖 ฮีลเลอร์ (1)</button>
             <button class="preset-filter-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition text-[11px]" data-category="support">⚡ ซัพพอร์ต/เบรก (2)</button>
@@ -1178,9 +1178,69 @@
     // Presets
         const META_PRESETS = [
       {
+        id: "tank_lasswell",
+        targetCharId: 1002,
+        name: "🛡️ Lasswell: Multi-Cover Speed Tank (IGN Official)",
+        subtitle: "วิชั่นหลัก: Warrior of Light • WoL Cover + Wilhelm Guard (-75% Dmg)",
+        category: "tank",
+        requiredBaseVis: 13100,
+        actionBadge: "Multi-Cover & Guard (-75%)",
+        desc: "บิลด์แทงก์ฉุกเฉินระดับ S-Tier จาก IGN Wiki โดยตรง: Lasswell มีค่า Speed สูงที่สุดในเกมทำให้ได้ออกแอคชั่นก่อนศัตรูเสมอ ใช้ Arms Akimbo ร่าย Multi-Cover ของ WoL พร้อมกับ Guard ของ Wilhelm ในเทิร์นเดียว ดึงการโจมตีทั้งหมดมาที่ Lasswell พร้อมลดความเสียหายลง 75% ทำให้เพื่อนในทีมไร้ดาเมจ 100%",
+        skills: ["spirit_wilhelm", "spirit_firion", "spirit_onion", "reflex", "magic_counter", "restore_mp_dmg", "first_strike", "lb_shield"],
+        synergyText: "IGN Official Emergency Tank: Lasswell ความเร็วสูงออกตัวก่อนศัตรู ใช้ Arms Akimbo กด Multi-Cover + Wilhelm Guard ในเทิร์นเดียวกัน ดาเมจลด 75% พร้อมหลบหลีก Reflex + Spry Steps และฟื้น MP จาก Arcane Reclamation รวม 410 / 484 AP"
+      },
+      {
+        id: "dark_archwitch_ign",
+        targetCharId: 1006,
+        name: "🌑 Archwitch Fina: Dark Havoc (IGN Official)",
+        subtitle: "วิชั่นหลัก: Sephiroth • Purging Blade + Queenly Whip 4 ดีบัฟใหญ่",
+        category: "magic",
+        requiredBaseVis: 13113,
+        actionBadge: "4 Debuffs in 1 Turn",
+        desc: "บิลด์ซินเนอร์จี้เวทมืดระดับทางการจาก IGN Wiki โดยตรง: Archwitch Fina ผสาน Sephiroth ด้วย Purging Blade (Deprotect & Deshell) + Queenly Whip (Debrave & Defaith) ใช้ Arms Akimbo กดยกชุด 4 ดีบัฟใหญ่ในเทิร์นเดียว ศัตรูพิการทั้งพลังรุกและรับ พร้อม Spirit of Zidane คูณดาเมจซ้ำเติมสเกลตามดีบัฟ",
+        skills: ["spirit_firion", "spirit_shantotto", "spirit_zidane", "half_mp_cost", "break_the_limit", "mana_overload", "first_strike", "preemptive_strike"],
+        synergyText: "IGN Official Darkness Synergy: Sephiroth มอบพลังมืด +50% ฟรี 0 AP ใน 8 ช่องใส่ Arms Akimbo x Dualcast กวาด 4 ดีบัฟ (Deprotect, Deshell, Debrave, Defaith) ในเทิร์นเดียว พร้อม Aggravation ซ้ำเติมดาเมจตามดีบัฟ +60% ทะลุ 99,999 รวม 475 / 484 AP"
+      },
+      {
+        id: "spellblade_bartz",
+        targetCharId: 1002,
+        name: "⚔️ Bartz: 8-Attack Dual Spellblade (IGN S-Tier)",
+        subtitle: "วิชั่นหลัก: Bartz • Dual Spellblade x Arms Akimbo x Double Action",
+        category: "phys",
+        requiredBaseVis: 13105,
+        actionBadge: "8 Attacks Every Turn",
+        desc: "IGN ยกให้ Bartz เป็นวิชั่นที่ดีที่สุดในเกม: Dual Spellblade ทำงานซ้ำ 2 ครั้ง ผสาน Arms Akimbo (2 แอคชั่น) และ Double Action ของ Squall ทำให้ฟันโจมตีกระหน่ำถึง 8 แอทแทคในเทิร์นเดียว! รีฟันด์ MP ทุกฮิตคริติคอลด้วย Cloud Soul และปลดเพดานดาเมจทะลุ 99,999",
+        skills: ["spirit_firion", "spirit_squall", "spirit_cloud", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
+        synergyText: "IGN Best Vision in Game: Bartz Dual Spellblade (x2) x Firion Arms Akimbo (x2) x Squall Double Action (x2) = ฟัน 8 ครั้งซ้อนทุกเทิร์น! เสริม Cloud Soul รีฟันด์ MP 3% ทุกครั้งที่คริติคอล รวม 470 / 484 AP"
+      },
+      {
+        id: "buffer_nichol",
+        targetCharId: 1005,
+        name: "⚡ Nichol: Fluid Warfare & Mirroring Prism (IGN Official)",
+        subtitle: "วิชั่นหลัก: Amelia • เลเวล 19 Fluid Warfare แจก Double Action ให้ทั้งทีม",
+        category: "support",
+        requiredBaseVis: 13017,
+        actionBadge: "4 Actions / Party 2x",
+        desc: "บิลด์ซัพพอร์ตไร้เทียมทานจาก IGN Wiki: Nichol ปลดล็อคสกิลเลเวล 19 'Tactic: Fluid Warfare' แจกเทิร์นพิเศษเมื่อกด Formation ผสาน Arms Akimbo ทำให้ได้ขยับถึง 4 แอคชั่นต่อเทิร์น ปั๊มเกจ Limit Break ด้วย Onion Knight Triple Charge ร่าย LB2 'Mirroring Prism' แจก Double Action ให้เพื่อนทั้งปาร์ตี้ทุกเทิร์น",
+        skills: ["spirit_firion", "spirit_onion", "spirit_clive", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
+        synergyText: "IGN Official LB Engine: Nichol Fluid Warfare + Arms Akimbo = 4 แอคชั่น/เทิร์น ชาร์จเกจ LB รวดเร็ว 300% ด้วย Onion Knight กด LB2 Mirroring Prism มอบ Double Actions ให้เพื่อนร่วมทีมทุกคนทุกเทิร์น รวม 475 / 484 AP"
+      },
+      {
+        id: "tank_rain",
+        targetCharId: 1001,
+        name: "🛡️ Rain: Genji Provoke & Cloud Counter (IGN Official)",
+        subtitle: "วิชั่นหลัก: Wilhelm • WoL Cover All + Genji Set & Spirit of Cloud",
+        category: "tank",
+        requiredBaseVis: 13062,
+        actionBadge: "Guard & Cloud Counter",
+        desc: "บิลด์รถถังเคาน์เตอร์และเซ็ตเก็นจิจาก IGN Wiki: Rain ใช้ Provoke ดึงศัตรูมาโจมตีตนเองและ Guard รับดาเมจแทนทีมด้วย WoL Cover All ผสานไอเทม Genji Set + Spirit of Cloud ทำให้ทุกจังหวะสวนกลับติดคริติคอลรุนแรง เร่งเกจ Stagger และฟื้นฟู MP กลับมาทุกครั้ง",
+        skills: ["spirit_wol", "spirit_firion", "spirit_cloud", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"],
+        synergyText: "IGN Genji + Cloud Meta: Wilhelm Bastion ลดทอนดาเมจทีม 20% ผสาน WoL Multi-Cover และ Spirit of Cloud ทุกครั้งที่เคาน์เตอร์ติดคริติคอลจะเพิ่ม Stagger และรีฟันด์ MP 3% รวม 420 / 484 AP"
+      },
+      {
         id: "katana_lasswell",
         targetCharId: 1002,
-        name: "⚔️ Lasswell: One-Winged Masamune",
+        name: "⚔️ Lasswell: One-Winged Masamune (S-Tier Slasher)",
         subtitle: "วิชั่นหลัก: Sephiroth • Arms Akimbo x Double Action 16 ฮิต",
         category: "phys",
         requiredBaseVis: 13113,
@@ -1190,33 +1250,9 @@
         synergyText: "Arms Akimbo (2 แอคชั่น) x Double Action (ฟันซ้ำ 2 ครั้ง) = 4 ท่าใหญ่ (16 ฮิต)! Cloud Soul รีฟันด์ MP 3% ทุกครั้งที่คริติคอล ฟันบอสทะลุ 99,999 ต่อเนื่องโดย MP ไม่หมดหลอด รวม 470 / 484 AP"
       },
       {
-        id: "tank_rain",
-        targetCharId: 1001,
-        name: "🛡️ Rain: Aegis Fortress Tank",
-        subtitle: "วิชั่นหลัก: Wilhelm • WoL Cover + ดูดเลือด + สวนกลับคู่",
-        category: "tank",
-        requiredBaseVis: 13062,
-        actionBadge: "Guard & Counter x2",
-        desc: "บิลด์รถถังอมตะ IGN Sentinel Meta: Wilhelm มอบ Bastion ลดดาเมจให้ทั้งทีม 20% ฟรี 0 AP สวมใส่ Spirit of WoL รับดาเมจแทนเพื่อนทุกคน + รอดตายด้วย Grit (1 HP) ผสาน Arms Akimbo และดูดเลือด 10% สวนกลับทั้งกายภาพและเวทมนตร์",
-        skills: ["spirit_wol", "spirit_firion", "spirit_onion", "reflex", "restore_mp_dmg", "first_strike", "lb_shield", "magic_counter"],
-        synergyText: "Wilhelm Bastion ลดทอนดาเมจทีม 20% ใน 8 ช่องใส่ Spirit of WoL (Multi-Cover + Grit) + Firion (Lifesteal 10% + 2 แอคชั่น) + Onion Knight (LB เร็ว 3 เท่า) รวม 415 / 484 AP"
-      },
-      {
-        id: "buffer_nichol",
-        targetCharId: 1005,
-        name: "⚡ Nichol: Infinite LB Formation",
-        subtitle: "วิชั่นหลัก: Amelia • ปั๊มเกจ LB เต็มทั้งทีมตั้งแต่เทิร์น 1",
-        category: "support",
-        requiredBaseVis: 13017,
-        actionBadge: "Turn 1 LB Battery",
-        desc: "สุดยอดบิลด์ซัพพอร์ตระดับตำนานจาก IGN & Reddit: Nichol มีสกิล Formation ปั๊มเกจ LB ผสาน Arms Akimbo (กดได้ 2 Formation ต่อเทิร์น) + Onion Knight (LB เร่ง 300%) แจกบัฟเร่งเกจท่าไม้ตายให้ทั้งทีมเต็มหลอดทันทีตั้งแต่เทิร์นแรกก่อนศัตรูขยับ",
-        skills: ["spirit_firion", "spirit_onion", "spirit_clive", "half_mp_cost", "break_the_limit", "first_strike", "preemptive_strike", "reflex"],
-        synergyText: "Amelia มอบ LB Shield ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x LB Triple Charge กด Formation 2 ชุดซ้อน ปั๊มเกจ Limit Break ให้ทั้ง 4 ตัวละครพร้อมใช้ท่าไม้ตายทันทีเทิร์น 1 รวม 475 / 484 AP"
-      },
-      {
         id: "healer_fina",
         targetCharId: 1003,
-        name: "💖 Fina: Miracle Healer & Infinite Revive",
+        name: "💖 Fina: Miracle Healer & Infinite Revive (IGN S-Tier)",
         subtitle: "วิชั่นหลัก: Leah • Dualcast ร่ายเวทขาว 4 ครั้ง ชุบชีวิตหมู่อัตโนมัติ",
         category: "heal",
         requiredBaseVis: 13045,
@@ -1228,7 +1264,7 @@
       {
         id: "mage_sakura",
         targetCharId: 1008,
-        name: "🔮 Sakura: Quad-Cast Cataclysm",
+        name: "🔮 Sakura: Quad-Cast Cataclysm (IGN Sorceress Meta)",
         subtitle: "วิชั่นหลัก: Shantotto • มหาเวทล้างโลก 4 สเปลล์ ทะลุ 99,999",
         category: "magic",
         requiredBaseVis: 13123,
@@ -1240,7 +1276,7 @@
       {
         id: "breaker_lid",
         targetCharId: 1004,
-        name: "🔨 Lid: Stagger Shredder & Saboteur",
+        name: "🔨 Lid: Stagger Shredder & Saboteur (IGN Guide)",
         subtitle: "วิชั่นหลัก: Clive • สลายเกราะบอสเทิร์นแรก + คูณดาเมจดีบัฟ 60%",
         category: "support",
         requiredBaseVis: 13130,
@@ -1252,7 +1288,7 @@
       {
         id: "sniper_jake",
         targetCharId: 1007,
-        name: "🎯 Jake: Critical Gatling Striker",
+        name: "🎯 Jake: Critical Gatling Striker (IGN Gunner)",
         subtitle: "วิชั่นหลัก: Onion Knight • สไนเปอร์ยิงคริติคอล 16 ฮิต เร่งเกจ LB 3 เท่า",
         category: "phys",
         requiredBaseVis: 13102,
@@ -1262,33 +1298,9 @@
         synergyText: "Onion Knight เร่งเกจท่าไม้ตาย 3 เท่าฟรี 0 AP ใน 8 ช่องใส่ Firion x Squall ยิงปืนกลหนัก 16 ฮิต รีฟันด์ MP คืนเต็มหลอดจาก Cloud Soul ทะลุ 99,999 ทุกนัด รวม 470 / 484 AP"
       },
       {
-        id: "dark_archwitch",
-        targetCharId: 1006,
-        name: "🌑 Archwitch Fina: Dark Apocalypse",
-        subtitle: "วิชั่นหลัก: Terra • Dualcast เวทมืด 4 สเปลล์ + Break 99,999",
-        category: "magic",
-        requiredBaseVis: 13108,
-        actionBadge: "4 Dark Spells / Turn",
-        desc: "บิลด์แม่มดดำทำลายล้าง Community Meta: Terra มอบ Break the Limit 99,999 และ LB Double Charge ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Dualcast ยิงเวทสายมืด/ระเบิดวิญญาณ 4 สเปลล์ซ้อน ผสาน Mana Overload + Aggravation ระเบิดดาเมจทะลุหลักแสน",
-        skills: ["spirit_firion", "spirit_shantotto", "spirit_yshtola", "half_mp_cost", "mana_overload", "aggravation", "first_strike", "preemptive_strike"],
-        synergyText: "Terra มอบ Break the Limit 99,999 ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Dualcast สาดมหาเวทมืด 4 ครั้งรวด บูสต์พลังเวท +25% และซ้ำเติมดีบัฟ +60% รวม 470 / 484 AP"
-      },
-      {
-        id: "buster_cloud",
-        targetCharId: 1002,
-        name: "🗡️ Cloud: Buster Critical Slasher",
-        subtitle: "วิชั่นหลัก: Cloud • ฟื้น MP 3% ทุกคริ + Clive LB Boost 40%",
-        category: "phys",
-        requiredBaseVis: 13110,
-        actionBadge: "4 Actions (Crit Boost)",
-        desc: "บิลด์นักดาบพลังทำลายล้างสูงสุดตรงตามรูปเซฟ 2 & IGN Meta: Cloud มอบ Cloud Soul รีฟันด์ MP 3% ทุกคริติคอล + Critical Boost ฟรี 0 AP ใน 8 ช่องผสาน Arms Akimbo x Double Action หวด 4 ท่าใหญ่ เสริมพลังท่าไม้ตายด้วย Spirit of Clive +40%",
-        skills: ["spirit_firion", "spirit_squall", "spirit_clive", "half_mp_cost", "break_the_limit", "tip_top_shape", "first_strike", "preemptive_strike"],
-        synergyText: "Cloud Soul รีฟันด์ MP ฟรี 0 AP ใน 8 ช่องใส่ Firion x Squall (4 แอคชั่น) + Clive (LB Dmg +40% + Stagger 30%) ทุบบอสเกราะแตกในเทิร์นเดียว รวม 480 / 484 AP"
-      },
-      {
         id: "farm_victoria",
         targetCharId: 1002,
-        name: "💰 Victoria: Ultra MRP & EXP Farm",
+        name: "💰 Victoria: Ultra MRP & EXP Farm (Game8 Meta)",
         subtitle: "วิชั่นหลัก: Victoria • เร่งฟาร์มแต้มวิชั่น x2 ปิดเกม 1 เทิร์น",
         category: "farm",
         requiredBaseVis: 13027,
